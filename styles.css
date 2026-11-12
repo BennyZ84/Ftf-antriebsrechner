@@ -139,3 +139,10 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .recommend-metrics span{margin:0}
 .recommend-metrics b{text-align:right}
 }
+
+/* v3.10: exklusive Motorauswahl */
+.drive-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 15px}
+.drive-choice button{white-space:normal;min-height:54px;line-height:1.35;padding:9px}
+.drive-requirements{margin:12px 0!important}
+#motorPanel>.drive-workflow[hidden],#motorPanel>.drive-manual[hidden]{display:none!important}
+@media(max-width:450px){.drive-choice button{font-size:12px}}
