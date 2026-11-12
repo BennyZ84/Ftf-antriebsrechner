@@ -47,3 +47,10 @@ test('Migration backup provides separate source ZIP and browser project JSON',()
  assert.ok(html.includes('MIGRATION_BACKUP.md'));
  assert.ok(!html.includes('Excel-'));
 });
+
+test('Pending manufacturer families are visible but kept out of numeric drive model',()=>{
+ assert.ok(html.includes('pendingCatalogFamilies'));
+ assert.ok(html.includes('catalogPendingSection'));
+ assert.ok(js.includes('renderPendingCatalog'));
+ assert.ok(sw.includes('catalog-pending.js'));
+});
