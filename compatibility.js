@@ -14,9 +14,9 @@ export const listedFamilies=Object.freeze({
 });
 export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG45/BG65/BG66/BG75 dMove; BG45/BG66/BG75/BG95 dPro (ausgewählte Schnittstellen)",
- gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien; SG45/62/80/80K/85/120/120K, STG65, KG80/120/150",
+ gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien; SG45/62/65/80/80K/85/120/120K, STG65, KG80/120/150; NG1000 WO nur vorläufig",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
- missingGearExamples:"SG65, WG52/63/75, NG1000 WO und weitere Untervarianten; konkrete Motor/Getriebe-Kombinationen nicht vollständig bestätigt",
+ missingGearExamples:"WG52/63/75 mit noch nicht einzeln belegten Übersetzungen und Grenzwerten; NG1000 WO nur vorläufig; konkrete Motor/Getriebe-Kombinationen nicht vollständig bestätigt",
  coverageComplete:false
 });
 export function motorFamily(motor){
@@ -26,12 +26,18 @@ export function motorFamily(motor){
 }
 export function gearFamily(gear){
  if(!gear)return null;
- for(const name of ["PLG 22 HT","PLG 30","PLG 32","PLG 40 LB","PLG 42 K","PLG 42 S","PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","PLG 75 SL","PLG 80 LB","PLG 95 HT","STG 65","SG 45","SG 62","SG 65","SG 80 K","SG 80","SG 85","SG 120 K","SG 120","KG 80","KG 120","KG 150","NG 250","NG 500"])
+ for(const name of ["PLG 22 HT","PLG 30","PLG 32","PLG 40 LB","PLG 42 K","PLG 42 S","PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","PLG 75 SL","PLG 80 LB","PLG 95 HT","STG 65","SG 45","SG 62","SG 65","SG 80 K","SG 80","SG 85","SG 120 K","SG 120","KG 80","KG 120","KG 150","NG 1000 WO","NG 250","NG 500"])
   if(gear.name?.startsWith(name+" ·"))return name;
  return null;
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ // Vorläufige Daten dürfen nicht als bestätigte Auslegungswerte geführt werden.
+ if(gear?.preliminary)return {
+  level:"unverified",label:"Vorläufige Herstellerdaten – keine Auslegungsfreigabe",
+  reason:"Die NG1000-WO-Daten sind als vorläufig bezeichnet. Auch die dokumentierte BG95x80-dPro-Referenz ersetzt keine technische Freigabe.",source:gear.source
+ };
+
  // BG45 dPro CO/IO: PLG42S, PLG52 EB/HT and PLG40 LB on manufacturer modular list.
  if(m==="bg45" && motor?.series==="dPro"){
   const listed=["PLG 40 LB","PLG 42 S","PLG 52 EB","PLG 52 HT","SG 45","SG 62","SG 80"];
