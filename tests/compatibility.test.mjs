@@ -7,7 +7,7 @@ const motor = (p) => motors.find(m => m.name.startsWith(p));
 const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
-  assert.equal(motors.length,135);
+  assert.equal(motors.length,152);
   assert.equal(gears.length,346);
   assert.equal(catalogScope.coverageComplete,false);
 });
@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 135 mal 346 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 152 mal 346 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -270,4 +270,32 @@ test('Sechs BGA22 dGo Wicklungen: Anhaltemoment ist kein freigegebenes Spitzenmo
  assert.deepEqual(rows.map(m=>m.voltage),[6,12,12,12,24,24]);
  assert.deepEqual(rows.map(m=>m.rpm),[2990,2950,8940,13120,8820,13160]);
  assert.equal(combinationStatus(rows[0],gear('PLG 22 HT')).level,'unverified');
+});
+
+test('BGA22 dCore has eight precisely mapped manufacturer winding variants',()=>{
+ const rows=motors.filter(m=>m.name.startsWith('BGA22x22 dCore'));
+ assert.equal(rows.length,8);
+ assert.deepEqual(rows.map(m=>m.voltage),[6,6,6,12,12,12,24,24]);
+ assert.deepEqual(rows.map(m=>m.rpm),[2990,9260,12100,2950,8940,13120,8820,13160]);
+ assert.equal(rows[0].peak,0);
+ assert.equal(rows[1].peak,.145);
+ assert.equal(rows[0].stallTorque,.0589);
+ assert.equal(combinationStatus(rows[0],gear('PLG 22 HT')).level,'family-listed');
+ assert.equal(combinationStatus(rows[0],gear('PLG 52 HT')).level,'unverified');
+});
+test('BG32 KI has four voltage models and differentiates stall from maximum torque',()=>{
+ const rows=motors.filter(m=>m.series==='KI'&&m.name.startsWith('BG32'));
+ assert.equal(rows.length,4);
+ assert.ok(rows.every(x=>x.peak===0&&x.stallTorque>0&&x.J>0));
+ assert.equal(combinationStatus(rows[0],gear('PLG 42 S')).level,'family-listed');
+ assert.equal(combinationStatus(rows[0],gear('NG 500')).level,'unverified');
+});
+test('BG42 KI has five manufacturer models incl one preliminary 24V model',()=>{
+ const rows=motors.filter(m=>m.series==='KI'&&m.name.startsWith('BG42'));
+ assert.equal(rows.length,5);
+ assert.deepEqual(rows.map(x=>x.nom),[.101,.106,.138,.166,.245]);
+ assert.ok(rows.every(x=>x.peak===0));
+ assert.equal(rows.filter(x=>x.preliminary).length,1);
+ assert.equal(combinationStatus(rows[0],gear('SG 45')).level,'family-listed');
+ assert.equal(combinationStatus(rows[4],gear('SG 45')).level,'unverified');
 });
