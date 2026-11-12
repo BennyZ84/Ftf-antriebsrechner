@@ -83,9 +83,11 @@ function updateMode(){
  $('resultActions').hidden=motorOnly;
  $('motorPanelTitle').textContent=motorOnly?'Motordaten':'Motor & Getriebe';
  $('motorSpecs').hidden=!motorOnly;
+ const layoutTab=document.querySelector('[data-tab="ansicht"]');
+ layoutTab.hidden=motorOnly;
  const resultTab=document.querySelector('[data-tab="ergebnisse"]');
  resultTab.hidden=motorOnly;
- if(motorOnly && resultTab.classList.contains('active'))tab('eingaben');
+ if(motorOnly && (resultTab.classList.contains('active')||layoutTab.classList.contains('active')))tab('eingaben');
 }
 function setNotes(){
  const m=motors.find(x=>x.id===config.motorId),g=gears.find(x=>x.id===config.gearId);
@@ -398,6 +400,8 @@ $('gearboxSelect').addEventListener('change',()=>{const g=gears.find(x=>x.id===$
 $('projectName').addEventListener('input',e=>config.projectName=e.target.value);
 for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>tab(b.dataset.tab));
 $('showResults').addEventListener('click',()=>tab('ergebnisse'));
+$('layoutBack').addEventListener('click',()=>tab('eingaben'));
+$('layoutSave').addEventListener('click',save);
 $('save').addEventListener('click',save);
 $('new').addEventListener('click',()=>{if(!confirm('Eingaben zurücksetzen? Gespeicherte Projekte bleiben erhalten.'))return;config=clone(projectDefaults);refresh();tab('eingaben');});
 $('print').addEventListener('click',()=>window.print());
