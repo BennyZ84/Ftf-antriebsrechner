@@ -63,3 +63,13 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .aux-result span{font-size:13px;color:#566d7c}
 .aux-result strong{font-size:14px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .aux-warning{background:#fff5ed;color:#744619;padding:8px 10px;border-radius:7px;font-size:12px}
+
+/* v2.9: editierbare Fahrkursabschnitte */
+.route-editor{margin:16px 0 5px;border-top:1px solid #e3eaf0;padding-top:14px}
+.route-editor-head,.route-segment-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.route-editor-head strong{font-size:15px;color:#173f55}
+.route-editor-head button,.route-segment-head button{font-size:12px;padding:7px 11px}
+.route-segment{border:1px solid #d8e3eb;padding:12px;border-radius:10px;margin:12px 0;background:#f8fafc}
+.route-segment-head{margin-bottom:10px}
+.route-segment-head strong{font-size:13px}
+.route-segment .form-grid{margin-top:8px}
