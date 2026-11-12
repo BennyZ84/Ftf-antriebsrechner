@@ -306,7 +306,7 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.3 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.4 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
@@ -317,7 +317,7 @@ $('addRouteSegment').addEventListener('click',()=>{
  renderRouteSegments();renderAdditionalResults();
 });
 
-const seriesValues=['dCore','dGo','dMove','dPro'];
+const seriesValues=['dCore','KI','dGo','dMove','dPro'];
 for(const series of seriesValues){
  const count=motors.filter(x=>seriesOf(x)===series).length;
  if(!count)continue;
