@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1f35"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="FTF Rechner"><meta name="description" content="FTF-Antriebsauslegung mit Dunkermotoren und NG500 – lokal und offline"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icons/icon-180.png"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./styles.css?v=3.6"><title>FTF Antriebsrechner</title></head>
-<body><header class="top"><div class="top-inner"><div class="brand"><span class="mark">FTF<span class="mark-dot">●</span></span><span><strong>Antriebsrechner</strong><small>Motoren & FTF · v3.6</small></span></div><button id="install" class="ghost" hidden>Installieren</button></div></header>
+<body><header class="top"><div class="top-inner"><div class="brand"><span class="mark">FTF<span class="mark-dot">●</span></span><span><strong>Antriebsrechner</strong><small>Motoren & FTF · v3.7</small></span></div><button id="install" class="ghost" hidden>Installieren</button></div></header>
 <main class="container"><section class="hero"><div><h1>Motoren & FTF-Auslegung</h1></div></section>
 <div class="toolbar"><label class="project-label" for="projectName">Projektname <input id="projectName" type="text" maxlength="100" autocomplete="off"></label><button id="save" class="primary">Speichern</button><button id="new" class="neutral">Zurücksetzen</button></div>
 <nav class="tabs" aria-label="Bereiche"><button data-tab="eingaben" class="active">Eingaben</button><button data-tab="ansicht">FTF-Ansicht</button><button data-tab="ergebnisse">Ergebnisse</button><button data-tab="projekte">Projekte & Export</button></nav>
@@ -25,6 +25,18 @@
 <div class="layout-inputs form-grid"><label class="field" for="layoutWidth"><span>Gestellbreite</span><span class="value"><input id="layoutWidth" type="number" min="1" step="1" inputmode="decimal"><small>mm</small></span></label><label class="field" for="layoutLength"><span>Gestelllänge</span><span class="value"><input id="layoutLength" type="number" min="1" step="1" inputmode="decimal"><small>mm</small></span></label><label class="field" for="layoutWheelInset"><span>Radmitte – Abstand zur Außenkante</span><span class="value"><input id="layoutWheelInset" type="number" min="0" step="1" inputmode="decimal"><small>mm</small></span></label></div><p class="fineprint">Der Seitenabstand gilt für die äußersten Räder vorn und hinten. Die Zeichnung aktualisiert sich direkt.</p><div class="vehicle-svg-wrap"><svg id="vehicleSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 510" role="img" aria-label="Schematische FTF-Draufsicht"></svg></div>
 <div id="vehicleLayoutStats" class="vehicle-layout-stats" aria-live="polite"></div>
 <p id="vehicleLayoutNote" class="fineprint"></p>
+<div class="load-layout-section">
+<h3>Beladung – Draufsicht</h3>
+<p class="fineprint">Gleiches FTF-Gestell ohne Räder. Die Beladung wird als Rechteck im Maßstab dargestellt. Versatz jeweils von der Gestellmitte zur Lastmitte.</p>
+<div class="layout-inputs form-grid">
+<label class="field" for="layoutLoadWidth"><span>Breite Beladung</span><span class="value"><input id="layoutLoadWidth" type="number" min="1" step="1" inputmode="decimal"><small>mm</small></span></label>
+<label class="field" for="layoutLoadLength"><span>Länge Beladung</span><span class="value"><input id="layoutLoadLength" type="number" min="1" step="1" inputmode="decimal"><small>mm</small></span></label>
+<label class="field" for="layoutLoadOffsetX"><span>Versatz seitlich (− links / + rechts)</span><span class="value"><input id="layoutLoadOffsetX" type="number" step="1" inputmode="decimal"><small>mm</small></span></label>
+<label class="field" for="layoutLoadOffsetY"><span>Versatz längs (− hinten / + vorne)</span><span class="value"><input id="layoutLoadOffsetY" type="number" step="1" inputmode="decimal"><small>mm</small></span></label>
+</div>
+<div class="vehicle-svg-wrap"><svg id="loadSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 510" role="img" aria-label="FTF-Draufsicht mit Beladung"></svg></div>
+<p id="loadLayoutNote" class="fineprint" aria-live="polite"></p>
+</div>
 <div class="layout-footer"><button id="layoutBack" class="neutral" type="button">Fahrdaten ändern</button><button id="layoutSave" class="primary" type="button">Projekt speichern</button></div>
 </section></div>
 <div id="view-ergebnisse" class="tab-view" hidden><div id="error" class="error" hidden></div><div id="kpis" class="kpis"></div><div class="result-top"><h2>Berechnungsergebnisse</h2><button id="print" class="neutral">Drucken / PDF</button></div><div id="warnings" class="warnings" role="alert" hidden></div><details id="calculationNotes" class="calculation-notes"><summary>Prüfhinweise & Grenzen der Berechnung</summary><div id="calculationNoteList"></div></details><div id="results"></div>
