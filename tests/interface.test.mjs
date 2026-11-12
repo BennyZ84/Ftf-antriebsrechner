@@ -40,3 +40,10 @@ test('Warnings are reserved for real threshold violations; generic notes collaps
  assert.ok(js.includes("const critical=/überschritten"));
  assert.ok(js.includes("warningsBox.hidden=warningsBox.childElementCount===0"));
 });
+
+test('Migration backup provides separate source ZIP and browser project JSON',()=>{
+ assert.ok(html.includes('Alle Projekte als JSON sichern'));
+ assert.ok(html.includes('Ftf-antriebsrechner/archive/refs/heads/main.zip'));
+ assert.ok(html.includes('MIGRATION_BACKUP.md'));
+ assert.ok(!html.includes('Excel-'));
+});
