@@ -14,19 +14,15 @@ iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffne
 
 Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-**Katalogstand v2.4 (12.11.2026): 87 Motorvarianten, 220 Getriebeübersetzungen aus 18 Getriebebaureihen.**
+**Katalogstand v3.0 (12.11.2026): 124 Motor-Spannungs-/Steuerungsvarianten und 344 Getriebeübersetzungen aus 30 Getriebebaureihen.** Die 17 Planetengetriebefamilien (PLG) der ausgewerteten Hersteller-Lieferübersicht sind als Baureihen vertreten. Motoren und Getriebe sind als technische Vorauslegungsdaten erfasst, nicht als vollständiges Sortiment aller Artikelnummern. Wo Herstellerdaten für Beschleunigungsgrenzen fehlen, wird **kein** fiktiver Peak-Wert ergänzt.
 
-Motoren: BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, zusätzlich BG75 dMove CO/IO und BG75 dPro CO/IO. dGo, andere dMove/dPro-Baugrößen, bürstenbehaftete GR/PM, AC-Motoren und BGA-Baureihen sind **noch nicht** vollständig erfasst.
+Motoren: ausgewählte BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, BG45/65/66/75 dMove und BG45/66/75/95 dPro. Noch nicht vollständig erfasst: dGo, BGA, GR/PM, weitere Schnittstellen- und Spannungsvarianten.
 
-Getriebe mit dokumentierten Auslegungsdaten: NG250/NG500, PLG40 LB, PLG52 EB/HT, PLG60 LN/LB, PLG63 EP/HT, PLG75 EP/HT/SL, PLG80 LB, PLG95 HT, STG65, SG120/SG120K und KG120.
+Getriebe: 17 PLG-Familien, NG250/NG500, SG45/62/80/80K/85/120/120K, KG80/120/150 und STG65. Weiterhin offen: insbesondere SG65, WG52/63/75, NG1000 WO (teils vorläufige Daten) und konkrete Herstellervarianten.
 
-**Spezifische Grenzen der Herstellerwerte:** Bei PLG40/60/80 LB ist das dargestellte Dauermoment der S8-Wert, bei 3000 min⁻¹ Eingangsdrehzahl; S1-Werte bei 100 min⁻¹ Abtriebsdrehzahl sind separat als Metadaten gespeichert. Die S1-Lebensdauer ist zu prüfen. Bei KG120 und PLG40 LB ist der angegebene Wirkungsgrad ein *Verzahnungswirkungsgrad* und nicht zwingend der gesamte Systemwirkungsgrad. Bei SG120 und STG65 gelten weitere Vorgaben zum Lastkollektiv und gegebenenfalls zur Selbsthemmung. Die voreingestellte Auslegungswirkungsgradannahme kann angepasst werden.
+**Auslegungsgrenzen:** Kombinierbarkeit auf Hersteller-Baureihenebene ist keine Freigabe einzelner Artikel. Flansch, Welle, Übersetzung, Wirkungsgrad, Anbauten, thermische Lasten und dynamische Lastkollektive müssen vor Freigabe geprüft werden. S1- und S8-Momentangaben sind teilweise betriebspunktabhängig.
 
-**Motor-Getriebe-Kombinationen:** Die App listet nur nachweisbare Hersteller-Baukastenfamilien als solche; mechanische Einzelausführungen werden dadurch **nicht automatisch freigegeben**. BG95x40 dCore + NG500 ist mit Herstellerzeichnung dokumentiert. BG75 dMove/dPro können mit den nachgewiesenen Getriebebaureihen ausgewählt werden; die konkrete EP-/HT-Variante, Motoranschlüsse und Artikelnummern erfordern gesonderte Prüfung.
-
-**Noch offene Familien im offiziellen Herstellerkatalog:** PLG22 HT, PLG30, PLG32, PLG42 K/S, weitere SG/KG/WG-Angulargetriebe, NG1000 WO und die noch nicht erfassten Motorreihen. Unvollständige oder als vorläufig gekennzeichnete Daten werden nicht für die Auslegung interpoliert oder als bestätigt eingetragen. Der Umfang des Portfolios kann sich außerdem ändern.
-
-Siehe [Katalog-Abdeckungsbericht](CATALOG_COVERAGE.md) für Status, Quellen und offene Punkte.
+**Vollständigkeit:** Die 124/344 Datensätze bezeichnen nicht alle lieferbaren Motoren, Getriebe und Baukastenkombinationen. Aktueller Stand und Quellen: [Katalog-Abdeckungsbericht](CATALOG_COVERAGE.md).
 
 Quellen: [Gesamtkatalog 2025/26](https://www.dunkermotoren.com/de-de/downloads/catalogues), [BLDC-Motoren](https://www.dunkermotoren.com/de-de/products/brushless-dc-motors/for-external-controllers), [Getriebe](https://www.dunkermotoren.com/de-de/products/gearboxes). Alle neuen Einträge enthalten eigene Datenblatt-Links im Quellcode.
 
