@@ -68,3 +68,10 @@ test('FTF layout has its own navigable page and real project-linked controls',()
  assert.ok(js.includes('calculateLayout(config)'));
  assert.ok(sw.includes('vehicle-layout.js'));
 });
+
+test('Second plan view exposes load dimensions and signed midpoint offsets',()=>{
+ for(const id of ['layoutLoadWidth','layoutLoadLength','layoutLoadOffsetX','layoutLoadOffsetY','loadSvg','loadLayoutNote'])
+  assert.ok(html.includes('id="'+id+'"'),id+' missing');
+ assert.ok(js.includes('calculateLoadLayout(config)'));
+ assert.ok(js.includes('renderLoadLayout();'));
+});
