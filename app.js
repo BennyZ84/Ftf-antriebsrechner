@@ -123,6 +123,42 @@ $('results').replaceChildren();
 renderAdditionalResults();
 for(const [name,val,unit,formula] of data.results){const article=document.createElement('article');article.className='result';const info=document.createElement('div');const heading=document.createElement('strong');heading.textContent=name;const f=document.createElement('small');f.textContent=formula;info.append(heading,f);const value=document.createElement('b');value.textContent=fmt(val,unit==='min⁻¹'||unit==='kg'?0:unit==='%'?1:unit==='Nm'?3:2)+' '+unit;article.append(info,value);$('results').append(article);}
 }
+function renderRouteSegments(){
+ const box=$('routeSegments');if(!box)return;
+ box.replaceChildren();
+ const values=Array.isArray(config.routeSegments)?config.routeSegments:[];
+ $('routeModeNote').textContent=values.length
+  ? values.length+' Fahrkursabschnitt(e) aktiv – die pauschalen Strecken-, Geschwindigkeits- und Stoppwerte werden für die Energiebilanz ersetzt.'
+  : 'Ohne Abschnitte gelten die pauschalen Kurswerte oben.';
+ const props=[
+  ['distance','Strecke','m',1],['speed','Tempo','m/s',.01],
+  ['loadFactor','Lastanteil (0–1)','',.05],['stops','Stopps','',1],
+  ['dwellSeconds','Warten','s',1],['conveyorSeconds','Fördertechnik','s',1]
+ ];
+ values.forEach((segment,index)=>{
+  const card=document.createElement('div');card.className='route-segment';
+  const head=document.createElement('div');head.className='route-segment-head';
+  const heading=document.createElement('strong');heading.textContent='Abschnitt '+(index+1);
+  const del=document.createElement('button');del.className='neutral';del.type='button';del.textContent='Entfernen';
+  del.addEventListener('click',()=>{config.routeSegments.splice(index,1);renderRouteSegments();renderAdditionalResults();});
+  head.append(heading,del);card.append(head);
+  const fields=document.createElement('div');fields.className='form-grid';
+  for(const [prop,label,unit,step] of props){
+   const wrap=document.createElement('label');wrap.className='field';
+   const title=document.createElement('span');title.textContent=label;
+   const sub=document.createElement('span');sub.className='value';
+   const input=document.createElement('input');input.type='number';input.inputMode='decimal';input.step=String(step);input.value=String(segment[prop]??0);
+   input.addEventListener('input',()=>{
+    if(input.value==='')return;
+    config.routeSegments[index][prop]=Number(input.value);
+    renderAdditionalResults();
+   });
+   sub.append(input);if(unit){const suffix=document.createElement('small');suffix.textContent=unit;sub.append(suffix);}
+   wrap.append(title,sub);fields.append(wrap);
+  }
+  card.append(fields);box.append(card);
+ });
+}
 function renderAdditionalResults(){
  const inertia=calculateInertia(config),battery=calculateBattery(config),stability=calculateStability(config),roller=calculateRollerPressure(config);
  const inertiaBox=$('inertiaResults'),batteryBox=$('batteryResults'),stabilityBox=$('stabilityResults'),rollerBox=$('rollerResults');
@@ -184,7 +220,7 @@ function refresh(){
  if(config.mode!=='motor')config.mode='ftf';
  const selected=motors.find(m=>m.id===config.motorId);
  if(selected){$('seriesSelect').value=seriesOf(selected)||'dCore';renderMotorOptions();}
- renderGearOptions();syncFields();renderMotorSpecs();updateMode();render();
+ renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();render();
 }
 function tab(id){if(id==='ergebnisse' && config.mode==='motor')id='eingaben';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
 function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes FTF';const existing=projects.findIndex(x=>x.projectName===config.projectName);const item=clone(config);if(existing<0)projects.push(item);else projects[existing]=item;store();showProjects();toast('Projekt lokal gespeichert');}
@@ -244,6 +280,13 @@ function updateCatalogSummary(){
 }
 function init(){
 setupFields();updateCatalogSummary();
+$('addRouteSegment').addEventListener('click',()=>{
+ if(!Array.isArray(config.routeSegments))config.routeSegments=[];
+ if(config.routeSegments.length>=100){toast('Maximal 100 Abschnitte');return;}
+ config.routeSegments.push({distance:100,speed:0.5,loadFactor:1,stops:1,dwellSeconds:0,conveyorSeconds:0});
+ renderRouteSegments();renderAdditionalResults();
+});
+
 const seriesValues=['dCore','dGo','dMove','dPro'];
 for(const series of seriesValues){
  const count=motors.filter(x=>seriesOf(x)===series).length;
