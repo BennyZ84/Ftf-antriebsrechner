@@ -53,3 +53,13 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 #results .result small{font-size:11px;margin-top:3px}
 #results .result b{font-size:15px}
 @media(max-width:520px){#results .result{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}#results .result div{flex:1}#results .result b{text-align:right;white-space:normal;min-width:90px}.result-top h2{font-size:19px}.result-top button{font-size:12px;padding:8px 10px}}
+
+/* Excel-Ausbaustufe v2.6 */
+.aux-section{margin:12px 0;border:1px solid #dce5ed;border-radius:11px;background:#fff;padding:12px 15px}
+.aux-section summary{cursor:pointer;font-size:14px;font-weight:700;color:#18546d}
+.aux-results{margin:12px 0 3px}
+.aux-result{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #edf0f4}
+.aux-result:last-of-type{border:0}
+.aux-result span{font-size:13px;color:#566d7c}
+.aux-result strong{font-size:14px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.aux-warning{background:#fff5ed;color:#744619;padding:8px 10px;border-radius:7px;font-size:12px}
