@@ -7,8 +7,8 @@ const motor = (p) => motors.find(m => m.name.startsWith(p));
 const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
-  assert.equal(motors.length,34);
-  assert.equal(gears.length,48);
+  assert.equal(motors.length,49);
+  assert.equal(gears.length,81);
   assert.equal(catalogScope.coverageComplete,false);
 });
 test('BG65 dCore und PLG63 EP als gelistete Baukastenfamilie', () => {
@@ -28,7 +28,7 @@ test('BG95 mit PLG63 EP ist nicht belegt und wird nicht als passend bezeichnet',
 test('Referenz BG95x40 plus NG500 bleibt als nicht bestätigt gekennzeichnet', () => {
   assert.equal(combinationStatus(motor('BG95x40'),gears.find(g=>g.id==='ng500')).level,'unverified');
 });
-test('Alle 34 mal 48 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 49 mal 81 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -38,5 +38,8 @@ test('Alle 34 mal 48 Motor/Getriebe-Kombinationen haben einen expliziten Status'
   }
   assert.ok(listed>0);
   assert.ok(unverified>0);
-  assert.equal(listed+unverified,34*48);
+  assert.equal(listed+unverified,49*81);
 });
+test('BG62 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG62x30'),gear('PLG 75 HT')).level,'family-listed');});
+test('BG66 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG66x25'),gear('PLG 75 HT')).level,'family-listed');});
+test('BG95 und PLG95 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG95x40'),gear('PLG 95 HT')).level,'family-listed');});
