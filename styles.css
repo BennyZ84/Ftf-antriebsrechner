@@ -36,3 +36,20 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .motor-only #motorSpecs{background:#f2f8fb}
 .motor-only #motorSpecGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:650px){.motor-only #motorSpecGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* v2.2: ruhige, platzsparende Ergebnisansicht */
+.calculation-notes{margin:10px 0 18px;padding:10px 14px;background:#fff;border:1px solid #d7e2e9;border-radius:9px}
+.calculation-notes summary{font-size:13px;font-weight:650;color:#526a79;cursor:pointer}
+.calculation-notes p{font-size:12px;line-height:1.5;color:#526674;margin:9px 0}
+.warnings{margin:8px 0 14px}
+.warnings p{margin:6px 0!important;background:#fff5f1!important;border:1px solid #e8a78d!important;color:#813822!important;padding:9px 12px!important}
+.result-top{gap:12px}
+.result-top h2{font-size:clamp(19px,3vw,25px);margin:14px 0}
+.result-top button{padding:10px 12px;font-size:13px;white-space:nowrap}
+#results{background:#fff;border:1px solid #dfe7ee;border-radius:12px;overflow:hidden;margin-bottom:22px}
+#results .result{border:0;border-bottom:1px solid #e8edf2;border-radius:0;margin:0;padding:12px 16px;gap:9px}
+#results .result:last-child{border-bottom:0}
+#results .result strong{font-size:13px}
+#results .result small{font-size:11px;margin-top:3px}
+#results .result b{font-size:15px}
+@media(max-width:520px){#results .result{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}#results .result div{flex:1}#results .result b{text-align:right;white-space:normal;min-width:90px}.result-top h2{font-size:19px}.result-top button{font-size:12px;padding:8px 10px}}
