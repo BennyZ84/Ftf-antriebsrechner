@@ -7,7 +7,7 @@ const motor = (p) => motors.find(m => m.name.startsWith(p));
 const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
-  assert.equal(motors.length,75);
+  assert.equal(motors.length,87);
   assert.equal(gears.length,220);
   assert.equal(catalogScope.coverageComplete,false);
 });
@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 75 mal 220 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 87 mal 220 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -41,7 +41,7 @@ test('Alle 75 mal 220 Motor/Getriebe-Kombinationen haben einen expliziten Status
   }
   assert.ok(listed>0);
   assert.ok(unverified>0);
-  assert.equal(listed+unverified,75*220);
+  assert.equal(listed+unverified,87*220);
 });
 test('BG62 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG62x30'),gear('PLG 75 HT')).level,'family-listed');});
 test('BG66 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG66x25'),gear('PLG 75 HT')).level,'family-listed');});
@@ -61,7 +61,7 @@ test('dCore dPro dMove BG75x25 bleiben getrennte Typen',()=>{
  assert.equal(combinationStatus(move,gears.find(g=>g.name.startsWith('PLG 75 EP'))).level,'family-listed');
 });
 test('alle 14 dPro/dMove BG75-Varianten haben vollständig bezifferte Kerndaten',()=>{
- const found=motors.filter(m=>['dPro','dMove'].includes(m.series));
+ const found=motors.filter(m=>m.name.startsWith('BG75')&&['dPro','dMove'].includes(m.series));
  assert.equal(found.length,14);
  for(const m of found)for(const k of ['rpm','idle','nom','peak','J','voltage'])assert.ok(m[k]>0,m.id+': '+k);
 });
@@ -115,4 +115,20 @@ test('Weitere Hersteller-Planetengetriebe mit genau dokumentierten Tabellenwerte
    assert.ok(g.source?.startsWith('https://www.dunkermotoren.com/'),g.name);
   }
  }
+});
+
+test('BG66 dMove and BG66 dPro Ethernet variants are distinct and carry thermally isolated limits',()=>{
+ const a=motors.filter(m=>m.name.startsWith('BG66')&&m.series==='dMove');
+ const b=motors.filter(m=>m.name.startsWith('BG66')&&m.series==='dPro');
+ assert.equal(a.length,6);assert.equal(b.length,6);
+ for(const m of [...a,...b]){
+  for(const k of ['voltage','rpm','idle','nom','peak','J','nomThermallyConnected','rpmThermallyConnected'])assert.ok(m[k]>0,m.id+': '+k);
+  assert.ok(m.nomThermallyConnected>=m.nom);
+ }
+ const drive=motors.find(m=>m.name.startsWith('BG66x25 dMove')&&m.voltage===48);
+ assert.equal(drive.nom,0.38);assert.equal(drive.nomThermallyConnected,0.57);
+ assert.equal(combinationStatus(drive,gears.find(g=>g.name.startsWith('PLG 63 HT ·'))).level,'family-listed');
+ const pro=motors.find(m=>m.name.startsWith('BG66x25 dPro')&&m.voltage===48);
+ assert.equal(pro.nom,0.42);assert.equal(pro.nomThermallyConnected,0.62);
+ assert.equal(combinationStatus(pro,gears.find(g=>g.name.startsWith('PLG 80 LB ·'))).level,'family-listed');
 });
