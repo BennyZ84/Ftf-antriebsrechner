@@ -5,7 +5,7 @@ import {stabilityDefaults,calculateStability} from './stability.js';
 import {rollerDefaults,calculateRollerPressure} from './roller.js';
 import {pendingCatalogFamilies} from './catalog-pending.js';
 import {layoutDefaults,calculateLayout,calculateLoadLayout} from './vehicle-layout.js';
-import {recommendDrives} from './drive-recommender.js';
+import {recommendMotors} from './drive-recommender.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
 const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults,...layoutDefaults};
 let config=clone(projectDefaults);
@@ -333,65 +333,60 @@ function renderLoadLayout(){
   ' Schematische Geometrie – keine Prüfung von Schwerpunkt, Kippsicherheit oder Lastaufnahme.';
 }
 
-function updateRecommendationSummary(){
- const box=$('recommendSummary');if(!box)return;
- const rows=[['Gesamtmasse',(Number(config.unloaded)+Number(config.payload)).toLocaleString('de-DE')+' kg'],
- ['Antriebe',config.drives],['Rad-Ø',config.wheel+' mm'],
- ['Geschwindigkeit',config.speed+' m/s'],['Beschleunigung',config.accel+' m/s²'],
- ['Steigung',config.slope+' %']];
- box.replaceChildren();
- for(const [label,value] of rows){
-  const entry=document.createElement('div');entry.className='drive-summary-item';
-  const small=document.createElement('span');small.textContent=label;
-  const strong=document.createElement('strong');strong.textContent=String(value);
-  entry.append(small,strong);box.append(entry);
- }
+let driveSelectionMode='direct';
+function setDriveSelectionMode(mode){
+ driveSelectionMode=mode==='suggest'?'suggest':'direct';
+ const suggest=driveSelectionMode==='suggest';
+ document.querySelector('.drive-workflow').hidden=!suggest;
+ document.querySelector('.drive-manual').hidden=suggest;
+ $('driveModeDirect').className=suggest?'neutral':'primary';
+ $('driveModeSuggest').className=suggest?'primary':'neutral';
+ $('driveModeDirect').setAttribute('aria-pressed',String(!suggest));
+ $('driveModeSuggest').setAttribute('aria-pressed',String(suggest));
 }
 function runRecommendations(){
  const box=$('recommendResults');box.replaceChildren();
- const voltage=Number($('recommendVoltage').value),reserve=Number($('recommendReserve').value);
- const result=recommendDrives(config,motors,gears,{voltage,reserve});
- const intro=document.createElement('p');
- intro.className='recommend-count';
+ const result=recommendMotors(motors,{
+  voltage:Number($('recommendVoltage').value),
+  rpm:Number($('recommendRpm').value),
+  torque:Number($('recommendTorque').value),
+  peak:Number($('recommendPeak').value),
+  reserve:Number($('recommendReserve').value)
+ });
+ const intro=document.createElement('p');intro.className='recommend-count';
  if(result.error){intro.textContent=result.error;box.append(intro);return;}
  intro.textContent=result.total
-  ? result.total+' rechnerisch passende, im Baukasten gelistete Kombinationen gefunden. Die ersten '+result.candidates.length+' sind nach Motornennmoment sortiert.'
-  : 'Keine Kombination erfüllt alle konservativen Anforderungen mit vollständig dokumentierten Grenzwerten. Prüfe Fahrdaten und Motorspannung; fehlende Nachweise werden nicht als passende Kombination angezeigt.';
+  ?result.total+' passende Motortypen gefunden. Die ersten '+result.candidates.length+' sind nach Nennmoment sortiert.'
+  :'Kein Motor erfüllt alle eingegebenen Mindestanforderungen mit ausreichend dokumentierten Katalogwerten.';
  box.append(intro);
  for(const item of result.candidates){
   const card=document.createElement('div');card.className='recommend-item';
-  const name=document.createElement('strong');name.textContent=item.motorName;
-  const gearName=document.createElement('div');gearName.className='recommend-gear';gearName.textContent=item.gearName;
+  const name=document.createElement('strong');name.textContent=item.name;
   const details=document.createElement('div');details.className='recommend-metrics';
   for(const [label,value] of [
-   ['Drehzahl Bedarf',fmt(item.requiredRpm,0)+' / '+fmt(item.rpm,0)+' min⁻¹'],
-   ['Anfahrmoment',fmt(item.requiredMotor,3)+' / '+fmt(item.nominal,3)+' Nm'],
-   ['Getriebe Anfahren',fmt(item.wheelAccel,2)+' / '+fmt(item.gearPeak,2)+' Nm']]){
-   const cell=document.createElement('div');
-   const caption=document.createElement('span');caption.textContent=label;
-   const number=document.createElement('b');number.textContent=value;
-   cell.append(caption,number);details.append(cell);
+   ['Nenndrehzahl',fmt(item.rpm,0)+' min⁻¹'],
+   ['Nennmoment',fmt(item.nom,3)+' Nm'],
+   ['Spitzenmoment',item.peak>0?fmt(item.peak,3)+' Nm':'Nicht angegeben']]){
+   const cell=document.createElement('div'),labelEl=document.createElement('span'),val=document.createElement('b');
+   labelEl.textContent=label;val.textContent=value;cell.append(labelEl,val);details.append(cell);
   }
-  const status=document.createElement('p');status.className='fineprint';status.textContent=item.status+' · Keine Hersteller-Einzelfreigabe.';
-  const btn=document.createElement('button');btn.type='button';btn.className='neutral';btn.textContent='Motor & Getriebe übernehmen';
-  btn.addEventListener('click',()=>{
-   const m=motors.find(m=>m.id===item.motorId),g=gears.find(g=>g.id===item.gearId);
-   if(!m||!g)return;
-   Object.assign(config,{motorId:m.id,rpm:m.rpm,idle:m.idle,nom:m.nom,peak:m.peak,J:m.J,
-    gearId:g.id,ratio:g.ratio,eta:g.eta,cont:g.cont,gearPeak:g.peak});
-   refresh();toast('Vorschlag ins Projekt übernommen – Berechnung prüfen');
+  const button=document.createElement('button');button.type='button';button.className='neutral';button.textContent='Motor übernehmen';
+  button.addEventListener('click',()=>{
+   const motor=motors.find(m=>m.id===item.id);if(!motor)return;
+   Object.assign(config,{motorId:motor.id,rpm:m.rpm,idle:m.idle,nom:m.nom,peak:m.peak,J:m.J});
+   setDriveSelectionMode('direct');refresh();toast('Motor übernommen – Getriebe bitte prüfen');
   });
-  card.append(name,gearName,details,status,btn);box.append(card);
+  card.append(name,details,button);box.append(card);
  }
- const caution=document.createElement('p');caution.className='fineprint';
- caution.textContent=result.note+' Berücksichtigte Baukastenpaare: '+result.documented+', mit vollständigen Prüfwerten: '+result.fullySpecified+'.';
- box.append(caution);
+ const note=document.createElement('p');note.className='fineprint';
+ note.textContent='Vorauswahl nach Motor-Nennwerten, kein Nachweis für Lastkollektiv, Einbauraum, Versorgung oder Motor-Getriebe-Kombination.';
+ box.append(note);
 }
 function refresh(){
  if(config.mode!=='motor')config.mode='ftf';
  const selected=motors.find(m=>m.id===config.motorId);
  if(selected){$('seriesSelect').value=seriesOf(selected)||'dCore';renderMotorOptions();}
- renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();renderVehicleLayout();renderLoadLayout();updateRecommendationSummary();render();
+ renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();renderVehicleLayout();renderLoadLayout();render();
 }
 function tab(id){if((id==='ergebnisse'||id==='ansicht') && config.mode==='motor')id='eingaben';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ansicht','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
 function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes FTF';const existing=projects.findIndex(x=>x.projectName===config.projectName);const item=clone(config);if(existing<0)projects.push(item);else projects[existing]=item;store();showProjects();toast('Projekt lokal gespeichert');}
@@ -464,11 +459,14 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.9 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.10 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
 $('recommendRun').addEventListener('click',runRecommendations);
+$('driveModeDirect').addEventListener('click',()=>setDriveSelectionMode('direct'));
+$('driveModeSuggest').addEventListener('click',()=>setDriveSelectionMode('suggest'));
+setDriveSelectionMode('direct');
  for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset'],['layoutLoadWidth','loadWidth'],['layoutLoadLength','loadLength'],['layoutLoadOffsetX','loadOffsetX'],['layoutLoadOffsetY','loadOffsetY']]){$(id).addEventListener('input',()=>{const value=$(id).value;if(value==='')return;config[key]=Number(value);refresh();});}
 $('addRouteSegment').addEventListener('click',()=>{
  if(!Array.isArray(config.routeSegments))config.routeSegments=[];
