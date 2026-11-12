@@ -638,18 +638,6 @@ export const motors=[
     "note": "Datenblatt BG42 dCore; BG42x45 24-V-Daten im Katalog als vorläufig (*) markiert – keine Serienfreigabe. Motor-/Getriebekombination einzeln nachweisen."
   },
   {
-    "id": "bg42x45-24v",
-    "name": "BG42x45 dCore · 24 V",
-    "voltage": 24,
-    "rpm": 3600,
-    "idle": 4500,
-    "nom": 0.245,
-    "peak": 2.25,
-    "J": 64,
-    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-42-dcore.pdf?la=pt-br&revision=baafebff-0293-40f2-b3f6-97bff0bfb880",
-    "note": "Datenblatt BG42 dCore; BG42x45 24-V-Daten im Katalog als vorläufig (*) markiert – keine Serienfreigabe. Motor-/Getriebekombination einzeln nachweisen."
-  },
-  {
     "id": "bg45x15-24v",
     "name": "BG45x15 dCore · 24 V",
     "voltage": 24,
@@ -696,6 +684,54 @@ export const motors=[
     "J": 44,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-45-dcore.pdf?la=pt-br&revision=fab53e46-4463-4803-bad1-fd46fe212989",
     "note": "BG45: Nennwerte mit thermischer Anbindung! Ohne thermische Anbindung Nennmoment nur 0.22 Nm; Nenndrehzahl ebenfalls anders. Keine Betriebsfreigabe ohne thermische Prüfung."
+  },
+  {
+    "id": "bg32x10-12v",
+    "name": "BG32x10 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 4000,
+    "idle": 5930,
+    "nom": 0.025,
+    "peak": 0.075,
+    "J": 5.9,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-32-dcore.pdf?la=pt-br&revision=7792021e-cdc1-499a-b732-a8fd39f0e787",
+    "note": "Katalogwerte BG32 dCore; Kompatibilität zur Getriebe-Einzelausführung nicht automatisch bestätigt."
+  },
+  {
+    "id": "bg32x10-24v",
+    "name": "BG32x10 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3870,
+    "idle": 5730,
+    "nom": 0.025,
+    "peak": 0.075,
+    "J": 5.9,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-32-dcore.pdf?la=pt-br&revision=7792021e-cdc1-499a-b732-a8fd39f0e787",
+    "note": "Katalogwerte BG32 dCore; Kompatibilität zur Getriebe-Einzelausführung nicht automatisch bestätigt."
+  },
+  {
+    "id": "bg32x20-12v",
+    "name": "BG32x20 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 4060,
+    "idle": 5460,
+    "nom": 0.045,
+    "peak": 0.162,
+    "J": 10.2,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-32-dcore.pdf?la=pt-br&revision=7792021e-cdc1-499a-b732-a8fd39f0e787",
+    "note": "Katalogwerte BG32 dCore; Kompatibilität zur Getriebe-Einzelausführung nicht automatisch bestätigt."
+  },
+  {
+    "id": "bg32x20-24v",
+    "name": "BG32x20 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3600,
+    "idle": 4960,
+    "nom": 0.044,
+    "peak": 0.162,
+    "J": 10.2,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-32-dcore.pdf?la=pt-br&revision=7792021e-cdc1-499a-b732-a8fd39f0e787",
+    "note": "Katalogwerte BG32 dCore; Kompatibilität zur Getriebe-Einzelausführung nicht automatisch bestätigt."
   }
 ];
 // Katalogbestätigte Einzelübersetzungen. Nicht automatisch mechanisch zu jedem Motor passend.
