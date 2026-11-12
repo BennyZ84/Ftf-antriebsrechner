@@ -39,3 +39,28 @@ test('Motorless saved project fields are not required; formula inputs are valida
  assert.ok(calculateInertia({...defaults,...auxiliaryDefaults,ftfLength:0}).error);
  assert.ok(calculateBattery({...defaults,...auxiliaryDefaults,usableCapacity:120}).error);
 });
+
+test('Mehrere Fahrkursabschnitte überschreiben die pauschale Streckenannahme',()=>{
+ const cfg={...defaults,...auxiliaryDefaults,routeSegments:[
+  {distance:100,speed:1,loadFactor:1,stops:1,dwellSeconds:20,conveyorSeconds:10},
+  {distance:100,speed:0.5,loadFactor:0,stops:1,dwellSeconds:30,conveyorSeconds:0}
+ ]};
+ const r=calculateBattery(cfg);
+ assert.ok(!r.error);
+ assert.equal(r.segmentDetails.length,2);
+ const expectedTimePerTrip=100/1+20+10+100/0.5+30;
+ assert.ok(Math.abs(r.occupiedHours-expectedTimePerTrip*cfg.tripsPerDay/3600)<1e-12);
+ const force=(m)=>m*9.81*(cfg.roll*Math.cos(Math.atan(cfg.slope/100))+Math.sin(Math.atan(cfg.slope/100)));
+ const loaded=(force(cfg.unloaded+cfg.payload)*100+0.5*(cfg.unloaded+cfg.payload)*1**2)/(cfg.eta*3600);
+ const empty=(force(cfg.unloaded)*100+0.5*cfg.unloaded*.5**2)/(cfg.eta*3600);
+ assert.ok(Math.abs(r.drivePerTrip-(loaded+empty))<1e-10);
+ assert.equal(r.conveyorWh,cfg.conveyorPower*10*cfg.tripsPerDay/3600);
+});
+test('Fahrkurs prüft unzulässige Abschnittswerte und unrealistische Zeiten',()=>{
+ const segment={distance:500,speed:0.5,loadFactor:1,stops:1,dwellSeconds:2000,conveyorSeconds:100};
+ const r=calculateBattery({...defaults,...auxiliaryDefaults,routeSegments:[segment],tripsPerDay:30});
+ assert.ok(!r.error);
+ assert.ok(r.warnings.some(x=>x.includes('überschreitet')));
+ assert.ok(calculateBattery({...defaults,...auxiliaryDefaults,routeSegments:[{...segment,speed:0}]}).error);
+ assert.ok(calculateBattery({...defaults,...auxiliaryDefaults,routeSegments:[{...segment,loadFactor:2}]}).error);
+});
