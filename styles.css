@@ -87,3 +87,9 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .layout-footer{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 .layout-footer button{flex:1 1 160px}
 @media(max-width:520px){.vehicle-layout-page{padding:14px}.vehicle-layout-stats{gap:7px}.layout-stat{font-size:12px;padding:7px 10px}.tabs{overflow-x:auto;white-space:nowrap}}
+
+/* v3.7: zweite Draufsicht für Lastgeometrie */
+.load-layout-section{margin-top:24px;padding-top:22px;border-top:1px solid #dbe5ed}
+.load-layout-section h3{margin:0 0 8px;color:#173f55;font-size:20px}
+.layout-inputs{margin:14px 0}
+.load-layout-section .vehicle-svg-wrap{margin-top:14px}
