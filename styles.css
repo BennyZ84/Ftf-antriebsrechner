@@ -103,3 +103,39 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .recommend-item strong{display:block;color:#173f55;font-size:14px}
 .recommend-item p{font-size:12px;margin:7px 0}
 .recommend-item button{font-size:12px}
+
+/* v3.9: klare Gliederung der Antriebsauswahl */
+#motorPanel>.panel-head{margin-bottom:16px}
+.drive-workflow,.drive-manual{border:1px solid #dce6ed;border-radius:14px;padding:16px;margin:0 0 17px;background:#fff}
+.drive-workflow{background:#f7fbfd;border-color:#cbdfe8}
+.drive-section-head{display:flex;align-items:flex-start;gap:11px;margin:0 0 14px}
+.drive-step{display:grid;place-items:center;flex:none;width:29px;height:29px;border-radius:50%;background:#0b7e98;color:white;font-weight:800;font-size:14px}
+.drive-section-head h3{font-size:17px;line-height:1.3;margin:1px 0 3px;color:#153c53}
+.drive-section-head p{font-size:12px!important;line-height:1.45;color:#617a8c!important;margin:0!important}
+.drive-recommendation{border:0;background:transparent;border-radius:0;padding:0;margin:0}
+.drive-recommendation summary{font-size:13px;padding:10px 0;border-top:1px solid #dce7ee;color:#176179}
+.drive-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 14px}
+.drive-summary-item{min-width:0;border:1px solid #d9e6ed;background:#fff;border-radius:9px;padding:10px 8px}
+.drive-summary-item span{display:block;font-size:11px;color:#637d8d;line-height:1.2;margin-bottom:5px}
+.drive-summary-item strong{display:block;font-size:13px;color:#143f56;overflow-wrap:anywhere}
+.drive-recommendation .form-grid{margin:12px 0}
+#recommendRun{width:100%;padding:12px 14px}
+.recommend-count{font-weight:650;font-size:13px!important;line-height:1.5;margin:14px 0 8px!important;color:#164b61!important}
+.recommend-results{display:grid;gap:9px;margin-top:10px}
+.recommend-item{margin:0;border:1px solid #d9e5ec;background:white;border-radius:11px;padding:13px}
+.recommend-item>strong{font-size:14px;line-height:1.4}
+.recommend-gear{font-size:13px;color:#42687e;font-weight:650;margin-top:3px}
+.recommend-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:12px 0}
+.recommend-metrics>div{background:#f3f7fa;border-radius:8px;padding:8px;min-width:0}
+.recommend-metrics span{display:block;font-size:10px;color:#607c8e;margin-bottom:5px}
+.recommend-metrics b{font-size:12px;display:block;color:#143f56;overflow-wrap:anywhere}
+.recommend-item button{width:100%;font-size:13px!important}
+.drive-manual #gearSection{margin-top:12px}
+@media(max-width:560px){
+.drive-workflow,.drive-manual{padding:12px;margin-bottom:14px}
+.drive-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+.recommend-metrics{grid-template-columns:1fr}
+.recommend-metrics>div{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.recommend-metrics span{margin:0}
+.recommend-metrics b{text-align:right}
+}
