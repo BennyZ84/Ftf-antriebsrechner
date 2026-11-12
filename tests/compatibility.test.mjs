@@ -7,7 +7,7 @@ const motor = (p) => motors.find(m => m.name.startsWith(p));
 const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
-  assert.equal(motors.length,103);
+  assert.equal(motors.length,118);
   assert.equal(gears.length,301);
   assert.equal(catalogScope.coverageComplete,false);
 });
@@ -173,4 +173,25 @@ test('BG95 dPro PN/EC/EI: nine documented variants, source-linked families only'
    assert.equal(combinationStatus(m,gear(g)).level,'family-listed',m.id+' '+g);
   assert.equal(combinationStatus(m,gear('PLG 30')).level,'unverified');
  }
+});
+
+test('BG45 dMove CO/IO variants and documented PLG family',()=>{
+ const found=motors.filter(m=>m.name.startsWith('BG45')&&m.series==='dMove');
+ assert.equal(found.length,6);
+ for(const m of found){
+  assert.equal(combinationStatus(m,gear('PLG 42 S')).level,'family-listed');
+  assert.equal(combinationStatus(m,gear('PLG 75 HT')).level,'unverified');
+  assert.ok(m.voltage>0&&m.rpm>0&&m.nom>0&&m.peak>0&&m.J>0);
+ }
+});
+test('BG95 dPro CO/IO vs PN/EC/EI kept separate',()=>{
+ const co=motors.filter(m=>m.name.startsWith('BG95')&&m.series==='dPro'&&m.name.includes('CO/IO'));
+ const pn=motors.filter(m=>m.name.startsWith('BG95')&&m.series==='dPro'&&m.name.includes('PN/EC/EI'));
+ assert.equal(co.length,9);assert.equal(pn.length,9);
+ const co120=co.find(m=>m.name.startsWith('BG95x120')&&m.voltage===48);
+ const pn120=pn.find(m=>m.name.startsWith('BG95x120')&&m.voltage===48);
+ assert.equal(co120.nom,3.55);
+ assert.equal(pn120.nom,3.8);
+ assert.notEqual(co120.id,pn120.id);
+ assert.equal(combinationStatus(co120,gear('NG 500')).level,'family-listed');
 });
