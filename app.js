@@ -69,6 +69,8 @@ function updateMode(){
  $('gearSection').hidden=motorOnly;
  $('drive-fields').hidden=motorOnly;
  $('extendedPanel').hidden=motorOnly;
+ $('inertiaPanel').hidden=motorOnly;
+ $('batteryPanel').hidden=motorOnly;
  $('resultActions').hidden=motorOnly;
  $('motorPanelTitle').textContent=motorOnly?'Motordaten':'Motor & Getriebe';
  $('motorSpecs').hidden=!motorOnly;
