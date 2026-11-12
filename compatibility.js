@@ -6,17 +6,17 @@ export const listedFamilies=Object.freeze({
   bg32:[],
   bg42:[],
   bg45:[],
-  bg62:["PLG 63 EP","PLG 75 EP","PLG 75 HT"],
+  bg62:["PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT"],
   bg65:["PLG 63 EP","PLG 75 EP"],
-  bg66:["PLG 63 EP","PLG 75 HT"],
+  bg66:["PLG 63 EP","PLG 63 HT","PLG 75 HT"],
   bg75:["PLG 63 EP","PLG 75 EP","PLG 75 HT","PLG 80 LB"],
   bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","PLG 80 LB"]
 });
 export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG75 dMove CO/IO und dPro CO/IO",
- gearFamilies:"NG250/NG500; PLG40 LB, PLG52 EB/HT, PLG60 LN/LB, PLG63 EP, PLG75 EP/HT/SL, PLG80 LB, PLG95 HT; STG65, SG120/K, KG120",
+ gearFamilies:"NG250/NG500; PLG40 LB, PLG52 EB/HT, PLG60 LN/LB, PLG63 EP/HT, PLG75 EP/HT/SL, PLG80 LB, PLG95 HT; STG65, SG120/K, KG120",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
- missingGearExamples:"PLG22/30/32/42/63HT, weitere SG- und KG-Familien sowie WG, NG1000 WO; teils noch nicht vollständig katalogisiert",
+ missingGearExamples:"PLG22/30/32/42, weitere SG- und KG-Familien sowie WG, NG1000 WO; teils noch nicht vollständig katalogisiert",
  coverageComplete:false
 });
 export function motorFamily(motor){
