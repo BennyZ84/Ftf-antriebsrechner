@@ -80,7 +80,7 @@ function setNotes(){
 function render(){
 const data=calc(config);$('error').hidden=!data.error;
 $('error').textContent=data.error||'';
-if(data.error){$('kpis').replaceChildren();$('results').replaceChildren();$('warnings').replaceChildren();return;}
+if(data.error){$('kpis').replaceChildren();$('results').replaceChildren();$('warnings').replaceChildren();$('warnings').hidden=true;$('calculationNoteList').replaceChildren();$('calculationNotes').hidden=true;return;}
 $('kpis').innerHTML=[['Gesamtgewicht',fmt(data.metrics.mass,0)+' kg'],['Motordrehzahl',fmt(data.metrics.rpm,0)+' min⁻¹'],['Radmoment',fmt(data.metrics.wheel)+' Nm'],['Motormoment',fmt(data.metrics.motor,3)+' Nm'],['Bremsweg',fmt(data.metrics.brakeDist)+' m']].map(x=>'<article class="kpi"><span>'+x[0]+'</span><strong>'+x[1]+'</strong></article>').join('');
 // Only actionable limit violations are shown directly; general assumptions are collapsible.
 const warningsBox=$('warnings'), notesBox=$('calculationNoteList'), notes=$('calculationNotes');
