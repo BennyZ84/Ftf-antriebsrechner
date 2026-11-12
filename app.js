@@ -31,14 +31,19 @@ function renderMotorSpecs(){
  const grid=$('motorSpecGrid');grid.replaceChildren();
  if(!motor){$('motorSpecVariant').textContent='Kein Motor gewählt';$('motorSpecNote').textContent='';$('motorSpecSource').hidden=true;return;}
  $('motorSpecVariant').textContent=motor.name;
+ const isThermal=Number.isFinite(motor.nomThermallyConnected);
  const specs=[
   ['Nennspannung',motor.voltage,'V',0],
-  ['Nenndrehzahl',motor.rpm,'min⁻¹',0],
+  [isThermal?'Nenndrehzahl (isoliert)':'Nenndrehzahl',motor.rpm,'min⁻¹',0],
   ['Leerlaufdrehzahl',motor.idle,'min⁻¹',0],
-  ['Nenndrehmoment',motor.nom,'Nm',3],
+  [isThermal?'Nennmoment (isoliert)':'Nenndrehmoment',motor.nom,'Nm',3],
   ['Max. Drehmoment',motor.peak,'Nm',3],
   ['Rotorträgheit',motor.J,'g·cm²',1]
  ];
+ if(isThermal){
+  specs.push(['Nennmoment (thermisch angebunden)',motor.nomThermallyConnected,'Nm',3]);
+  specs.push(['Nenndrehzahl (thermisch angebunden)',motor.rpmThermallyConnected,'min⁻¹',0]);
+ }
  for(const [label,value,unit,digits] of specs){
   const card=document.createElement('div');card.className='motor-spec';
   const title=document.createElement('span');title.textContent=label;
@@ -163,8 +168,12 @@ function renderGearOptions(){
   if(gear)Object.assign(config,{gearId:gear.id,ratio:gear.ratio,eta:gear.eta,cont:gear.cont,gearPeak:gear.peak});
  }
 }
+function updateCatalogSummary(){
+ const out=$('catalogSummary');
+ if(out)out.textContent='v2.4 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+}
 function init(){
-setupFields();
+setupFields();updateCatalogSummary();
 const seriesValues=['dCore','dGo','dMove','dPro'];
 for(const series of seriesValues){
  const count=motors.filter(x=>seriesOf(x)===series).length;
