@@ -46,7 +46,11 @@ $('warnings').replaceChildren();const comp=combinationStatus(motors.find(x=>x.id
 $('results').replaceChildren();
 for(const [name,val,unit,formula] of data.results){const article=document.createElement('article');article.className='result';const info=document.createElement('div');const heading=document.createElement('strong');heading.textContent=name;const f=document.createElement('small');f.textContent=formula;info.append(heading,f);const value=document.createElement('b');value.textContent=fmt(val,unit==='min⁻¹'||unit==='kg'?0:unit==='%'?1:unit==='Nm'?3:2)+' '+unit;article.append(info,value);$('results').append(article);}
 }
-function refresh(){renderGearOptions();syncFields();render();}
+function refresh(){
+ const selected=motors.find(m=>m.id===config.motorId);
+ if(selected){$('seriesSelect').value=seriesOf(selected)||'dCore';renderMotorOptions();}
+ renderGearOptions();syncFields();render();
+}
 function tab(id){for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
 function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes FTF';const existing=projects.findIndex(x=>x.projectName===config.projectName);const item=clone(config);if(existing<0)projects.push(item);else projects[existing]=item;store();showProjects();toast('Projekt lokal gespeichert');}
 function showProjects(){
@@ -55,6 +59,20 @@ if(!projects.length){box.textContent='Noch keine Projekte gespeichert.';return;}
 for(const p of projects){const line=document.createElement('div');line.className='project-entry';const title=document.createElement('strong');title.textContent=p.projectName+' · '+fmt(Number(p.unloaded)+Number(p.payload),0)+' kg';const load=document.createElement('button');load.className='neutral';load.textContent='Öffnen';load.addEventListener('click',()=>{config={...clone(defaults),...clone(p)};refresh();tab('eingaben');toast('Projekt geladen');});const del=document.createElement('button');del.className='danger';del.textContent='Löschen';del.addEventListener('click',()=>{if(!confirm('Projekt „'+p.projectName+'“ wirklich löschen?'))return;projects=projects.filter(x=>x!==p);store();showProjects();});line.append(title,load,del);box.append(line);}}
 function exportJSON(){const data=JSON.stringify({version:1,created:new Date().toISOString(),projects},null,2);const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download='ftf-projekte-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
 async function importJSON(file){try{const obj=JSON.parse(await file.text());if(!Array.isArray(obj.projects))throw Error('Keine Projektliste vorhanden');let imported=0;for(const p of obj.projects){if(!p||typeof p.projectName!=='string')continue;const name=p.projectName.trim();if(!name)continue;let proposed=name;let n=2;while(projects.some(x=>x.projectName===proposed))proposed=name+' (Import '+n+++')';projects.push({...clone(defaults),...p,projectName:proposed});imported++;}store();showProjects();toast(imported+' Projekte importiert');}catch(e){toast('Import fehlgeschlagen: '+e.message);}}
+const seriesOf=m=>m?.series||(/\bdCore\b/.test(m?.name||'')?'dCore':null);
+function renderMotorOptions(){
+ const box=$('motorSelect'),series=$('seriesSelect').value,selected=config.motorId;
+ box.replaceChildren();
+ for(const m of motors.filter(x=>seriesOf(x)===series)){
+  const o=document.createElement('option');o.value=m.id;o.textContent=m.name;box.append(o);
+ }
+ if(motors.some(x=>x.id===selected&&seriesOf(x)===series))box.value=selected;
+}
+function selectMotor(id){
+ const m=motors.find(x=>x.id===id);if(!m)return;
+ Object.assign(config,{motorId:m.id,rpm:m.rpm,idle:m.idle,nom:m.nom,peak:m.peak,J:m.J});
+ refresh();
+}
 function renderGearOptions(){
  const select=$('gearboxSelect');
  const m=motors.find(x=>x.id===config.motorId);
@@ -80,9 +98,21 @@ function renderGearOptions(){
 }
 function init(){
 setupFields();
-$('motorSelect').replaceChildren();for(const m of motors){const op=document.createElement('option');op.value=m.id;op.textContent=m.name;$('motorSelect').append(op);}
+const seriesValues=['dCore','dGo','dMove','dPro'];
+for(const series of seriesValues){
+ const count=motors.filter(x=>seriesOf(x)===series).length;
+ if(!count)continue;
+ const o=document.createElement('option');o.value=series;o.textContent=series+' ('+count+' Varianten)';$('seriesSelect').append(o);
+}
+$('seriesSelect').value=seriesOf(motors.find(x=>x.id===config.motorId))||'dCore';
+renderMotorOptions();
 $('gearboxSelect').replaceChildren();renderGearOptions();
-$('motorSelect').addEventListener('change',()=>{const m=motors.find(x=>x.id===$('motorSelect').value);if(!m)return;Object.assign(config,{motorId:m.id,rpm:m.rpm,idle:m.idle,nom:m.nom,peak:m.peak,J:m.J});renderGearOptions();refresh();});
+$('seriesSelect').addEventListener('change',()=>{
+ const series=$('seriesSelect').value;
+ const first=motors.find(m=>seriesOf(m)===series);
+ if(first)selectMotor(first.id);
+});
+$('motorSelect').addEventListener('change',()=>selectMotor($('motorSelect').value));
 $('showUnverified').addEventListener('change',()=>{renderGearOptions();setNotes();});
 $('gearboxSelect').addEventListener('change',()=>{const g=gears.find(x=>x.id===$('gearboxSelect').value);if(!g)return;Object.assign(config,{gearId:g.id,ratio:g.ratio,eta:g.eta,cont:g.cont,gearPeak:g.peak});refresh();});
 $('projectName').addEventListener('input',e=>config.projectName=e.target.value);
