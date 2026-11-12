@@ -43,5 +43,5 @@ export function calculateStability(c){
  if(reserve<=0)warnings.push('Unter Worst-Case-Zuschlägen ergibt sich kein positiver geometrischer Kippabstand.');
  warnings.push('Gefederte Antriebe, dynamische Achslasten, Bremsmomente und tatsächliche Kippachsen sind nicht vollständig modelliert.');
  return {cg,points:poly,margins,staticMargin,gradeShift,curveShift,externalShift,reserve,stableUnderModel:reserve>0,warnings,
- source:'Excel Standfestigkeit: Radkoordinaten, SP-Koordinaten, Seitenneigung, externe Kraft und Kurvengeschwindigkeit; eigene geometrische Vorausprüfung, kein Excel-Formelgleichheitsnachweis.'};
+ source:'Geometrische Vorausprüfung aus Radkoordinaten, Schwerpunkt, Seitenneigung und äußeren Kräften; kein vollständiger Standfestigkeitsnachweis.'};
 }
