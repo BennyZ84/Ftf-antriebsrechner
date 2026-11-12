@@ -26,6 +26,45 @@ wrap.append(input);if(unit){const u=document.createElement('small');u.textConten
 label.append(span,wrap);$(id).append(label);
 }}}
 function syncFields(){for(const k of Object.keys(config)){const input=$('field-'+k);if(input&&document.activeElement!==input)input.value=String(config[k]);}$('projectName').value=config.projectName;$('motorSelect').value=config.motorId;$('gearboxSelect').value=config.gearId;setNotes();}
+function renderMotorSpecs(){
+ const motor=motors.find(x=>x.id===config.motorId);
+ const grid=$('motorSpecGrid');grid.replaceChildren();
+ if(!motor){$('motorSpecVariant').textContent='Kein Motor gewählt';$('motorSpecNote').textContent='';$('motorSpecSource').hidden=true;return;}
+ $('motorSpecVariant').textContent=motor.name;
+ const specs=[
+  ['Nennspannung',motor.voltage,'V',0],
+  ['Nenndrehzahl',motor.rpm,'min⁻¹',0],
+  ['Leerlaufdrehzahl',motor.idle,'min⁻¹',0],
+  ['Nenndrehmoment',motor.nom,'Nm',3],
+  ['Max. Drehmoment',motor.peak,'Nm',3],
+  ['Rotorträgheit',motor.J,'g·cm²',1]
+ ];
+ for(const [label,value,unit,digits] of specs){
+  const card=document.createElement('div');card.className='motor-spec';
+  const title=document.createElement('span');title.textContent=label;
+  const data=document.createElement('strong');data.textContent=fmt(value,digits)+' '+unit;
+  card.append(title,data);grid.append(card);
+ }
+ $('motorSpecNote').textContent=motor.note||'Katalogwerte: Verwendungsgrenzen und Herstellerangaben prüfen.';
+ const link=$('motorSpecSource');link.hidden=!motor.source;
+ if(motor.source)link.href=motor.source;else link.removeAttribute('href');
+}
+function updateMode(){
+ const motorOnly=config.mode==='motor';
+ $('modeMotor').className=motorOnly?'primary':'neutral';
+ $('modeFTF').className=motorOnly?'neutral':'primary';
+ $('modeMotor').setAttribute('aria-pressed',String(motorOnly));
+ $('modeFTF').setAttribute('aria-pressed',String(!motorOnly));
+ $('vehiclePanel').hidden=motorOnly;
+ $('gearSection').hidden=motorOnly;
+ $('drive-fields').hidden=motorOnly;
+ $('extendedPanel').hidden=motorOnly;
+ $('resultActions').hidden=motorOnly;
+ const notice=document.querySelector('#view-eingaben .notice');
+ if(notice)notice.hidden=motorOnly;
+ // Der Ergebnisbereich ist nur mit gültiger FTF-/Getriebekonfiguration sinnvoll.
+ if(motorOnly && document.querySelector('[data-tab="ergebnisse"]').classList.contains('active'))tab('eingaben');
+}
 function setNotes(){
  const m=motors.find(x=>x.id===config.motorId),g=gears.find(x=>x.id===config.gearId);
  $('motorNote').textContent=m?.note||'Motor nicht im Katalog gefunden.';
@@ -47,11 +86,12 @@ $('results').replaceChildren();
 for(const [name,val,unit,formula] of data.results){const article=document.createElement('article');article.className='result';const info=document.createElement('div');const heading=document.createElement('strong');heading.textContent=name;const f=document.createElement('small');f.textContent=formula;info.append(heading,f);const value=document.createElement('b');value.textContent=fmt(val,unit==='min⁻¹'||unit==='kg'?0:unit==='%'?1:unit==='Nm'?3:2)+' '+unit;article.append(info,value);$('results').append(article);}
 }
 function refresh(){
+ if(config.mode!=='motor')config.mode='ftf';
  const selected=motors.find(m=>m.id===config.motorId);
  if(selected){$('seriesSelect').value=seriesOf(selected)||'dCore';renderMotorOptions();}
- renderGearOptions();syncFields();render();
+ renderGearOptions();syncFields();renderMotorSpecs();updateMode();render();
 }
-function tab(id){for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
+function tab(id){if(id==='ergebnisse' && config.mode==='motor')id='eingaben';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
 function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes FTF';const existing=projects.findIndex(x=>x.projectName===config.projectName);const item=clone(config);if(existing<0)projects.push(item);else projects[existing]=item;store();showProjects();toast('Projekt lokal gespeichert');}
 function showProjects(){
 const box=$('projectList');box.replaceChildren();
@@ -107,6 +147,8 @@ for(const series of seriesValues){
 $('seriesSelect').value=seriesOf(motors.find(x=>x.id===config.motorId))||'dCore';
 renderMotorOptions();
 $('gearboxSelect').replaceChildren();renderGearOptions();
+$('modeMotor').addEventListener('click',()=>{config.mode='motor';refresh();tab('eingaben');});
+$('modeFTF').addEventListener('click',()=>{config.mode='ftf';refresh();});
 $('seriesSelect').addEventListener('change',()=>{
  const series=$('seriesSelect').value;
  const first=motors.find(m=>seriesOf(m)===series);
