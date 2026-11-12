@@ -1,6 +1,6 @@
 # Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.2)
 
-## Verifizierter Datenbestand
+## Erfasster Datenbestand (einschließlich ausdrücklich vorläufiger Referenzwerte)
 
 **135 Motor-Spannungs-/Steuerungsvarianten (davon 11 vorläufig)** und **346 Getriebeübersetzungen aus 32 Getriebebaureihen**. Diese Anzahl ist **keine Zahl verfügbarer Artikelnummern** und keine Vollständigkeitsbestätigung des Dunkermotoren-Portfolios.
 
