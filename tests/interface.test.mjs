@@ -24,9 +24,9 @@ test('Technical notes are collapsible and duplicate motor note removed',()=>{
  assert.ok(html.includes('id="motorSpecSource"'));
 });
 test('App version assets and offline cache agree',()=>{
- assert.match(html,/app\.js\?v=2\.2/);
- assert.match(html,/styles\.css\?v=2\.2/);
- assert.match(sw,/ftf-rechner-v2\.2/);
+ assert.match(html,/app\.js\?v=2\.3/);
+ assert.match(html,/styles\.css\?v=2\.3/);
+ assert.match(sw,/ftf-rechner-v2\.3/);
 });
 
 test('Warnings are reserved for real threshold violations; generic notes collapse',()=>{
