@@ -8,7 +8,7 @@ const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
   assert.equal(motors.length,87);
-  assert.equal(gears.length,220);
+  assert.equal(gears.length,301);
   assert.equal(catalogScope.coverageComplete,false);
 });
 test('BG65 dCore und PLG63 EP als gelistete Baukastenfamilie', () => {
@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 87 mal 220 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 87 mal 301 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -41,7 +41,7 @@ test('Alle 87 mal 220 Motor/Getriebe-Kombinationen haben einen expliziten Status
   }
   assert.ok(listed>0);
   assert.ok(unverified>0);
-  assert.equal(listed+unverified,87*220);
+  assert.equal(listed+unverified,87*301);
 });
 test('BG62 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG62x30'),gear('PLG 75 HT')).level,'family-listed');});
 test('BG66 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG66x25'),gear('PLG 75 HT')).level,'family-listed');});
@@ -131,4 +131,22 @@ test('BG66 dMove and BG66 dPro Ethernet variants are distinct and carry thermall
  const pro=motors.find(m=>m.name.startsWith('BG66x25 dPro')&&m.voltage===48);
  assert.equal(pro.nom,0.42);assert.equal(pro.nomThermallyConnected,0.62);
  assert.equal(combinationStatus(pro,gears.find(g=>g.name.startsWith('PLG 80 LB ·'))).level,'family-listed');
+});
+
+test('All 17 PLG catalog families represented without fabricated peak torque',()=>{
+ const expected={'PLG 22 HT':17,'PLG 30':14,'PLG 32':18,'PLG 42 K':16,'PLG 42 S':16};
+ for(const [family,count] of Object.entries(expected)){
+  const items=gears.filter(g=>g.name.startsWith(family+' ·'));
+  assert.equal(items.length,count,family);
+  for(const g of items){
+   assert.equal(gearFamily(g),family);
+   assert.ok(Number.isFinite(g.ratio)&&g.ratio>0);
+   assert.ok(Number.isFinite(g.eta)&&g.eta>0&&g.eta<=1);
+   assert.ok(Number.isFinite(g.cont)&&g.cont>0);
+   assert.equal(g.peak,0,'Not-specified peak torque must not be invented: '+g.id);
+   assert.equal(g.peakSpecified,false);
+   assert.match(g.source,/dunkermotoren\.com/);
+  }
+ }
+ assert.equal(new Set(gears.map(g=>g.id)).size,gears.length);
 });
