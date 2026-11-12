@@ -16,7 +16,7 @@ export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG75 dMove CO/IO und dPro CO/IO",
  gearFamilies:"NG250/NG500; PLG63 EP, PLG75 EP/HT, PLG95 HT",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
- missingGearExamples:"PLG22/30/32/40/42/52/60/63HT/75SL/80LB, STG-, KG-, SG-, WG-Familien",
+ missingGearExamples:"PLG60 LN, PLG80 LB, SG120, STG65, KG120 sowie PLG22/30/32/40/42/52/60/63HT/75SL/80LB, STG-, KG-, SG-, WG-Familien",
  coverageComplete:false
 });
 export function motorFamily(motor){
@@ -32,10 +32,24 @@ export function gearFamily(gear){
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ // dMove/dPro BG75: Hersteller nennt PLG63, PLG75, NG250 und NG500 ausdrücklich
+ // im modularen Baukastensystem. Die Untervariante EP/HT ist dort nicht spezifiziert.
+ if((motor?.series==="dMove"||motor?.series==="dPro") && m==="bg75"){
+  const documented=["PLG 63 EP","PLG 75 EP","NG 250","NG 500"];
+  if(documented.includes(g))return {
+   level:"family-listed",
+   label:"BG75 "+motor.series+" · Getriebebaureihe im Herstellerkatalog",
+   reason:"Dunkermotoren listet "+g.replace(" EP","")+" im BG75-"+motor.series+"-Baukasten. Die in der App hinterlegte konkrete Getriebeuntervariante, Übersetzung und Anbauausführung sind damit nicht einzeln bestätigt.",
+   source:motor.source||combinationSource
+  };
+  return {
+   level:"unverified",label:"Getriebekombination nicht belegt",
+   reason:"Die konkrete Getriebebaureihe "+g+" ist für BG75 "+motor.series+" in der ausgewerteten Hersteller-Baukastenliste nicht nachgewiesen."
+  };
+ }
  if(motor?.series&&motor.series!=="dCore")return {
-  level:"unverified",
-  label:"Getriebeanbau für "+motor.series+" noch nicht einzeln bestätigt",
-  reason:"Die vorhandenen Baukasten-Nachweise beziehen sich auf dCore oder spezifische Referenzen. Für "+motor.series+" wird keine dCore-Freigabe übernommen; mechanische Schnittstellen und konkrete Getriebeausführung gesondert prüfen."
+  level:"unverified",label:"Getriebekombination nicht bestätigt",
+  reason:"Für die gewählte "+motor.series+"-Motorbaureihe fehlt ein konkreter Baukastennachweis."
  };
  if(!m||!g)return {level:"unknown",label:"Baureihe nicht eindeutig zugeordnet",reason:"Motor oder Getriebe wurde nicht eindeutig erkannt."};
  if(m==="bg95" && motor.name?.startsWith("BG95x40 ") && g==="NG 500")return {
