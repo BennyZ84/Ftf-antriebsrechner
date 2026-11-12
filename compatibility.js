@@ -10,7 +10,7 @@ export const listedFamilies=Object.freeze({
   bg65:["PLG 63 EP","PLG 75 EP"],
   bg66:["PLG 63 EP","PLG 75 HT"],
   bg75:["PLG 63 EP","PLG 75 EP","PLG 75 HT"],
-  bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT"]
+  bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","NG 500"]
 });
 export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, dokumentierte Spannungsvarianten",
@@ -33,6 +33,12 @@ export function gearFamily(gear){
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
  if(!m||!g)return {level:"unknown",label:"Baureihe nicht eindeutig zugeordnet",reason:"Motor oder Getriebe wurde nicht eindeutig erkannt."};
+ if(m==="bg95" && motor.name?.startsWith("BG95x40 ") && g==="NG 500")return {
+  level:"family-listed",
+  label:"BG95x40 dCore + NG500 vom Hersteller dokumentiert",
+  reason:"Dunkermotoren zeigt diese Kombination ausdrücklich im NG500-Datenblatt mit Maßzeichnung und 160-mm-Rad. Die Übersetzung "+gear.ratio+":1 ist als NG500-Getriebevariante aufgeführt. Konkrete Artikelnummer, Spannung, Anbauten und Einsatzlast bleiben separat zu bestätigen.",
+  source:"https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-500.pdf?la=pt-br&revision=07b3f891-b877-41c3-9b90-c700039b8899"
+ };
  if((listedFamilies[m]||[]).includes(g))return {
   level:"family-listed",
   label:"Baureihen-Kombination im Hersteller-Baukasten genannt",
