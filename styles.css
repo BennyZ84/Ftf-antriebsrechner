@@ -23,3 +23,16 @@ body.motor-only #view-eingaben .columns{grid-template-columns:minmax(0,1fr)}
 body.motor-only #view-eingaben #motorSpecs{background:#f0f8fc}
 body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:650px){body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* v2.1: Kompakte, eindeutige Datendarstellung */
+.hero{padding:21px 0 16px}.hero h1{font-size:clamp(24px,3vw,32px);margin:0}
+.modebar{margin-bottom:17px}.modebar button{min-width:0}.panel-head{margin-bottom:14px}
+.panel-head h2{margin-bottom:0}
+.spec-details{border-top:1px solid #d8e5eb;margin-top:13px;padding-top:10px}
+.spec-details summary{cursor:pointer;font-weight:650;font-size:13px;color:#155d78}
+.spec-details p{font-size:12px;line-height:1.5;margin:9px 0!important}
+.compatibility{margin:9px 0;padding:9px 11px}
+.motor-only #motorPanel{max-width:880px;margin-left:auto;margin-right:auto;width:100%}
+.motor-only #motorSpecs{background:#f2f8fb}
+.motor-only #motorSpecGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:650px){.motor-only #motorSpecGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
