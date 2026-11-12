@@ -38,16 +38,17 @@ function renderMotorSpecs(){
  const motor=motors.find(x=>x.id===config.motorId);
  const grid=$('motorSpecGrid');grid.replaceChildren();
  if(!motor){$('motorSpecVariant').textContent='Kein Motor gewählt';$('motorSpecNote').textContent='';$('motorSpecSource').hidden=true;return;}
- $('motorSpecVariant').textContent=motor.name;
+ $('motorSpecVariant').textContent=motor.name+(motor.preliminary?' · Daten vorläufig':'');
  const isThermal=Number.isFinite(motor.nomThermallyConnected);
  const specs=[
   ['Nennspannung',motor.voltage,'V',0],
   [isThermal?'Nenndrehzahl (isoliert)':'Nenndrehzahl',motor.rpm,'min⁻¹',0],
   ['Leerlaufdrehzahl',motor.idle,'min⁻¹',0],
   [isThermal?'Nennmoment (isoliert)':'Nenndrehmoment',motor.nom,'Nm',3],
-  ['Max. Drehmoment',motor.peak,'Nm',3],
+  ['Max. Drehmoment',motor.peak>0?motor.peak:null,'Nm',3],
   ['Rotorträgheit',motor.J,'g·cm²',1]
  ];
+ if(Number.isFinite(motor.stallTorque))specs.push(['Anhaltemoment (nicht Spitzenmoment)',motor.stallTorque,'Nm',4]);
  if(isThermal){
   specs.push(['Nennmoment (thermisch angebunden)',motor.nomThermallyConnected,'Nm',3]);
   specs.push(['Nenndrehzahl (thermisch angebunden)',motor.rpmThermallyConnected,'min⁻¹',0]);
@@ -55,7 +56,7 @@ function renderMotorSpecs(){
  for(const [label,value,unit,digits] of specs){
   const card=document.createElement('div');card.className='motor-spec';
   const title=document.createElement('span');title.textContent=label;
-  const data=document.createElement('strong');data.textContent=fmt(value,digits)+' '+unit;
+  const data=document.createElement('strong');data.textContent=value==null?'Nicht angegeben':fmt(value,digits)+' '+unit;
   card.append(title,data);grid.append(card);
  }
  $('motorSpecNote').textContent=motor.note||'Katalogwerte: Verwendungsgrenzen und Herstellerangaben prüfen.';
@@ -106,6 +107,12 @@ const selectedMotor=motors.find(x=>x.id===config.motorId);
 const selectedGear=gears.find(x=>x.id===config.gearId);
 const comp=combinationStatus(selectedMotor,selectedGear);
 const info=[];
+if(selectedMotor?.preliminary){
+ const alert=document.createElement('p');
+ alert.textContent='⚠ Vorläufige Motordaten – keine belastbare Auslegungsfreigabe. Herstellerbestätigung erforderlich.';
+ warningsBox.append(alert);
+}
+
 if(selectedGear?.preliminary){
  const alert=document.createElement('p');
  alert.textContent='⚠ Vorläufige Getriebedaten – keine belastbare Auslegungsfreigabe. Herstellerbestätigung erforderlich.';
