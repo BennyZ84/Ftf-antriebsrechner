@@ -14,11 +14,19 @@ iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffne
 
 Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-Katalogstand **v1.8 (12.11.2026)**: 75 einzeln dokumentierte Motor-Spannungs-/Elektronikvarianten aus **BG32, BG42, BG45, BG62, BG65, BG66, BG75 und BG95 dCore** sowie **BG75 dPro CO/IO und dMove CO/IO** sowie 81 Getriebeübersetzungen aus **NG250, NG500, PLG63 EP, PLG75 EP/HT und PLG95 HT**. BG45-Nennwerte sind thermisch angebundene Werte; ohne ausreichende Kühlung ist die Nennbelastbarkeit geringer. BG42x45 24 V wurde wegen vorläufig markierter Daten nicht übernommen.
+**Katalogstand v2.4 (12.11.2026): 75 Motorvarianten, 220 Getriebeübersetzungen aus 18 Getriebebaureihen.**
 
-**Kompatibilität:** Das neue Ausführungs-Dropdown trennt dCore, dMove und dPro. Die dGo-Baureihe ist als Herstellerfamilie bekannt, aber vorläufige BG42-dGo-Leistungsdaten werden nicht als bestätigte Auslegungswerte übernommen. Die Getriebe-Auswahlliste zeigt standardmäßig ausschließlich vom Hersteller auf **Baureihenebene** genannte Motor/Getriebe-Kombinationen. Auch dort sind Übersetzung, Flansch, Welle, Drehzahl, zulässige Last und Artikelnummer nicht automatisch bestätigt. Nicht belegte Verbindungen lassen sich nur über die zusätzliche Vergleichsoption einblenden. Die vorhandene BG95x40/NG500-Referenz bleibt als **nicht baureihenbestätigt** markiert.
+Motoren: BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, zusätzlich BG75 dMove CO/IO und BG75 dPro CO/IO. dGo, andere dMove/dPro-Baugrößen, bürstenbehaftete GR/PM, AC-Motoren und BGA-Baureihen sind **noch nicht** vollständig erfasst.
 
-**Nicht vollständig:** Der Dunkermotoren-Gesamtkatalog 2025/26 enthält weitere Motoren (darunter dGo/dMove/dPro, GR/G und andere BG/BGA-Reihen) und weitere Planeten-, Winkel-, Schnecken- und Nabengetriebe, deren konkreten Einzelvarianten hier **noch nicht vollständig erfasst** sind. Fehlende Werte werden nicht erfunden. Für eine freigegebene Produktkombination bitte immer den Herstellerkonfigurator oder eine individuelle Herstellerbestätigung verwenden.
+Getriebe mit dokumentierten Auslegungsdaten: NG250/NG500, PLG40 LB, PLG52 EB/HT, PLG60 LN/LB, PLG63 EP/HT, PLG75 EP/HT/SL, PLG80 LB, PLG95 HT, STG65, SG120/SG120K und KG120.
+
+**Spezifische Grenzen der Herstellerwerte:** Bei PLG40/60/80 LB ist das dargestellte Dauermoment der S8-Wert, bei 3000 min⁻¹ Eingangsdrehzahl; S1-Werte bei 100 min⁻¹ Abtriebsdrehzahl sind separat als Metadaten gespeichert. Die S1-Lebensdauer ist zu prüfen. Bei KG120 und PLG40 LB ist der angegebene Wirkungsgrad ein *Verzahnungswirkungsgrad* und nicht zwingend der gesamte Systemwirkungsgrad. Bei SG120 und STG65 gelten weitere Vorgaben zum Lastkollektiv und gegebenenfalls zur Selbsthemmung. Die voreingestellte Auslegungswirkungsgradannahme kann angepasst werden.
+
+**Motor-Getriebe-Kombinationen:** Die App listet nur nachweisbare Hersteller-Baukastenfamilien als solche; mechanische Einzelausführungen werden dadurch **nicht automatisch freigegeben**. BG95x40 dCore + NG500 ist mit Herstellerzeichnung dokumentiert. BG75 dMove/dPro können mit den nachgewiesenen Getriebebaureihen ausgewählt werden; die konkrete EP-/HT-Variante, Motoranschlüsse und Artikelnummern erfordern gesonderte Prüfung.
+
+**Noch offene Familien im offiziellen Herstellerkatalog:** PLG22 HT, PLG30, PLG32, PLG42 K/S, weitere SG/KG/WG-Angulargetriebe, NG1000 WO und die noch nicht erfassten Motorreihen. Unvollständige oder als vorläufig gekennzeichnete Daten werden nicht für die Auslegung interpoliert oder als bestätigt eingetragen. Der Umfang des Portfolios kann sich außerdem ändern.
+
+Siehe [Katalog-Abdeckungsbericht](CATALOG_COVERAGE.md) für Status, Quellen und offene Punkte.
 
 Quellen: [Gesamtkatalog 2025/26](https://www.dunkermotoren.com/de-de/downloads/catalogues), [BLDC-Motoren](https://www.dunkermotoren.com/de-de/products/brushless-dc-motors/for-external-controllers), [Getriebe](https://www.dunkermotoren.com/de-de/products/gearboxes). Alle neuen Einträge enthalten eigene Datenblatt-Links im Quellcode.
 
