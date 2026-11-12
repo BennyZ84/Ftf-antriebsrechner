@@ -410,7 +410,489 @@ export const motors=[
     "note": "Bestätigte Katalog-Spannungsvariante BG95x120 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
   }
 ];
-export const gears=[{id:"ng500",name:"NG500 · 16:1",ratio:16,eta:.8,cont:21,peak:42,note:"NG500 Herstellerreferenz; 80 % konservative Auslegungsannahme"}];
+// Katalogbestätigte Einzelübersetzungen. Nicht automatisch mechanisch zu jedem Motor passend.
+export const gears=[
+  {
+    "id": "ng-250-4",
+    "name": "NG 250 · 4:1",
+    "ratio": 4,
+    "eta": 0.9,
+    "cont": 11,
+    "peak": 22,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-250.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 11 Nm, Beschleunigung 22 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-250-5",
+    "name": "NG 250 · 5:1",
+    "ratio": 5,
+    "eta": 0.9,
+    "cont": 9,
+    "peak": 18,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-250.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 9 Nm, Beschleunigung 18 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-250-8",
+    "name": "NG 250 · 8:1",
+    "ratio": 8,
+    "eta": 0.9,
+    "cont": 9,
+    "peak": 18,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-250.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 9 Nm, Beschleunigung 18 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-250-16",
+    "name": "NG 250 · 16:1",
+    "ratio": 16,
+    "eta": 0.85,
+    "cont": 11,
+    "peak": 22,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-250.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 85 %, Dauer 11 Nm, Beschleunigung 22 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-250-20",
+    "name": "NG 250 · 20:1",
+    "ratio": 20,
+    "eta": 0.85,
+    "cont": 11,
+    "peak": 22,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-250.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 85 %, Dauer 11 Nm, Beschleunigung 22 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-250-32",
+    "name": "NG 250 · 32:1",
+    "ratio": 32,
+    "eta": 0.85,
+    "cont": 11,
+    "peak": 22,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-250.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 85 %, Dauer 11 Nm, Beschleunigung 22 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-500-4",
+    "name": "NG 500 · 4:1",
+    "ratio": 4,
+    "eta": 0.9,
+    "cont": 21,
+    "peak": 42,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-500.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 21 Nm, Beschleunigung 42 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-500-5",
+    "name": "NG 500 · 5:1",
+    "ratio": 5,
+    "eta": 0.9,
+    "cont": 16,
+    "peak": 32,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-500.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 16 Nm, Beschleunigung 32 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-500-8",
+    "name": "NG 500 · 8:1",
+    "ratio": 8,
+    "eta": 0.9,
+    "cont": 18,
+    "peak": 36,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-500.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 18 Nm, Beschleunigung 36 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng500",
+    "name": "NG 500 · 16:1",
+    "ratio": 16,
+    "eta": 0.85,
+    "cont": 21,
+    "peak": 42,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-500.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 85 %, Dauer 21 Nm, Beschleunigung 42 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-500-20",
+    "name": "NG 500 · 20:1",
+    "ratio": 20,
+    "eta": 0.85,
+    "cont": 21,
+    "peak": 42,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-500.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 85 %, Dauer 21 Nm, Beschleunigung 42 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "ng-500-32",
+    "name": "NG 500 · 32:1",
+    "ratio": 32,
+    "eta": 0.85,
+    "cont": 21,
+    "peak": 42,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/hub-wheel/ng-500.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 85 %, Dauer 21 Nm, Beschleunigung 42 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-3",
+    "name": "PLG 63 EP · 3:1",
+    "ratio": 3,
+    "eta": 0.9,
+    "cont": 4,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 4 Nm, Beschleunigung 8 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-4",
+    "name": "PLG 63 EP · 4:1",
+    "ratio": 4,
+    "eta": 0.9,
+    "cont": 5,
+    "peak": 10,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 5 Nm, Beschleunigung 10 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-7",
+    "name": "PLG 63 EP · 7:1",
+    "ratio": 7,
+    "eta": 0.9,
+    "cont": 5,
+    "peak": 10,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 5 Nm, Beschleunigung 10 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-10",
+    "name": "PLG 63 EP · 10:1",
+    "ratio": 10,
+    "eta": 0.9,
+    "cont": 4,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 4 Nm, Beschleunigung 8 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-14_5",
+    "name": "PLG 63 EP · 14,5:1",
+    "ratio": 14.5,
+    "eta": 0.9,
+    "cont": 1.2,
+    "peak": 2.4,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 1.2 Nm, Beschleunigung 2.4 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-16_8",
+    "name": "PLG 63 EP · 16,8:1",
+    "ratio": 16.8,
+    "eta": 0.9,
+    "cont": 19,
+    "peak": 38,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 19 Nm, Beschleunigung 38 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-29_4",
+    "name": "PLG 63 EP · 29,4:1",
+    "ratio": 29.4,
+    "eta": 0.9,
+    "cont": 19,
+    "peak": 38,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 19 Nm, Beschleunigung 38 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-35",
+    "name": "PLG 63 EP · 35:1",
+    "ratio": 35,
+    "eta": 0.9,
+    "cont": 22,
+    "peak": 45,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 22 Nm, Beschleunigung 45 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-42",
+    "name": "PLG 63 EP · 42:1",
+    "ratio": 42,
+    "eta": 0.9,
+    "cont": 15,
+    "peak": 30,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 15 Nm, Beschleunigung 30 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-50",
+    "name": "PLG 63 EP · 50:1",
+    "ratio": 50,
+    "eta": 0.9,
+    "cont": 18,
+    "peak": 36,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 18 Nm, Beschleunigung 36 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-60_9",
+    "name": "PLG 63 EP · 60,9:1",
+    "ratio": 60.9,
+    "eta": 0.9,
+    "cont": 4.5,
+    "peak": 10,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 4.5 Nm, Beschleunigung 10 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-70_56",
+    "name": "PLG 63 EP · 70,56:1",
+    "ratio": 70.56,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 88 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-84",
+    "name": "PLG 63 EP · 84:1",
+    "ratio": 84,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 88 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-100",
+    "name": "PLG 63 EP · 100:1",
+    "ratio": 100,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 86,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 86 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-147",
+    "name": "PLG 63 EP · 147:1",
+    "ratio": 147,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 88 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-175",
+    "name": "PLG 63 EP · 175:1",
+    "ratio": 175,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 86,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 86 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-210",
+    "name": "PLG 63 EP · 210:1",
+    "ratio": 210,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 88 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-250",
+    "name": "PLG 63 EP · 250:1",
+    "ratio": 250,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 86,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 86 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-304_5",
+    "name": "PLG 63 EP · 304,5:1",
+    "ratio": 304.5,
+    "eta": 0.73,
+    "cont": 20,
+    "peak": 44,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 20 Nm, Beschleunigung 44 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-350",
+    "name": "PLG 63 EP · 350:1",
+    "ratio": 350,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 86,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 58 Nm, Beschleunigung 86 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-362_5",
+    "name": "PLG 63 EP · 362,5:1",
+    "ratio": 362.5,
+    "eta": 0.73,
+    "cont": 24,
+    "peak": 52,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 24 Nm, Beschleunigung 52 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-426_3",
+    "name": "PLG 63 EP · 426,3:1",
+    "ratio": 426.3,
+    "eta": 0.73,
+    "cont": 28,
+    "peak": 60,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 28 Nm, Beschleunigung 60 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-63-ep-507_5",
+    "name": "PLG 63 EP · 507,5:1",
+    "ratio": 507.5,
+    "eta": 0.73,
+    "cont": 34,
+    "peak": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-63-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 73 %, Dauer 34 Nm, Beschleunigung 70 Nm.  Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-4",
+    "name": "PLG 75 EP · 4:1",
+    "ratio": 4,
+    "eta": 0.9,
+    "cont": 10,
+    "peak": 16,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 10 Nm, Beschleunigung 16 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-5_5",
+    "name": "PLG 75 EP · 5,5:1",
+    "ratio": 5.5,
+    "eta": 0.9,
+    "cont": 8,
+    "peak": 15,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 8 Nm, Beschleunigung 15 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-7",
+    "name": "PLG 75 EP · 7:1",
+    "ratio": 7,
+    "eta": 0.9,
+    "cont": 6,
+    "peak": 12,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 6 Nm, Beschleunigung 12 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-10",
+    "name": "PLG 75 EP · 10:1",
+    "ratio": 10,
+    "eta": 0.9,
+    "cont": 5,
+    "peak": 10,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 5 Nm, Beschleunigung 10 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-14_5",
+    "name": "PLG 75 EP · 14,5:1",
+    "ratio": 14.5,
+    "eta": 0.9,
+    "cont": 2,
+    "peak": 4,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 2 Nm, Beschleunigung 4 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-16_8",
+    "name": "PLG 75 EP · 16,8:1",
+    "ratio": 16.8,
+    "eta": 0.9,
+    "cont": 38,
+    "peak": 60,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 38 Nm, Beschleunigung 60 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-23_1",
+    "name": "PLG 75 EP · 23,1:1",
+    "ratio": 23.1,
+    "eta": 0.9,
+    "cont": 30,
+    "peak": 56,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 30 Nm, Beschleunigung 56 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-27_5",
+    "name": "PLG 75 EP · 27,5:1",
+    "ratio": 27.5,
+    "eta": 0.9,
+    "cont": 36,
+    "peak": 67,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 36 Nm, Beschleunigung 67 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-29_4",
+    "name": "PLG 75 EP · 29,4:1",
+    "ratio": 29.4,
+    "eta": 0.9,
+    "cont": 24,
+    "peak": 48,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 24 Nm, Beschleunigung 48 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-35",
+    "name": "PLG 75 EP · 35:1",
+    "ratio": 35,
+    "eta": 0.9,
+    "cont": 27,
+    "peak": 54,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 27 Nm, Beschleunigung 54 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-42",
+    "name": "PLG 75 EP · 42:1",
+    "ratio": 42,
+    "eta": 0.9,
+    "cont": 19,
+    "peak": 40,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 19 Nm, Beschleunigung 40 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-50",
+    "name": "PLG 75 EP · 50:1",
+    "ratio": 50,
+    "eta": 0.9,
+    "cont": 22.5,
+    "peak": 47,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 22.5 Nm, Beschleunigung 47 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg-75-ep-60_9",
+    "name": "PLG 75 EP · 60,9:1",
+    "ratio": 60.9,
+    "eta": 0.9,
+    "cont": 7.5,
+    "peak": 15,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
+    "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 7.5 Nm, Beschleunigung 15 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  }
+];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42};
 export function calc(c){
 const m=c.unloaded+c.payload,r=c.wheel/2000,z=c.drives,i=c.ratio,eta=c.eta,g=9.81,ang=Math.atan(c.slope/100),J=c.J*1e-7;
