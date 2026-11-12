@@ -35,7 +35,7 @@ if(input.value==='')return;config[k]=Number(input.value);refresh();});
 wrap.append(input);if(unit){const u=document.createElement('small');u.textContent=unit;wrap.append(u);}
 label.append(span,wrap);$(id).append(label);
 }}}
-function syncFields(){for(const k of Object.keys(config)){const input=$('field-'+k);if(input&&document.activeElement!==input)input.value=String(config[k]);}$('projectName').value=config.projectName;$('motorSelect').value=config.motorId;$('gearboxSelect').value=config.gearId;setNotes();}
+function syncFields(){for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset']]){const input=$(id);if(input&&document.activeElement!==input)input.value=String(config[key]);}for(const k of Object.keys(config)){const input=$('field-'+k);if(input&&document.activeElement!==input)input.value=String(config[k]);}$('projectName').value=config.projectName;$('motorSelect').value=config.motorId;$('gearboxSelect').value=config.gearId;setNotes();}
 function renderMotorSpecs(){
  const motor=motors.find(x=>x.id===config.motorId);
  const grid=$('motorSpecGrid');grid.replaceChildren();
@@ -367,10 +367,11 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.5 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.6 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
+ for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset']]){$(id).addEventListener('input',()=>{const value=$(id).value;if(value==='')return;config[key]=Number(value);refresh();});}
 $('addRouteSegment').addEventListener('click',()=>{
  if(!Array.isArray(config.routeSegments))config.routeSegments=[];
  if(config.routeSegments.length>=100){toast('Maximal 100 Abschnitte');return;}
