@@ -41,7 +41,7 @@ test('Alle 124 mal 346 Motor/Getriebe-Kombinationen haben einen expliziten Statu
   }
   assert.ok(listed>0);
   assert.ok(unverified>0);
-  assert.equal(listed+unverified,87*344);
+  assert.equal(listed+unverified,motors.length*gears.length);
 });
 test('BG62 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG62x30'),gear('PLG 75 HT')).level,'family-listed');});
 test('BG66 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG66x25'),gear('PLG 75 HT')).level,'family-listed');});
