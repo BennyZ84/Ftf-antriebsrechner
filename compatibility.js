@@ -13,9 +13,9 @@ export const listedFamilies=Object.freeze({
   bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT"]
 });
 export const catalogScope=Object.freeze({
- motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, dokumentierte Spannungsvarianten",
+ motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG75 dMove CO/IO und dPro CO/IO",
  gearFamilies:"NG250/NG500; PLG63 EP, PLG75 EP/HT, PLG95 HT",
- missingMotorExamples:"BGA22 und weitere dCore- sowie dGo/dMove/dPro-Reihen; GR/G, KD/DR",
+ missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
  missingGearExamples:"PLG22/30/32/40/42/52/60/63HT/75SL/80LB, STG-, KG-, SG-, WG-Familien",
  coverageComplete:false
 });
@@ -32,6 +32,11 @@ export function gearFamily(gear){
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ if(motor?.series&&motor.series!=="dCore")return {
+  level:"unverified",
+  label:"Getriebeanbau für "+motor.series+" noch nicht einzeln bestätigt",
+  reason:"Die vorhandenen Baukasten-Nachweise beziehen sich auf dCore oder spezifische Referenzen. Für "+motor.series+" wird keine dCore-Freigabe übernommen; mechanische Schnittstellen und konkrete Getriebeausführung gesondert prüfen."
+ };
  if(!m||!g)return {level:"unknown",label:"Baureihe nicht eindeutig zugeordnet",reason:"Motor oder Getriebe wurde nicht eindeutig erkannt."};
  if(m==="bg95" && motor.name?.startsWith("BG95x40 ") && g==="NG 500")return {
   level:"family-listed",
