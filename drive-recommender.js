@@ -41,3 +41,23 @@ export function recommendDrives(input,motors,gears,{voltage=48,reserve=20}={}){
  return {candidates:candidates.slice(0,12),total:candidates.length,documented,fullySpecified,
   note:'Motor-Nennmoment wird konservativ gegen den Anfahrbedarf inkl. Reserve verglichen; Getriebe-Dauermoment gegen stationäre Steigungs-/Rollbelastung. Kein Nachweis für thermisches Lastkollektiv, Bremsen, Radhaftung, Flansch, Spannung unter Last oder Herstellerfreigabe.'};
 }
+
+/** Direkte Motorvorauswahl anhand der verlangten Motor-Kenndaten, ohne FTF-Lastmodell. */
+export function recommendMotors(motors,{voltage=48,rpm=0,torque=0,peak=0,reserve=20}={}){
+ const values=[voltage,rpm,torque,peak,reserve].map(Number);
+ if(values.some(v=>!Number.isFinite(v))||![12,24,48,60,110,325].includes(values[0])||
+ values[1]<=0||values[2]<=0||values[3]<0||values[4]<0||values[4]>200){
+  return {error:'Bitte gültige Motorspannung, positive Nenndrehzahl und Dauermoment sowie eine Reserve von 0–200 % eingeben.'};
+ }
+ const [v,n,m,p,res]=values,scale=1+res/100;
+ const candidates=motors.filter(x=>{
+  if(x.preliminary||Number(x.voltage)!==v)return false;
+  const mr=Number(x.rpm),mn=Number(x.nom),mp=Number(x.peak);
+  if(!Number.isFinite(mr)||mr<=0||!Number.isFinite(mn)||mn<=0)return false;
+  if(mr<n||mn<m*scale)return false;
+  if(p>0&&(!Number.isFinite(mp)||mp<=0||mp<p*scale))return false;
+  return true;
+ }).map(x=>({id:x.id,name:x.name,rpm:x.rpm,nom:x.nom,peak:x.peak,voltage:x.voltage}))
+ .sort((a,b)=>a.nom-b.nom||a.rpm-b.rpm||a.name.localeCompare(b.name));
+ return {candidates:candidates.slice(0,20),total:candidates.length};
+}
