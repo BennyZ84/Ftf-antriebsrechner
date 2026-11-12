@@ -1,6 +1,415 @@
+// Bestätigte Katalogdaten der BG65/BG75/BG95 dCore-Baureihen. Keine Sonderartikelnummern.
+// BG95x120 325 V ausgeschlossen: Nenn-/Spitzenwerte im Katalog mit 'tbd.' gekennzeichnet.
 export const motors=[
-{id:"bg95",name:"BG95x40 dCore · Standard 48 V (40-V-Projektvariante unbestätigt)",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,note:"48-V-Standarddaten; 88595.01992 (40 V) nicht bestätigt"},
-{id:"bg75",name:"BG75x25 · Daten fehlen – Platzhalter",rpm:0,idle:0,nom:0,peak:0,J:0,note:"Nicht für Eignungsnachweis verwenden"}];
+  {
+    "id": "bg65x25-12v",
+    "name": "BG65x25 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 3530,
+    "idle": 7330,
+    "nom": 0.214,
+    "peak": 0.3,
+    "J": 71.6,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x25 dCore, 12 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x25-24v",
+    "name": "BG65x25 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 4170,
+    "idle": 7970,
+    "nom": 0.27,
+    "peak": 0.3,
+    "J": 71.6,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x25 dCore, 24 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x25-48v",
+    "name": "BG65x25 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3920,
+    "idle": 7720,
+    "nom": 0.219,
+    "peak": 0.3,
+    "J": 71.6,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x25 dCore, 48 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x25-60v",
+    "name": "BG65x25 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3530,
+    "idle": 7330,
+    "nom": 0.234,
+    "peak": 0.3,
+    "J": 71.6,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x25 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x25-110v",
+    "name": "BG65x25 dCore · 110 V",
+    "voltage": 110,
+    "rpm": 2920,
+    "idle": 6720,
+    "nom": 0.262,
+    "peak": 0.3,
+    "J": 71.6,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x25 dCore, 110 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x50-24v",
+    "name": "BG65x50 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3360,
+    "idle": 5900,
+    "nom": 0.367,
+    "peak": 0.97,
+    "J": 128,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x50 dCore, 24 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x50-48v",
+    "name": "BG65x50 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3560,
+    "idle": 6100,
+    "nom": 0.376,
+    "peak": 0.97,
+    "J": 128,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x50 dCore, 48 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x50-60v",
+    "name": "BG65x50 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3480,
+    "idle": 6020,
+    "nom": 0.383,
+    "peak": 0.97,
+    "J": 128,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x50 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x50-110v",
+    "name": "BG65x50 dCore · 110 V",
+    "voltage": 110,
+    "rpm": 3450,
+    "idle": 5990,
+    "nom": 0.391,
+    "peak": 0.97,
+    "J": 128,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x50 dCore, 110 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x75-24v",
+    "name": "BG65x75 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3650,
+    "idle": 5730,
+    "nom": 0.425,
+    "peak": 1.85,
+    "J": 172,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x75 dCore, 24 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x75-48v",
+    "name": "BG65x75 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3390,
+    "idle": 5470,
+    "nom": 0.482,
+    "peak": 1.85,
+    "J": 172,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x75 dCore, 48 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x75-60v",
+    "name": "BG65x75 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3940,
+    "idle": 6020,
+    "nom": 0.429,
+    "peak": 1.85,
+    "J": 172,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x75 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x75-110v",
+    "name": "BG65x75 dCore · 110 V",
+    "voltage": 110,
+    "rpm": 3440,
+    "idle": 5790,
+    "nom": 0.502,
+    "peak": 2.42,
+    "J": 172,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x75 dCore, 110 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg65x75-325v",
+    "name": "BG65x75 dCore · 325 V",
+    "voltage": 325,
+    "rpm": 3240,
+    "idle": 5590,
+    "nom": 0.506,
+    "peak": 2.42,
+    "J": 172,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-65-dcore.pdf?la=pt-br&revision=0cecadda-455a-487c-b32e-2136e0ae660e",
+    "note": "Bestätigte Katalog-Spannungsvariante BG65x75 dCore, 325 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x25-12v",
+    "name": "BG75x25 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 3315,
+    "idle": 4480,
+    "nom": 0.66,
+    "peak": 2.5,
+    "J": 233,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x25 dCore, 12 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75",
+    "name": "BG75x25 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3620,
+    "idle": 4950,
+    "nom": 0.66,
+    "peak": 2.5,
+    "J": 233,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x25 dCore, 24 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x25-40v",
+    "name": "BG75x25 dCore · 40 V",
+    "voltage": 40,
+    "rpm": 3650,
+    "idle": 4800,
+    "nom": 0.64,
+    "peak": 2.5,
+    "J": 233,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x25 dCore, 40 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x25-325v",
+    "name": "BG75x25 dCore · 325 V",
+    "voltage": 325,
+    "rpm": 3400,
+    "idle": 4650,
+    "nom": 0.62,
+    "peak": 2.5,
+    "J": 233,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x25 dCore, 325 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x50-24v",
+    "name": "BG75x50 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3780,
+    "idle": 4660,
+    "nom": 1.09,
+    "peak": 5,
+    "J": 437,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x50 dCore, 24 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x50-40v",
+    "name": "BG75x50 dCore · 40 V",
+    "voltage": 40,
+    "rpm": 3500,
+    "idle": 4400,
+    "nom": 1.1,
+    "peak": 5,
+    "J": 437,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x50 dCore, 40 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x50-325v",
+    "name": "BG75x50 dCore · 325 V",
+    "voltage": 325,
+    "rpm": 3570,
+    "idle": 4470,
+    "nom": 1.1,
+    "peak": 5,
+    "J": 437,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x50 dCore, 325 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x75-40v",
+    "name": "BG75x75 dCore · 40 V",
+    "voltage": 40,
+    "rpm": 3370,
+    "idle": 4100,
+    "nom": 1.5,
+    "peak": 6.3,
+    "J": 652,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x75 dCore, 40 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg75x75-325v",
+    "name": "BG75x75 dCore · 325 V",
+    "voltage": 325,
+    "rpm": 3480,
+    "idle": 4210,
+    "nom": 1.49,
+    "peak": 6.3,
+    "J": 652,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-75-dcore.pdf?la=pt-br&revision=31a22d68-2568-4f7a-a7bc-9b1ea0462565",
+    "note": "Bestätigte Katalog-Spannungsvariante BG75x75 dCore, 325 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x40-12v",
+    "name": "BG95x40 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 3900,
+    "idle": 4400,
+    "nom": 1.7,
+    "peak": 6.5,
+    "J": 950,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x40 dCore, 12 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x40-24v",
+    "name": "BG95x40 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3940,
+    "idle": 4400,
+    "nom": 1.7,
+    "peak": 6.45,
+    "J": 950,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x40 dCore, 24 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95",
+    "name": "BG95x40 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3940,
+    "idle": 4400,
+    "nom": 1.7,
+    "peak": 6.33,
+    "J": 950,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x40 dCore, 48 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x40-60v",
+    "name": "BG95x40 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 4088,
+    "idle": 4546,
+    "nom": 1.67,
+    "peak": 6,
+    "J": 950,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x40 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x40-325v",
+    "name": "BG95x40 dCore · 325 V",
+    "voltage": 325,
+    "rpm": 3940,
+    "idle": 4310,
+    "nom": 1.72,
+    "peak": 5.95,
+    "J": 950,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x40 dCore, 325 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x80-24v",
+    "name": "BG95x80 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3890,
+    "idle": 4150,
+    "nom": 2.44,
+    "peak": 10,
+    "J": 1890,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x80 dCore, 24 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x80-48v",
+    "name": "BG95x80 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3800,
+    "idle": 4120,
+    "nom": 2.61,
+    "peak": 11,
+    "J": 1890,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x80 dCore, 48 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x80-60v",
+    "name": "BG95x80 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3829,
+    "idle": 4138,
+    "nom": 2.6,
+    "peak": 10.5,
+    "J": 1890,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x80 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x80-325v",
+    "name": "BG95x80 dCore · 325 V",
+    "voltage": 325,
+    "rpm": 3855,
+    "idle": 4070,
+    "nom": 2.74,
+    "peak": 10.5,
+    "J": 1890,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x80 dCore, 325 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x120-48v",
+    "name": "BG95x120 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3900,
+    "idle": 4200,
+    "nom": 3.5,
+    "peak": 14.5,
+    "J": 2830,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x120 dCore, 48 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg95x120-60v",
+    "name": "BG95x120 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3900,
+    "idle": 4200,
+    "nom": 3.5,
+    "peak": 14.5,
+    "J": 2830,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
+    "note": "Bestätigte Katalog-Spannungsvariante BG95x120 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  }
+];
 export const gears=[{id:"ng500",name:"NG500 · 16:1",ratio:16,eta:.8,cont:21,peak:42,note:"NG500 Herstellerreferenz; 80 % konservative Auslegungsannahme"}];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42};
 export function calc(c){
@@ -31,8 +440,8 @@ const results=[
 ["Querbeschleunigung",c.curveRadius?c.curveSpeed*c.curveSpeed/c.curveRadius:null,"m/s²","a_q = vₖ²/R"]
 ];
 const warnings=["Nur vereinfachte Vorauslegung, keine Sicherheits- oder Herstellerfreigabe. Bremsreaktion, Haftung, thermisches Lastkollektiv, Rücktrieb und Kippstabilität gesondert prüfen."];
-if(c.motorId==="bg95")warnings.unshift("Motorwerte: 48-V-Standardreferenz; 40-V-Projektartikel 88595.01992 nicht einzeln bestätigt.");
-if(c.motorId==="bg75")warnings.unshift("BG75x25: Daten fehlen. Keine Eignungsaussage möglich.");
+if(c.motorId==="bg95")warnings.unshift("BG95x40: bestätigte 48-V-Katalogwerte. Individuelle Artikelnummern/abweichende Ausführungen nicht automatisch bestätigt.");
+
 if(c.cont&&wheel>c.cont)warnings.unshift("Getriebe-Dauermoment überschritten.");
 if(c.gearPeak&&wheel>c.gearPeak)warnings.unshift("Getriebe-Beschleunigungsmoment überschritten.");
 if(c.nom&&motor>c.nom)warnings.unshift("Motornennmoment überschritten.");
