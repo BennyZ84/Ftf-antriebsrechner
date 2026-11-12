@@ -9,14 +9,14 @@ export const listedFamilies=Object.freeze({
   bg62:["PLG 63 EP","PLG 75 EP","PLG 75 HT"],
   bg65:["PLG 63 EP","PLG 75 EP"],
   bg66:["PLG 63 EP","PLG 75 HT"],
-  bg75:["PLG 63 EP","PLG 75 EP","PLG 75 HT"],
-  bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT"]
+  bg75:["PLG 63 EP","PLG 75 EP","PLG 75 HT","PLG 80 LB"],
+  bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","PLG 80 LB"]
 });
 export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG75 dMove CO/IO und dPro CO/IO",
- gearFamilies:"NG250/NG500; PLG63 EP, PLG75 EP/HT, PLG95 HT",
+ gearFamilies:"NG250/NG500; PLG60 LN/LB, PLG63 EP, PLG75 EP/HT, PLG80 LB, PLG95 HT; STG65, SG120/120K, KG120",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
- missingGearExamples:"PLG60 LN, PLG80 LB, SG120, STG65, KG120 sowie PLG22/30/32/40/42/52/60/63HT/75SL/80LB, STG-, KG-, SG-, WG-Familien",
+ missingGearExamples:"PLG22/30/32/40/42/52/63HT/75SL, weitere SG- und KG-Familien sowie WG, NG1000 WO; teils noch nicht vollständig katalogisiert",
  coverageComplete:false
 });
 export function motorFamily(motor){
@@ -26,7 +26,7 @@ export function motorFamily(motor){
 }
 export function gearFamily(gear){
  if(!gear)return null;
- for(const name of ["PLG 63 EP","PLG 75 EP","PLG 75 HT","PLG 95 HT","NG 250","NG 500"])
+ for(const name of ["PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 75 EP","PLG 75 HT","PLG 80 LB","PLG 95 HT","STG 65","SG 120 K","SG 120","KG 120","NG 250","NG 500"])
   if(gear.name?.startsWith(name+" ·"))return name;
  return null;
 }
@@ -35,12 +35,12 @@ export function combinationStatus(motor,gear){
  // dMove/dPro BG75: Hersteller nennt PLG63, PLG75, NG250 und NG500 ausdrücklich
  // im modularen Baukastensystem. Die Untervariante EP/HT ist dort nicht spezifiziert.
  if((motor?.series==="dMove"||motor?.series==="dPro") && m==="bg75"){
-  const documented=["PLG 63 EP","PLG 75 EP","NG 250","NG 500"];
+  const documented=["PLG 60 LN","PLG 63 EP","PLG 75 EP","PLG 80 LB","NG 250","NG 500","STG 65","SG 120","KG 120"];
   if(documented.includes(g))return {
    level:"family-listed",
    label:"BG75 "+motor.series+" · Getriebebaureihe im Herstellerkatalog",
-   reason:"Dunkermotoren listet "+g.replace(" EP","")+" im BG75-"+motor.series+"-Baukasten. Die in der App hinterlegte konkrete Getriebeuntervariante, Übersetzung und Anbauausführung sind damit nicht einzeln bestätigt.",
-   source:motor.source||combinationSource
+   reason:"Dunkermotoren nennt "+g.replace(" EP","")+" für die BG75-"+motor.series+"-Baureihe. Die konkrete Getriebeuntervariante, Übersetzung, Flanschausführung und Freigabe für das Lastkollektiv sind damit nicht bestätigt.",
+   source:g==="PLG 80 LB"?gear.source:combinationSource
   };
   return {
    level:"unverified",label:"Getriebekombination nicht belegt",
