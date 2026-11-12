@@ -69,6 +69,7 @@ function renderGearOptions(){
   for(const g of gears){
    const status=combinationStatus(m,g);
    if((status.level==='family-listed')!==(item.level==='family-listed'))continue;
+   if(item.level==='other' && !$('showUnverified').checked && g.id!==selected)continue;
    const o=document.createElement('option');o.value=g.id;
    o.textContent=g.name+(status.level==='family-listed'?' · Baukastenfamilie':' · ungeprüft');
    grp.append(o);
@@ -82,6 +83,7 @@ setupFields();
 $('motorSelect').replaceChildren();for(const m of motors){const op=document.createElement('option');op.value=m.id;op.textContent=m.name;$('motorSelect').append(op);}
 $('gearboxSelect').replaceChildren();renderGearOptions();
 $('motorSelect').addEventListener('change',()=>{const m=motors.find(x=>x.id===$('motorSelect').value);if(!m)return;Object.assign(config,{motorId:m.id,rpm:m.rpm,idle:m.idle,nom:m.nom,peak:m.peak,J:m.J});renderGearOptions();refresh();});
+$('showUnverified').addEventListener('change',()=>{renderGearOptions();setNotes();});
 $('gearboxSelect').addEventListener('change',()=>{const g=gears.find(x=>x.id===$('gearboxSelect').value);if(!g)return;Object.assign(config,{gearId:g.id,ratio:g.ratio,eta:g.eta,cont:g.cont,gearPeak:g.peak});refresh();});
 $('projectName').addEventListener('input',e=>config.projectName=e.target.value);
 for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>tab(b.dataset.tab));
