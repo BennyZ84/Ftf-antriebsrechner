@@ -27,10 +27,10 @@ test('App version assets and offline cache agree',()=>{
  const match=sw.match(/const CACHE='ftf-rechner-(v[0-9]+\.[0-9]+)'/);
  assert.ok(match,'cache version missing');
  const version=match[1];
- assert.ok(html.includes('app.js?'+version));
- assert.ok(html.includes('styles.css?'+version));
- assert.ok(sw.includes('app.js?'+version));
- assert.ok(sw.includes('styles.css?'+version));
+ assert.ok(html.includes('app.js?v='+version.slice(1)));
+ assert.ok(html.includes('styles.css?v='+version.slice(1)));
+ assert.ok(sw.includes('app.js?v='+version.slice(1)));
+ assert.ok(sw.includes('styles.css?v='+version.slice(1)));
 
 });
 
