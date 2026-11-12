@@ -93,3 +93,13 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .load-layout-section h3{margin:0 0 8px;color:#173f55;font-size:20px}
 .layout-inputs{margin:14px 0}
 .load-layout-section .vehicle-svg-wrap{margin-top:14px}
+
+/* v3.8 Motor-Getriebe-Vorauswahl */
+.drive-recommendation{border:1px solid #c9e0ec;background:#f3f9fc;border-radius:13px;padding:14px;margin:12px 0 22px}
+.drive-recommendation summary{font-weight:750;color:#15556e;cursor:pointer}
+.drive-recommendation .form-grid{margin:12px 0}
+.recommend-results{margin-top:12px}
+.recommend-item{background:white;border:1px solid #d6e3eb;border-radius:12px;padding:12px;margin:10px 0}
+.recommend-item strong{display:block;color:#173f55;font-size:14px}
+.recommend-item p{font-size:12px;margin:7px 0}
+.recommend-item button{font-size:12px}
