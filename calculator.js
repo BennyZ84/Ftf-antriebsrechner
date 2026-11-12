@@ -5358,6 +5358,27 @@ export const gears=[
     "peak": 10,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
     "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
+  },
+  {
+    "id": "sg65-10_25",
+    "name": "SG 65 · 10,25:1",
+    "ratio": 10.25,
+    "eta": 0.8,
+    "cont": 4,
+    "peak": 7,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-65.pdf?la=pt-br&revision=9b31937b-f467-4705-bcc1-64d18f94152c",
+    "note": "SG65: 10,25:1, Dauermoment 4 Nm, Spitzendrehmoment 7 Nm laut Herstellerdatenblatt; Anbaumaße/Lastkollektiv prüfen."
+  },
+  {
+    "id": "ng1000wo-20-preliminary",
+    "name": "NG 1000 WO · 20:1 (vorläufig)",
+    "ratio": 20,
+    "eta": 0.85,
+    "cont": 80,
+    "peak": 160,
+    "preliminary": true,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/029_ng-1000_wo.pdf?hash=6614E47D07D52F584FA2D1AE71E4C139&la=en&revision=dbcf2e52-35eb-482b-be92-64f9e130e00a",
+    "note": "VORLÄUFIGE Herstellerwerte, keine verbindliche Auslegungsfreigabe: NG1000 WO 20:1, η 85 %, 80 Nm Dauer, 160 Nm Beschleunigung. Hersteller zeigt BG95x80 dPro + NG1000 WO. Radlast, Achsversatz, Konfiguration und Lieferstatus einzeln bestätigen."
   }
 ];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42,startFactor:1.3,reactionTime:0.4,speedTolerance:0.05,brakeSafetyFactor:1.2,scannerTolerance:65,clearanceAllowance:150,reflectionAllowance:350};
