@@ -13,7 +13,7 @@ export const listedFamilies=Object.freeze({
   bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","PLG 80 LB"]
 });
 export const catalogScope=Object.freeze({
- motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG45/BG65/BG66/BG75 dMove; BG45/BG66/BG75/BG95 dPro (ausgewählte Schnittstellen)",
+ motorFamilies:"BGA22 dCore, BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG32 KI; BG45/BG65/BG66/BG75 dMove; BG45/BG66/BG75/BG95 dPro (ausgewählte Schnittstellen)",
  gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien; SG45/62/65/80/80K/85/120/120K, STG65, KG80/120/150; NG1000 WO nur vorläufig",
  missingMotorExamples:"BG45 dGo, weitere dMove-/dPro-Baureihen, GR/G, KD/DR; BG42/BGA22 dGo nur als vorläufige Referenzen",
  missingGearExamples:"WG52/63/75 als Baureihen aufgenommen, jedoch ohne nachweisbare einzelne Übersetzungs-/Grenzmomentdatensätze; NG1000 WO nur vorläufig; konkrete Motor/Getriebe-Kombinationen nicht vollständig bestätigt",
@@ -32,6 +32,20 @@ export function gearFamily(gear){
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ // Hersteller-Baukasten aus den BGA22-dCore- und BG32-KI-Datenblättern.
+ if(motor?.name?.startsWith("BGA22x22 dCore")){
+  const documented=["PLG 22 HT","PLG 32"];
+  return documented.includes(g)
+   ?{level:"family-listed",label:"BGA22 dCore · Herstellerbaukasten",reason:"PLG 22 HT bzw. PLG 32 sind im BGA22-dCore-Datenblatt als Getriebefamilien genannt. Konkreter Flansch und Grenzdaten sind einzeln zu prüfen.",source:motor.source}
+   :{level:"unverified",label:"BGA22 dCore · Kombination nicht belegt",reason:"Diese Getriebefamilie wird für BGA22 dCore im ausgewerteten Herstellerdatenblatt nicht genannt."};
+ }
+ if(motor?.series==="KI" && m==="bg32"){
+  const documented=["PLG 32","PLG 42 K","PLG 42 S"];
+  return documented.includes(g)
+   ?{level:"family-listed",label:"BG32 KI · Herstellerbaukasten",reason:"Die Getriebefamilie ist im BG32-KI-Datenblatt aufgeführt. Die zulässige Motor-Beschleunigungsmomentgrenze ist dort nicht gesondert ausgewiesen.",source:motor.source}
+   :{level:"unverified",label:"BG32 KI · Kombination nicht belegt",reason:"Die Getriebebaureihe ist im ausgewerteten BG32-KI-Baukasten nicht genannt."};
+ }
+
  if(motor?.preliminary)return {level:"unverified",label:"Vorläufige Motordaten – keine Freigabe",
   reason:"Die Motordaten sind vorläufig bzw. die zulässigen Beschleunigungsmomente sind nicht vollständig angegeben. Herstellerfreigabe vor Auslegung erforderlich.",
   source:motor.source||combinationSource};
