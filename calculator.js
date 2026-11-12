@@ -5060,6 +5060,113 @@ export const gears=[
     "peak": 3,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-62.pdf?la=pt-br&revision=31b2740f-fc0f-4f43-9717-b31be26c2339",
     "note": "Schneckengetriebe. Hersteller-Wirkungsgrad, S1-Dauermoment und S8-Beschleunigungsmoment; S8-Beschleunigungswert nur für 1 % der Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktreibbarkeit separat prüfen."
+  },
+  {
+    "id": "kg-150-7_29",
+    "name": "KG 150 · 7,29:1",
+    "ratio": 7.29,
+    "eta": 0.96,
+    "cont": 58.5,
+    "peak": 117,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-150_kg-150-h.pdf?la=pt-br&revision=c5724461-b93b-410a-8150-ec1947fd74ad",
+    "note": "KG150/KG150H, 2-stufig; 96 % ist Verzahnungswirkungsgrad, nicht Gesamtsystemwirkungsgrad; Beschleunigungsmoment höchstens 1 Sekunde, zulässige Einbaulage prüfen.",
+    "efficiencyBasis": "Verzahnungswirkungsgrad"
+  },
+  {
+    "id": "kg-150-13_18",
+    "name": "KG 150 · 13,18:1",
+    "ratio": 13.18,
+    "eta": 0.96,
+    "cont": 92,
+    "peak": 184,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-150_kg-150-h.pdf?la=pt-br&revision=c5724461-b93b-410a-8150-ec1947fd74ad",
+    "note": "KG150/KG150H, 2-stufig; 96 % ist Verzahnungswirkungsgrad, nicht Gesamtsystemwirkungsgrad; Beschleunigungsmoment höchstens 1 Sekunde, zulässige Einbaulage prüfen.",
+    "efficiencyBasis": "Verzahnungswirkungsgrad"
+  },
+  {
+    "id": "kg-150-21_4",
+    "name": "KG 150 · 21,4:1",
+    "ratio": 21.4,
+    "eta": 0.96,
+    "cont": 92,
+    "peak": 184,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-150_kg-150-h.pdf?la=pt-br&revision=c5724461-b93b-410a-8150-ec1947fd74ad",
+    "note": "KG150/KG150H, 2-stufig; 96 % ist Verzahnungswirkungsgrad, nicht Gesamtsystemwirkungsgrad; Beschleunigungsmoment höchstens 1 Sekunde, zulässige Einbaulage prüfen.",
+    "efficiencyBasis": "Verzahnungswirkungsgrad"
+  },
+  {
+    "id": "kg-150-29_21",
+    "name": "KG 150 · 29,21:1",
+    "ratio": 29.21,
+    "eta": 0.96,
+    "cont": 92,
+    "peak": 184,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-150_kg-150-h.pdf?la=pt-br&revision=c5724461-b93b-410a-8150-ec1947fd74ad",
+    "note": "KG150/KG150H, 2-stufig; 96 % ist Verzahnungswirkungsgrad, nicht Gesamtsystemwirkungsgrad; Beschleunigungsmoment höchstens 1 Sekunde, zulässige Einbaulage prüfen.",
+    "efficiencyBasis": "Verzahnungswirkungsgrad"
+  },
+  {
+    "id": "kg-150-38_12",
+    "name": "KG 150 · 38,12:1",
+    "ratio": 38.12,
+    "eta": 0.96,
+    "cont": 92,
+    "peak": 184,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-150_kg-150-h.pdf?la=pt-br&revision=c5724461-b93b-410a-8150-ec1947fd74ad",
+    "note": "KG150/KG150H, 2-stufig; 96 % ist Verzahnungswirkungsgrad, nicht Gesamtsystemwirkungsgrad; Beschleunigungsmoment höchstens 1 Sekunde, zulässige Einbaulage prüfen.",
+    "efficiencyBasis": "Verzahnungswirkungsgrad"
+  },
+  {
+    "id": "kg-150-44_89",
+    "name": "KG 150 · 44,89:1",
+    "ratio": 44.89,
+    "eta": 0.96,
+    "cont": 92,
+    "peak": 184,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-150_kg-150-h.pdf?la=pt-br&revision=c5724461-b93b-410a-8150-ec1947fd74ad",
+    "note": "KG150/KG150H, 2-stufig; 96 % ist Verzahnungswirkungsgrad, nicht Gesamtsystemwirkungsgrad; Beschleunigungsmoment höchstens 1 Sekunde, zulässige Einbaulage prüfen.",
+    "efficiencyBasis": "Verzahnungswirkungsgrad"
+  },
+  {
+    "id": "kg-150-77_36",
+    "name": "KG 150 · 77,36:1",
+    "ratio": 77.36,
+    "eta": 0.96,
+    "cont": 92,
+    "peak": 184,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-150_kg-150-h.pdf?la=pt-br&revision=c5724461-b93b-410a-8150-ec1947fd74ad",
+    "note": "KG150/KG150H, 2-stufig; 96 % ist Verzahnungswirkungsgrad, nicht Gesamtsystemwirkungsgrad; Beschleunigungsmoment höchstens 1 Sekunde, zulässige Einbaulage prüfen.",
+    "efficiencyBasis": "Verzahnungswirkungsgrad"
+  },
+  {
+    "id": "kg-80-6",
+    "name": "KG 80 · 6:1",
+    "ratio": 6,
+    "eta": 0.86,
+    "cont": 6.5,
+    "peak": 12,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 zweistufig. Nur Übersetzungen mit eindeutig zugeordnetem Dauer- und Beschleunigungsmoment übernommen; weitere Getriebevarianten aus Datenblatt nicht vollständig ausgewertet."
+  },
+  {
+    "id": "kg-80-10_5",
+    "name": "KG 80 · 10,5:1",
+    "ratio": 10.5,
+    "eta": 0.86,
+    "cont": 6,
+    "peak": 10,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 zweistufig. Nur Übersetzungen mit eindeutig zugeordnetem Dauer- und Beschleunigungsmoment übernommen; weitere Getriebevarianten aus Datenblatt nicht vollständig ausgewertet."
+  },
+  {
+    "id": "kg-80-15",
+    "name": "KG 80 · 15:1",
+    "ratio": 15,
+    "eta": 0.86,
+    "cont": 4.5,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 zweistufig. Nur Übersetzungen mit eindeutig zugeordnetem Dauer- und Beschleunigungsmoment übernommen; weitere Getriebevarianten aus Datenblatt nicht vollständig ausgewertet."
   }
 ];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42,startFactor:1.3,reactionTime:0.4,speedTolerance:0.05,brakeSafetyFactor:1.2,scannerTolerance:65,clearanceAllowance:150,reflectionAllowance:350};
