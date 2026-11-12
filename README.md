@@ -14,11 +14,11 @@ iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffne
 
 Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-**Katalogstand v3.0 (12.11.2026): 124 Motor-Spannungs-/Steuerungsvarianten und 344 Getriebeübersetzungen aus 30 Getriebebaureihen.** Die 17 Planetengetriebefamilien (PLG) der ausgewerteten Hersteller-Lieferübersicht sind als Baureihen vertreten. Motoren und Getriebe sind als technische Vorauslegungsdaten erfasst, nicht als vollständiges Sortiment aller Artikelnummern. Wo Herstellerdaten für Beschleunigungsgrenzen fehlen, wird **kein** fiktiver Peak-Wert ergänzt.
+**Katalogstand v3.0 (12.11.2026): 124 Motor-Spannungs-/Steuerungsvarianten und 346 Getriebeübersetzungen aus 32 Getriebebaureihen.** Die 17 Planetengetriebefamilien (PLG) der ausgewerteten Hersteller-Lieferübersicht sind als Baureihen vertreten. Motoren und Getriebe sind als technische Vorauslegungsdaten erfasst, nicht als vollständiges Sortiment aller Artikelnummern. Wo Herstellerdaten für Beschleunigungsgrenzen fehlen, wird **kein** fiktiver Peak-Wert ergänzt.
 
 Motoren: ausgewählte BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, BG45/65/66/75 dMove und BG45/66/75/95 dPro. Noch nicht vollständig erfasst: dGo, BGA, GR/PM, weitere Schnittstellen- und Spannungsvarianten.
 
-Getriebe: 17 PLG-Familien, NG250/NG500, SG45/62/80/80K/85/120/120K, KG80/120/150 und STG65. Weiterhin offen: insbesondere SG65, WG52/63/75, NG1000 WO (teils vorläufige Daten) und konkrete Herstellervarianten.
+Getriebe: 17 PLG-Familien, NG250/NG500, SG45/62/65/80/80K/85/120/120K, KG80/120/150 und STG65. Weiterhin offen: insbesondere WG52/63/75, NG1000 WO (ein Eintrag, ausdrücklich vorläufige Daten) und konkrete Herstellervarianten.
 
 **Auslegungsgrenzen:** Kombinierbarkeit auf Hersteller-Baureihenebene ist keine Freigabe einzelner Artikel. Flansch, Welle, Übersetzung, Wirkungsgrad, Anbauten, thermische Lasten und dynamische Lastkollektive müssen vor Freigabe geprüft werden. S1- und S8-Momentangaben sind teilweise betriebspunktabhängig.
 
