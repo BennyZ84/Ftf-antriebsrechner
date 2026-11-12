@@ -1621,6 +1621,76 @@ export const motors=[
     "rpmThermallyConnected": 3730,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dpro/bg-45-dpro-canopen-io.pdf?la=pt-br&revision=d9dc567f-30a5-4ce3-aee8-d4a4086c77dd",
     "note": "BG45 dPro CO/IO, Herstellerwerte für isolierte Montage; höhere Dauerwerte nur bei nachgewiesener thermischer Anbindung."
+  },
+  {
+    "id": "bg42x15-dgo-12v",
+    "name": "BG42x15 dGo · 12 V (vorläufig)",
+    "series": "dGo",
+    "voltage": 12,
+    "rpm": 3540,
+    "idle": 4400,
+    "nom": 0.113,
+    "peak": 0.432,
+    "J": 24,
+    "preliminary": true,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/001_-brushless-dc-motors/005_bg_42_dcore.pdf?la=pt-br&revision=d9071c9e-4a21-43b8-85af-8b5290bcbb6b",
+    "note": "Herstellerangaben ausdrücklich als 'Technische Daten vorläufig' bezeichnet. Kein bestätigter Auslegungs- oder Lieferstatus. Baukastenvarianten und Flansch einzeln prüfen."
+  },
+  {
+    "id": "bg42x15-dgo-24v",
+    "name": "BG42x15 dGo · 24 V (vorläufig)",
+    "series": "dGo",
+    "voltage": 24,
+    "rpm": 3540,
+    "idle": 4300,
+    "nom": 0.118,
+    "peak": 0.615,
+    "J": 24,
+    "preliminary": true,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/001_-brushless-dc-motors/005_bg_42_dcore.pdf?la=pt-br&revision=d9071c9e-4a21-43b8-85af-8b5290bcbb6b",
+    "note": "Herstellerangaben ausdrücklich als 'Technische Daten vorläufig' bezeichnet. Kein bestätigter Auslegungs- oder Lieferstatus. Baukastenvarianten und Flansch einzeln prüfen."
+  },
+  {
+    "id": "bg42x30-dgo-12v",
+    "name": "BG42x30 dGo · 12 V (vorläufig)",
+    "series": "dGo",
+    "voltage": 12,
+    "rpm": 3650,
+    "idle": 4200,
+    "nom": 0.152,
+    "peak": 0.459,
+    "J": 44,
+    "preliminary": true,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/001_-brushless-dc-motors/005_bg_42_dcore.pdf?la=pt-br&revision=d9071c9e-4a21-43b8-85af-8b5290bcbb6b",
+    "note": "Herstellerangaben ausdrücklich als 'Technische Daten vorläufig' bezeichnet. Kein bestätigter Auslegungs- oder Lieferstatus. Baukastenvarianten und Flansch einzeln prüfen."
+  },
+  {
+    "id": "bg42x30-dgo-24v",
+    "name": "BG42x30 dGo · 24 V (vorläufig)",
+    "series": "dGo",
+    "voltage": 24,
+    "rpm": 3600,
+    "idle": 4200,
+    "nom": 0.182,
+    "peak": 0.667,
+    "J": 44,
+    "preliminary": true,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/001_-brushless-dc-motors/005_bg_42_dcore.pdf?la=pt-br&revision=d9071c9e-4a21-43b8-85af-8b5290bcbb6b",
+    "note": "Herstellerangaben ausdrücklich als 'Technische Daten vorläufig' bezeichnet. Kein bestätigter Auslegungs- oder Lieferstatus. Baukastenvarianten und Flansch einzeln prüfen."
+  },
+  {
+    "id": "bg42x45-dgo-24v",
+    "name": "BG42x45 dGo · 24 V (vorläufig)",
+    "series": "dGo",
+    "voltage": 24,
+    "rpm": 3590,
+    "idle": 4200,
+    "nom": 0.246,
+    "peak": 1.001,
+    "J": 64,
+    "preliminary": true,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/001_-brushless-dc-motors/005_bg_42_dcore.pdf?la=pt-br&revision=d9071c9e-4a21-43b8-85af-8b5290bcbb6b",
+    "note": "Herstellerangaben ausdrücklich als 'Technische Daten vorläufig' bezeichnet. Kein bestätigter Auslegungs- oder Lieferstatus. Baukastenvarianten und Flansch einzeln prüfen."
   }
 ];
 // Katalogbestätigte Einzelübersetzungen. Nicht automatisch mechanisch zu jedem Motor passend.
