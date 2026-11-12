@@ -54,3 +54,17 @@ test('Pending manufacturer families are visible but kept out of numeric drive mo
  assert.ok(js.includes('renderPendingCatalog'));
  assert.ok(sw.includes('catalog-pending.js'));
 });
+
+test('FTF layout has its own navigable page and real project-linked controls',()=>{
+ assert.ok(html.includes('data-tab="ansicht"'));
+ assert.ok(html.includes('id="view-ansicht"'));
+ assert.ok(html.includes('id="vehicleSvg"'));
+ assert.ok(html.includes('id="vehicleLayoutStats"'));
+ assert.ok(html.includes('id="layoutBack"'));
+ assert.ok(html.includes('id="layoutSave"'));
+ assert.ok(js.includes('renderVehicleLayout();'));
+ assert.ok(js.includes("['eingaben','ansicht','ergebnisse','projekte']"));
+ assert.ok(js.includes('casterCount'));
+ assert.ok(js.includes('calculateLayout(config)'));
+ assert.ok(sw.includes('vehicle-layout.js'));
+});
