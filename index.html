@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1f35"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="FTF Rechner"><meta name="description" content="FTF-Antriebsauslegung mit Dunkermotoren und NG500 – lokal und offline"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icons/icon-180.png"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./styles.css?v=3.9"><title>FTF Antriebsrechner</title></head>
-<body><header class="top"><div class="top-inner"><div class="brand"><span class="mark">FTF<span class="mark-dot">●</span></span><span><strong>Antriebsrechner</strong><small>Motoren & FTF · v3.9</small></span></div><button id="install" class="ghost" hidden>Installieren</button></div></header>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1f35"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="FTF Rechner"><meta name="description" content="FTF-Antriebsauslegung mit Dunkermotoren und NG500 – lokal und offline"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icons/icon-180.png"><link rel="icon" href="./icons/icon.svg"><link rel="stylesheet" href="./styles.css?v=3.10"><title>FTF Antriebsrechner</title></head>
+<body><header class="top"><div class="top-inner"><div class="brand"><span class="mark">FTF<span class="mark-dot">●</span></span><span><strong>Antriebsrechner</strong><small>Motoren & FTF · v3.10</small></span></div><button id="install" class="ghost" hidden>Installieren</button></div></header>
 <main class="container"><section class="hero"><div><h1>Motoren & FTF-Auslegung</h1></div></section>
 <div class="toolbar"><label class="project-label" for="projectName">Projektname <input id="projectName" type="text" maxlength="100" autocomplete="off"></label><button id="save" class="primary">Speichern</button><button id="new" class="neutral">Zurücksetzen</button></div>
 <nav class="tabs" aria-label="Bereiche"><button data-tab="eingaben" class="active">Eingaben</button><button data-tab="ansicht">FTF-Ansicht</button><button data-tab="ergebnisse">Ergebnisse</button><button data-tab="projekte">Projekte & Export</button></nav>
@@ -9,18 +9,21 @@
   <button id="modeMotor" type="button" class="neutral" aria-pressed="false">Motordaten</button>
   <button id="modeFTF" type="button" class="primary" aria-pressed="true">FTF-Berechnung</button>
 </div>
-<div class="columns"><div class="panel" id="vehiclePanel"><div class="panel-head"><span class="kicker">FAHRZEUG</span><h2>Fahrdaten</h2></div><div class="form-grid" id="vehicle-fields"></div></div><div class="panel" id="motorPanel"><div class="panel-head"><span class="kicker">ANTRIEB</span><h2 id="motorPanelTitle">Motor & Getriebe</h2></div><div class="drive-workflow"><div class="drive-section-head"><span class="drive-step">1</span><div><h3>Antrieb automatisch auslegen</h3><p>Passende Kombinationen aus deinen Fahrdaten finden</p></div></div>
+<div class="columns"><div class="panel" id="vehiclePanel"><div class="panel-head"><span class="kicker">FAHRZEUG</span><h2>Fahrdaten</h2></div><div class="form-grid" id="vehicle-fields"></div></div><div class="panel" id="motorPanel"><div class="panel-head"><span class="kicker">ANTRIEB</span><h2 id="motorPanelTitle">Motor & Getriebe</h2></div><div class="drive-choice" role="group" aria-label="Motorauswahl"><button id="driveModeDirect" class="primary" aria-pressed="true" type="button">Motor direkt auswählen</button><button id="driveModeSuggest" class="neutral" aria-pressed="false" type="button">Motor nach Werten suchen</button></div><div class="drive-workflow" hidden><div class="drive-section-head"><span class="drive-step">1</span><div><h3>Motorvorschläge</h3><p>Nach Drehzahl, Moment und Spannung suchen</p></div></div>
 <details id="driveRecommendation" class="drive-recommendation" open>
-<summary>Passenden Motor &amp; Getriebe vorschlagen</summary>
-<p class="fineprint">Die Vorauswahl verwendet die bereits eingegebenen Fahrdaten. Überprüfe diese vor der Suche.</p>
-<div id="recommendSummary" class="drive-summary" aria-live="polite"></div>
+<summary>Motor nach technischen Anforderungen suchen</summary>
+<p class="fineprint">Gib benötigte Motordrehzahl und Momente direkt ein. Die Fahrdaten werden hier nicht zur Motorauswahl verwendet.</p>
 <div class="form-grid">
 <label class="field" for="recommendVoltage"><span>Motorspannung</span><span class="value"><select id="recommendVoltage"><option value="12">12 V</option><option value="24">24 V</option><option value="48" selected>48 V</option><option value="60">60 V</option><option value="110">110 V</option><option value="325">325 V</option></select></span></label>
 <label class="field" for="recommendReserve"><span>Momentreserve</span><span class="value"><input id="recommendReserve" type="number" min="0" max="200" step="5" value="20" inputmode="decimal"><small>%</small></span></label>
-</div><button id="recommendRun" type="button" class="primary">Passende Antriebe suchen</button>
+</div><div class="form-grid drive-requirements">
+<label class="field" for="recommendRpm"><span>Mindest-Nenndrehzahl</span><span class="value"><input id="recommendRpm" type="number" min="1" step="10" value="3000" inputmode="decimal"><small>min⁻¹</small></span></label>
+<label class="field" for="recommendTorque"><span>Benötigtes Dauermoment</span><span class="value"><input id="recommendTorque" type="number" min="0.001" step="0.1" value="1" inputmode="decimal"><small>Nm</small></span></label>
+<label class="field" for="recommendPeak"><span>Benötigtes Spitzenmoment (0 = egal)</span><span class="value"><input id="recommendPeak" type="number" min="0" step="0.1" value="0" inputmode="decimal"><small>Nm</small></span></label>
+</div><button id="recommendRun" type="button" class="primary">Passende Motoren suchen</button>
 <div id="recommendResults" class="recommend-results" aria-live="polite"></div>
 </details></div>
-<div class="drive-manual"><div class="drive-section-head"><span class="drive-step">2</span><div><h3>Motor &amp; Getriebe auswählen</h3><p>Manuell wählen oder einen Vorschlag übernehmen</p></div></div>
+<div class="drive-manual"><div class="drive-section-head"><span class="drive-step">2</span><div><h3>Direkte Motorauswahl</h3><p>Motor aus dem Katalog wählen und Getriebe zuordnen</p></div></div>
 <div class="selector"><label for="seriesSelect">Motorvariante</label><select id="seriesSelect"></select></div><div class="selector"><label for="motorSelect">Motor</label><select id="motorSelect"></select></div><section id="motorSpecs" class="motor-specs" aria-label="Motordatenblatt">
  <div class="specs-heading"><h3>Technische Daten</h3><span id="motorSpecVariant"></span></div>
  <div id="motorSpecGrid" class="spec-grid"></div>
@@ -61,4 +64,4 @@
 <p class="fineprint">Für einen vollständigen Umzug beides speichern: App-ZIP und Projekt-JSON. Das ZIP ist ein GitHub-Quellcodearchiv ohne Git-Versionshistorie.</p>
 <a href="https://github.com/BennyZ84/Ftf-antriebsrechner/blob/main/MIGRATION_BACKUP.md" target="_blank" rel="noopener noreferrer">Umzugsanleitung öffnen</a></div></div></div></div>
 <footer><span id="catalogSummary">Katalog wird geladen</span> · Vorauslegung, keine technische Freigabe. <a href="https://github.com/BennyZ84/Ftf-antriebsrechner/blob/main/CATALOG_COVERAGE.md" target="_blank" rel="noopener noreferrer">Katalogstatus</a></footer></main>
-<div id="toast" role="status" class="toast" hidden></div><script type="module" src="./app.js?v=3.9"></script></body></html>
+<div id="toast" role="status" class="toast" hidden></div><script type="module" src="./app.js?v=3.10"></script></body></html>
