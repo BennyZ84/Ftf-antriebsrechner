@@ -51,6 +51,7 @@ function renderMotorSpecs(){
 }
 function updateMode(){
  const motorOnly=config.mode==='motor';
+ document.body.classList.toggle('motor-only',motorOnly);
  $('modeMotor').className=motorOnly?'primary':'neutral';
  $('modeFTF').className=motorOnly?'neutral':'primary';
  $('modeMotor').setAttribute('aria-pressed',String(motorOnly));
@@ -62,8 +63,12 @@ function updateMode(){
  $('resultActions').hidden=motorOnly;
  const notice=document.querySelector('#view-eingaben .notice');
  if(notice)notice.hidden=motorOnly;
- // Der Ergebnisbereich ist nur mit gültiger FTF-/Getriebekonfiguration sinnvoll.
- if(motorOnly && document.querySelector('[data-tab="ergebnisse"]').classList.contains('active'))tab('eingaben');
+ $('modeDescription').textContent=motorOnly
+  ? 'Motordatenblatt ohne Fahrzeug- und Getriebeberechnung'
+  : 'Vollständige FTF-Auslegung mit Motor, Getriebe und Fahrzeugdaten';
+ const resultTab=document.querySelector('[data-tab="ergebnisse"]');
+ resultTab.hidden=motorOnly;
+ if(motorOnly && resultTab.classList.contains('active'))tab('eingaben');
 }
 function setNotes(){
  const m=motors.find(x=>x.id===config.motorId),g=gears.find(x=>x.id===config.gearId);
