@@ -588,6 +588,114 @@ export const motors=[
     "J": 188,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
     "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg42x15-12v",
+    "name": "BG42x15 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 3410,
+    "idle": 4670,
+    "nom": 0.106,
+    "peak": 0.602,
+    "J": 24,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-42-dcore.pdf?la=pt-br&revision=baafebff-0293-40f2-b3f6-97bff0bfb880",
+    "note": "Datenblatt BG42 dCore; BG42x45 24-V-Daten im Katalog als vorläufig (*) markiert – keine Serienfreigabe. Motor-/Getriebekombination einzeln nachweisen."
+  },
+  {
+    "id": "bg42x15-24v",
+    "name": "BG42x15 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3630,
+    "idle": 4723,
+    "nom": 0.108,
+    "peak": 0.746,
+    "J": 24,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-42-dcore.pdf?la=pt-br&revision=baafebff-0293-40f2-b3f6-97bff0bfb880",
+    "note": "Datenblatt BG42 dCore; BG42x45 24-V-Daten im Katalog als vorläufig (*) markiert – keine Serienfreigabe. Motor-/Getriebekombination einzeln nachweisen."
+  },
+  {
+    "id": "bg42x30-12v",
+    "name": "BG42x30 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 3330,
+    "idle": 4530,
+    "nom": 0.173,
+    "peak": 1.02,
+    "J": 44,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-42-dcore.pdf?la=pt-br&revision=baafebff-0293-40f2-b3f6-97bff0bfb880",
+    "note": "Datenblatt BG42 dCore; BG42x45 24-V-Daten im Katalog als vorläufig (*) markiert – keine Serienfreigabe. Motor-/Getriebekombination einzeln nachweisen."
+  },
+  {
+    "id": "bg42x30-24v",
+    "name": "BG42x30 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3580,
+    "idle": 4434,
+    "nom": 0.172,
+    "peak": 1.52,
+    "J": 44,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-42-dcore.pdf?la=pt-br&revision=baafebff-0293-40f2-b3f6-97bff0bfb880",
+    "note": "Datenblatt BG42 dCore; BG42x45 24-V-Daten im Katalog als vorläufig (*) markiert – keine Serienfreigabe. Motor-/Getriebekombination einzeln nachweisen."
+  },
+  {
+    "id": "bg42x45-24v",
+    "name": "BG42x45 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3600,
+    "idle": 4500,
+    "nom": 0.245,
+    "peak": 2.25,
+    "J": 64,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-42-dcore.pdf?la=pt-br&revision=baafebff-0293-40f2-b3f6-97bff0bfb880",
+    "note": "Datenblatt BG42 dCore; BG42x45 24-V-Daten im Katalog als vorläufig (*) markiert – keine Serienfreigabe. Motor-/Getriebekombination einzeln nachweisen."
+  },
+  {
+    "id": "bg45x15-24v",
+    "name": "BG45x15 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3440,
+    "idle": 5130,
+    "nom": 0.21,
+    "peak": 0.665,
+    "J": 24,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-45-dcore.pdf?la=pt-br&revision=fab53e46-4463-4803-bad1-fd46fe212989",
+    "note": "BG45: Nennwerte mit thermischer Anbindung! Ohne thermische Anbindung Nennmoment nur 0.14 Nm; Nenndrehzahl ebenfalls anders. Keine Betriebsfreigabe ohne thermische Prüfung."
+  },
+  {
+    "id": "bg45x15-48v",
+    "name": "BG45x15 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3550,
+    "idle": 5170,
+    "nom": 0.2,
+    "peak": 0.707,
+    "J": 24,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-45-dcore.pdf?la=pt-br&revision=fab53e46-4463-4803-bad1-fd46fe212989",
+    "note": "BG45: Nennwerte mit thermischer Anbindung! Ohne thermische Anbindung Nennmoment nur 0.14 Nm; Nenndrehzahl ebenfalls anders. Keine Betriebsfreigabe ohne thermische Prüfung."
+  },
+  {
+    "id": "bg45x30-24v",
+    "name": "BG45x30 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3040,
+    "idle": 4510,
+    "nom": 0.35,
+    "peak": 1.22,
+    "J": 44,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-45-dcore.pdf?la=pt-br&revision=fab53e46-4463-4803-bad1-fd46fe212989",
+    "note": "BG45: Nennwerte mit thermischer Anbindung! Ohne thermische Anbindung Nennmoment nur 0.22 Nm; Nenndrehzahl ebenfalls anders. Keine Betriebsfreigabe ohne thermische Prüfung."
+  },
+  {
+    "id": "bg45x30-48v",
+    "name": "BG45x30 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3180,
+    "idle": 4530,
+    "nom": 0.35,
+    "peak": 1.33,
+    "J": 44,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-45-dcore.pdf?la=pt-br&revision=fab53e46-4463-4803-bad1-fd46fe212989",
+    "note": "BG45: Nennwerte mit thermischer Anbindung! Ohne thermische Anbindung Nennmoment nur 0.22 Nm; Nenndrehzahl ebenfalls anders. Keine Betriebsfreigabe ohne thermische Prüfung."
   }
 ];
 // Katalogbestätigte Einzelübersetzungen. Nicht automatisch mechanisch zu jedem Motor passend.
