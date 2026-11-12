@@ -18,7 +18,7 @@ export function calculateInertia(c){
  const ftfAxis=ftfCenter+c.unloaded*(c.ftfAxisOffset/1000)**2;
  const loadAxis=loadCenter+c.payload*(c.loadAxisOffset/1000)**2;
  return {ftfCenter,loadCenter,ftfAxis,loadAxis,total:ftfAxis+loadAxis,
- source:'Excel: Trägheitsmoment!F21:F27. Rechteckannahme + Steiner. Achsversatz als radialer Abstand (nicht zweiachsig).'};
+ source:'Rechteckannahme + Satz von Steiner. Achsversatz als radialer Abstand.'};
 }
 export function calculateBattery(c){
  const required=['unloaded','payload','systemVoltage','batteryVoltage','batteryAh','batteryCount','usableCapacity','routeLength','routeSpeed','loadedFraction','tripsPerDay','controlPower','routeOperatingHours','routeStops','conveyorPower','conveyorSecondsPerTrip','chargingEfficiency','roll','eta','slope'];
@@ -54,5 +54,5 @@ export function calculateBattery(c){
  if(c.slope<0)warnings.push('Bergabfahrt: Modell rechnet keine Rekuperation an und setzt negative Zugenergie auf null.');
  if(c.routeStops>0)warnings.push('Anfahrenergie pro Stopp pauschal über kinetische Energie; Rotation, Beschleunigungsprofil und Stromspitzen separat prüfen.');
  return {series,parallel,totalAh,nominalWh,usableWh,steadyLoaded,steadyEmpty,drivePerTrip,driveWh,conveyorWh,controlWh,dailyWh,totalChargeWh,occupiedHours,warnings,
- source:'Excel: Energieauslegung BAT!F25:F33; Fahrkurs als vereinfachte Eingabe. Keine vollständige Excel-Kursübernahme.'};
+ source:'Vereinfachte Fahrkursauslegung mit Energieverbrauchern, ohne Rekuperation.'};
 }
