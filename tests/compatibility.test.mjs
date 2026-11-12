@@ -7,7 +7,7 @@ const motor = (p) => motors.find(m => m.name.startsWith(p));
 const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
-  assert.equal(motors.length,87);
+  assert.equal(motors.length,103);
   assert.equal(gears.length,301);
   assert.equal(catalogScope.coverageComplete,false);
 });
@@ -149,4 +149,28 @@ test('All 17 PLG catalog families represented without fabricated peak torque',()
   }
  }
  assert.equal(new Set(gears.map(g=>g.id)).size,gears.length);
+});
+
+test('BG65 dMove: seven source-derived electrical variants and correct gearbox families',()=>{
+ const list=motors.filter(m=>m.name.startsWith('BG65')&&m.series==='dMove');
+ assert.equal(list.length,7);
+ for(const m of list){
+  assert.ok(m.rpm>0&&m.idle>0&&m.nom>0&&m.peak>0&&m.J>0);
+  assert.ok(m.nomThermallyConnected>=m.nom);
+  assert.ok(combinationStatus(m,gear('PLG 63 EP')).level==='family-listed');
+ }
+ assert.equal(combinationStatus(list[0],gear('PLG 42 K')).level,'unverified');
+});
+test('BG95 dPro PN/EC/EI: nine documented variants, source-linked families only',()=>{
+ const list=motors.filter(m=>m.name.startsWith('BG95')&&m.series==='dPro');
+ assert.equal(list.length,9);
+ const byV=voltage=>list.find(m=>m.name.startsWith('BG95x40 ')&&m.voltage===voltage);
+ assert.equal(byV(48).nom,2.14);
+ assert.equal(byV(48).peak,8.13);
+ for(const m of list){
+  assert.ok(m.source.includes('dunkermotoren.com'));
+  for(const g of ['NG 500','PLG 95 HT','PLG 75 EP'])
+   assert.equal(combinationStatus(m,gear(g)).level,'family-listed',m.id+' '+g);
+  assert.equal(combinationStatus(m,gear('PLG 30')).level,'unverified');
+ }
 });
