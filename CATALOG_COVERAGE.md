@@ -1,4 +1,4 @@
-# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.2)
+# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.3)
 
 ## Erfasster Datenbestand (einschließlich ausdrücklich vorläufiger Referenzwerte)
 
@@ -62,3 +62,9 @@ Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com
 - Vorhandene App-/Projekt-Sicherungs- und Migrationsanleitung: [MIGRATION_BACKUP.md](MIGRATION_BACKUP.md). GitHub ist Versionsverwaltung, aber **kein unabhängiges Offline-Backup**; Quellcode-ZIP und Browserprojekt-JSON müssen getrennt gesichert werden.
 
 **Gesamtkatalog vollständig? Nein.** Es gibt weiter offene Baukasten- und Artikelnummern-Zuordnungen, neuere Baureihen und einen nicht abgeschlossenen Hersteller-Nachweis auf Einzelartikelniveau.
+
+## Nachtrag v3.3 – Herstellerfamilien ohne verifizierte Rechendaten
+
+Die Herstellerfamilien **WG 52, WG 63, WG 75** sowie **BG 45 dGo** sind nun in der App unter **Projekte & Export → Weitere Herstellerbaureihen** ausdrücklich als Katalogeinträge sichtbar. Sie werden **nicht** zu den numerisch berechenbaren 346 Getriebeübersetzungen beziehungsweise 135 Motorvarianten gezählt. Für die WG-Serie nennt Dunkermotoren maximal 320:1 sowie S1/S8 und 3000 min⁻¹ abhängig von der Ausführung, jedoch sind keine eindeutig überprüften Grenzmoment-/Wirkungsgradtabellen je konkreter Übersetzung aus den zugänglichen Herstellertexten übernommen worden. Diese Daten werden weder interpoliert noch aus anderen Baureihen übertragen. Verweis: https://www.dunkermotoren.com/de-de/products/gearboxes/angular-gears/combination-gearboxes
+
+**Damit ist die Familienerfassung erweitert, die vollständige katalogisierte Produktdatenbank jedoch noch nicht bewiesen.** Es fehlen nach wie vor variantenspezifische Werte und weitere Dunkermotoren-Motorfamilien.
