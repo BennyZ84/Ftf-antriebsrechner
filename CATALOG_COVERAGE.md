@@ -1,4 +1,4 @@
-# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.0)
+# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.1)
 
 ## Verifizierter Datenbestand
 
@@ -25,7 +25,7 @@ Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com
 
 **Weiterhin nicht vollständig erfasst:** WG 52/63/75 und einzelne Übersetzungen/Lastgrenzen weiterer Familien; NG1000 WO bisher nur mit vorläufigen Herstellerwerten; weitere BG/BGA-dGo, dMove und dPro Motoren, GR/G/PM/KD, Varianten mit anderen Elektronikschnittstellen sowie vollständige Hersteller-Artikelnummern, Wellen-/Flanschkombinationen und aktuelle lieferbare Konfigurationen. Bei den BG42 dGo/dMove sind in den derzeit verfügbaren Dokumenten teilweise ausdrücklich vorläufige Angaben markiert; diese werden nicht als bestätigte Auslegungswerte ausgegeben.
 
-**Katalog nicht vollständig** bleibt deshalb eine korrekte Kennzeichnung. Die 17 PLG-Familien sind baureihenseitig abgedeckt, aber nicht alle Artikelkonfigurationen und zulässigen Lastkollektive.
+**Katalog nicht vollständig** bleibt deshalb eine korrekte Kennzeichnung. Die Herstellerdatenbanken und der Online-Konfigurator umfassen zusätzlich zahlreiche individuelle Artikel- und Motor-Getriebe-Anbauten. Eine vollständige Erfassung sämtlicher lieferbarer Artikel ist mit den verifizierten öffentlich zugänglichen Tabellen nicht nachgewiesen. Die 17 PLG-Familien sind baureihenseitig abgedeckt, aber nicht alle Artikelkonfigurationen und zulässigen Lastkollektive.
 
 ## Kompatibilität und Einschränkungen
 
@@ -44,3 +44,12 @@ Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com
 - GitHub Actions führt JavaScript-Syntaxchecks und Referenz-/Katalog-/Kompatibilitätstests aus.
 - Mit **coverageComplete: false** wird ausdrücklich kein vollständiger und herstellerfreigegebener Katalog behauptet.
 - Eine erfolgreiche Veröffentlichung beweist die Funktion der Web-App, nicht die technische Zulassung sämtlicher Antriebskombinationen.
+
+## Katalognachtrag v3.1
+
+- **SG 65:** 10,25:1, Auslegungswirkungsgrad 0,8, Dauerdrehmoment 4 Nm, Spitzenmoment 7 Nm. Direkt aus dem [Herstellerdatenblatt SG65](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-65.pdf?la=pt-br&revision=9b31937b-f467-4705-bcc1-64d18f94152c).
+- **NG 1000 WO:** 20:1, Wirkungsgrad 85 %, Dauer 80 Nm, Beschleunigung 160 Nm laut ausdrücklich **vorläufigem** [Datenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/029_ng-1000_wo.pdf?hash=6614E47D07D52F584FA2D1AE71E4C139&la=en&revision=dbcf2e52-35eb-482b-be92-64f9e130e00a). Im Rechner als vorläufig markiert und nicht als bestätigte Baukasten-/Artikelkombination ausgewiesen; separate Freigabe erforderlich.
+- **WG52/63/75:** Neuere offiziell gelistete Kombinationsgetriebe. Mangels eindeutiger, verifizierbarer Einzelübersetzungs-/Grenzwerttabellen nicht mit interpolierten Werten ergänzt. [Offizielle Baureihenseite](https://www.dunkermotoren.com/de-de/products/gearboxes/angular-gears/combination-gearboxes).
+- **dGo/BGA22 und weitere dMove/dPro:** Einige aktuelle Herstellerunterlagen bezeichnen die Kennwerte als vorläufig. Diese Motoren sind weiterhin nicht als **bestätigte** Berechnungsdatensätze aufgenommen. [BG42 dGo Datenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-dgo.pdf?la=pt-br&revision=6d0ce8b1-fc74-42a3-b71b-63a19d6b6125).
+
+**Status: 124 Motordatensätze; 346 Getriebeübersetzungsdatensätze (davon 1 vorläufig). Vollständigkeit des Gesamtportfolios nicht bestätigt.**
