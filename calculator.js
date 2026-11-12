@@ -3443,7 +3443,7 @@ export const gears=[
     "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
   }
 ];
-export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42,startFactor:1,reactionTime:0.4,speedTolerance:0.05,brakeSafetyFactor:1.2,scannerTolerance:65,clearanceAllowance:150,reflectionAllowance:350};
+export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42,startFactor:1.3,reactionTime:0.4,speedTolerance:0.05,brakeSafetyFactor:1.2,scannerTolerance:65,clearanceAllowance:150,reflectionAllowance:350};
 export function calc(c){
 const m=c.unloaded+c.payload,r=c.wheel/2000,z=c.drives,i=c.ratio,eta=c.eta,g=9.81,ang=Math.atan(c.slope/100),J=c.J*1e-7;
 for(const k of ["unloaded","payload","drives","wheel","ratio","eta","roll","slope","speed","accel","brake","curveSpeed","positionSpeed","curveRadius","adhesion","drivenFraction","reverseEta","rpm","idle","nom","peak","J","cont","gearPeak"])if(!Number.isFinite(c[k]))return {error:"Ungültiger Zahlenwert: "+k};
