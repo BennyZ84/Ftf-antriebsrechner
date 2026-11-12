@@ -1,45 +1,31 @@
-# FTF Antriebsrechner – GitHub Pages PWA
+# FTF Antriebsrechner (PWA)
 
-Installierbare Web-App (PWA) für iPhone/iPad und Windows ohne Server-Backend, Framework oder Developer-Account.
+Installierbare FTF-Fahrantriebs-Berechnung für iPhone, iPad und Windows.
 
-## Live stellen auf GitHub Pages
+## Veröffentlichung
 
-1. GitHub öffnen und **New repository** wählen, z. B. `ftf-antriebsrechner`. Ein **öffentliches** Repository anlegen (Free-Plan für Pages). Nicht in ein bestehendes anderes Projekt hochladen.
-2. Dieses ZIP entpacken und **alle Dateien und Ordner des ZIP-Inhalts** ins Stammverzeichnis des neuen Repositories hochladen (GitHub: **Add file → Upload files → Commit changes**). Wichtig: `index.html` muss direkt im Repo-Stamm liegen.
-3. **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main → /(root) → Save**.
-4. Nach erfolgreichem Deployment ist die App erreichbar über `https://BENUTZERNAME.github.io/ftf-antriebsrechner/` (bei anders benanntem Repository den Pfad entsprechend anpassen).
-5. Link auf dem iPhone in **Safari** öffnen → **Teilen** → **Zum Home-Bildschirm** → **Als Web-App öffnen** aktivieren → **Hinzufügen**.
-6. App einmal online öffnen, damit die Dateien offline zwischengespeichert werden. Für Updates neu laden (online).
+Die Dateien und der GitHub-Actions-Workflow sind bereits im Repository. **Einmalig** unter **Settings → Pages → Build and deployment → Source: GitHub Actions** aktivieren. Danach kann der Workflow `Publish FTF Antriebsrechner` per **Actions → Run workflow** erneut gestartet werden; spätere Änderungen auf `main` veröffentlichen sich automatisch.
 
-**Datenschutz:** GitHub Pages veröffentlicht Quellcode/Referenzdaten öffentlich. Projekte werden ausschließlich lokal im jeweiligen Browser gespeichert, nicht an GitHub übertragen. Für Projekte und Sicherungen `Projekte & Export` → JSON exportieren. Kein vertrauliches Projektwissen in öffentliche Quellcodedateien eintragen.
+Vorgesehene Adresse: https://bennyz84.github.io/Ftf-antriebsrechner/
 
-## Funktionen
+iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffnen → Hinzufügen. Nach dem ersten erfolgreichen Online-Aufruf werden wichtige App-Dateien offline gespeichert.
 
-- Referenzwerte: **200 kg Leergewicht + 550 kg Zuladung = 750 kg Gesamtgewicht**, zwei Antriebe, Ø160 mm, i=16, η=0,80.
-- Motor- und Getriebeauswahl, freie Bearbeitung der Motordaten und Antriebsparameter.
-- Live-Berechnung der Geschwindigkeit, Motordrehzahl, Fahrwiderstände, Beschleunigungsmomente, Getriebegrenzen, Reserven und Bremswege.
-- Steigung, Kurvenradius und Haftkraft als optionale Erweiterungen.
-- Lokales Speichern mehrerer Projekte, Import/Export als JSON, Browser-Druck als PDF.
-- Offline-Modus via Service Worker, Startbildschirm-Icon und iOS-Stand-alone-Ansicht.
+## Eingaben
 
-## Herstellerdaten und fachliche Grenzen
+Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-Die Datenbank umfasst **noch nicht alle Dunkermotoren**. Der BG95x40 basiert auf der **48-V-Standardreferenz** aus dem Rechenblatt; die abweichende 40-V-Projektartikelnummer **88595.01992** ist nicht einzeln bestätigt. Der BG75x25 ist ausdrücklich ein leerer Platzhalter. Das NG500 i=16 basiert auf den im Rechenblatt dokumentierten Grenzen 21 Nm Dauer / 42 Nm Beschleunigung.
+Motoren: BG95x40 mit 48-V-Standardreferenz (40-V-Projektmotor 88595.01992 nicht individuell bestätigt); BG75x25 ist nur ein **Platzhalter ohne Herstellerwerte**. Getriebe: NG500, 16:1, Dauer- und Beschleunigungsmoment. Eine vollständige Dunkermotoren-Datenbank ist noch nicht vorhanden.
 
-Eingetragene projektbezogene Werte dürfen frei verändert werden, gelten dadurch aber **nicht** als vom Hersteller verifizierte Daten. Berechnungen ersetzen keine thermische Auslegung, Haftungs-/Kippprüfung, Rücktriebsfreigabe oder Sicherheitsbetrachtung. Bremsweg ohne Reaktionszeit/Verzögerungsaufbau.
+Die App berechnet Motordrehzahlen, Geschwindigkeit, Roll- und Steigungswiderstände, Rad- und Motormomente, Beschleunigungs- und Bremswege sowie Reserven. Rotorträgheit wird motorseitig berücksichtigt. Die Auslegung ist **keine Sicherheitsfreigabe**.
 
-Quellen des Rechenmodells: `Berechnung_mit_Formeln_FTF_BG95x40.docx` (Stand 12.11.2026); Originalquellen darin: BG95 dCore-Datenblatt, NG500-Datenblatt und Dunkermotoren-Bremsenkatalog.
+## Datenspeicherung
 
-## Lokal testen (Windows)
+Projekte werden lokal im Browser gespeichert. JSON-Import/Export für Backups und Gerätewechsel. Keine Anmeldung, keine Übertragung der Projekte an GitHub. **Das Repository und alle dort hinterlegten Referenzwerte sind öffentlich.** Browserdaten nicht löschen, bevor ein JSON-Backup gesichert ist.
 
-- Im Projektordner `python -m http.server 8080` und anschließend `http://localhost:8080` öffnen (Service Worker nur localhost oder HTTPS).
-- Berechnungstests: `npm test` oder `node --test tests/calculator.test.mjs` (Node.js nötig).
-- Für einen iPhone-Test ist die Veröffentlichung unter HTTPS erforderlich.
+## Prüfen
 
-## Aufbau
+`npm test` führt automatisierte Referenz- und Eingabeprüfungen aus. `node --check app.js` und `node --check calculator.js` prüfen die JavaScript-Syntax. Diese Prüfungen laufen auch vor jeder automatischen Veröffentlichung.
 
-- `index.html` und `styles.css`: responsive Oberfläche
-- `app.js`: Eingaben, Projekte, lokale Speicherung, Backup
-- `calculator.js`: testbare Rechenlogik und Referenzdaten
-- `sw.js`, `manifest.webmanifest`, `icons/`: Offline/PWA
-- `tests/`: Referenzrechnungen und Eingabevalidierung
+### Grenzen
+
+Das Modell basiert auf dem Projekt-Rechenblatt „Berechnung mit Formeln FTF BG95x40“ (12.11.2026). Haftung, Fahrzeugstabilität, Lastkollektiv, Bremsenergiepfad, thermische Last und Rücktrieb müssen separat geprüft werden. Bremswege enthalten keine Reaktionszeit, Verzögerungsaufbauzeit oder Sicherheitszuschläge.
