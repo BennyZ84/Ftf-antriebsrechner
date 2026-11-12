@@ -13,7 +13,7 @@ export const listedFamilies=Object.freeze({
   bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","PLG 80 LB"]
 });
 export const catalogScope=Object.freeze({
- motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG66/BG75 dMove CO/IO, BG75 dPro CO/IO und BG66 dPro PN/EC/EI",
+ motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG65/BG66/BG75 dMove CO/IO; BG66/BG95 dPro PN/EC/EI, BG75 dPro CO/IO",
  gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien (teilweise begrenzte Tabellenwerte); STG65, SG120/K, KG120",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
  missingGearExamples:"Weitere SG-, KG- und WG-Familien sowie NG1000 WO; konkrete Motor/Getriebe-Einzelkonfigurationen sind nicht vollständig bestätigt",
@@ -32,6 +32,24 @@ export function gearFamily(gear){
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ // BG65 dMove: per BG65 dMove CO/IO datasheet.
+ if(m==="bg65" && motor?.series==="dMove"){
+  const listed=["PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","SG 120","STG 65"];
+  if(listed.includes(g))return {level:"family-listed",label:"BG65 dMove · Getriebebaureihe im Herstellerbaukasten",
+   reason:"BG65 dMove und "+g+" sind als Baureihen aufgeführt. Konkrete Flansch-, Wellen- und Übersetzungsvariante sowie Belastbarkeit separat bestätigen.",
+   source:motor.source||combinationSource};
+  return {level:"unverified",label:"Keine bestätigte BG65-dMove-Kombination",
+   reason:"Diese Getriebefamilie ist im ausgewerteten BG65-dMove-Baukasten nicht aufgeführt."};
+ }
+ // BG95 dPro PN/EC/EI: manufacturer modular-system drawing.
+ if(m==="bg95" && motor?.series==="dPro"){
+  const listed=["PLG 75 EP","PLG 75 HT","PLG 80 LB","PLG 95 HT","SG 120","STG 65","KG 120","NG 500"];
+  if(listed.includes(g))return {level:"family-listed",label:"BG95 dPro · Getriebebaureihe dokumentiert",
+   reason:"Hersteller listet "+g+" als Baukastenfamilie für BG95 dPro PN/EC/EI. Konkrete Artikel-/Flanschausführung nicht freigegeben.",
+   source:motor.source||combinationSource};
+  return {level:"unverified",label:"Nicht belegte BG95-dPro-Kombination",
+   reason:"Keine bestätigte Baukastenfamilie für diesen Motor in den ausgewerteten Herstellerunterlagen."};
+ }
  // BG66 dMove: explicit modular-system table in BG66 dMove CO/IO datasheet.
  if(m==="bg66" && motor?.series==="dMove"){
   const confirmed=["PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","PLG 80 LB","NG 250","STG 65","SG 120"];
