@@ -14,7 +14,7 @@ iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffne
 
 Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-**Katalogstand v2.4 (12.11.2026): 75 Motorvarianten, 220 Getriebeübersetzungen aus 18 Getriebebaureihen.**
+**Katalogstand v2.4 (12.11.2026): 87 Motorvarianten, 220 Getriebeübersetzungen aus 18 Getriebebaureihen.**
 
 Motoren: BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, zusätzlich BG75 dMove CO/IO und BG75 dPro CO/IO. dGo, andere dMove/dPro-Baugrößen, bürstenbehaftete GR/PM, AC-Motoren und BGA-Baureihen sind **noch nicht** vollständig erfasst.
 
