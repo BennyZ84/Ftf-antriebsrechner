@@ -408,6 +408,186 @@ export const motors=[
     "J": 2830,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/dunkermotoren_product_catalog.pdf?la=pt-br&revision=224224c7-2c0a-482e-8a45-ed275ab36fad",
     "note": "Bestätigte Katalog-Spannungsvariante BG95x120 dCore, 60 V. Motorparameter aus Herstellerkatalog. Keine Bestätigung individueller Artikelnummern, Geber-/Reglerkombination oder Betriebsfreigabe."
+  },
+  {
+    "id": "bg62x30-24v",
+    "name": "BG62x30 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3000,
+    "idle": 3855,
+    "nom": 0.2,
+    "peak": 1.31,
+    "J": 185,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-62-dcore.pdf?la=pt-br&revision=c67dfc8f-e134-4fbf-9975-1fa0fbd34321",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg62x45-24v",
+    "name": "BG62x45 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3210,
+    "idle": 3855,
+    "nom": 0.27,
+    "peak": 2.11,
+    "J": 262,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-62-dcore.pdf?la=pt-br&revision=c67dfc8f-e134-4fbf-9975-1fa0fbd34321",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg62x60-24v",
+    "name": "BG62x60 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3350,
+    "idle": 3865,
+    "nom": 0.36,
+    "peak": 3.07,
+    "J": 353,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-62-dcore.pdf?la=pt-br&revision=c67dfc8f-e134-4fbf-9975-1fa0fbd34321",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x25-12v",
+    "name": "BG66x25 dCore · 12 V",
+    "voltage": 12,
+    "rpm": 3460,
+    "idle": 4480,
+    "nom": 0.347,
+    "peak": 1.46,
+    "J": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x25-24v",
+    "name": "BG66x25 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3850,
+    "idle": 4750,
+    "nom": 0.398,
+    "peak": 1.46,
+    "J": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x25-48v",
+    "name": "BG66x25 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3680,
+    "idle": 4580,
+    "nom": 0.42,
+    "peak": 1.46,
+    "J": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x25-60v",
+    "name": "BG66x25 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3440,
+    "idle": 4340,
+    "nom": 0.444,
+    "peak": 1.46,
+    "J": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x25-110v",
+    "name": "BG66x25 dCore · 110 V",
+    "voltage": 110,
+    "rpm": 3160,
+    "idle": 4060,
+    "nom": 0.465,
+    "peak": 1.46,
+    "J": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x50-24v",
+    "name": "BG66x50 dCore · 24 V",
+    "voltage": 24,
+    "rpm": 3200,
+    "idle": 3940,
+    "nom": 0.653,
+    "peak": 2.92,
+    "J": 129,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x50-48v",
+    "name": "BG66x50 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3200,
+    "idle": 3940,
+    "nom": 0.667,
+    "peak": 2.92,
+    "J": 129,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x50-60v",
+    "name": "BG66x50 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3360,
+    "idle": 4100,
+    "nom": 0.67,
+    "peak": 2.92,
+    "J": 129,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x50-110v",
+    "name": "BG66x50 dCore · 110 V",
+    "voltage": 110,
+    "rpm": 3290,
+    "idle": 4030,
+    "nom": 0.693,
+    "peak": 2.92,
+    "J": 129,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x75-48v",
+    "name": "BG66x75 dCore · 48 V",
+    "voltage": 48,
+    "rpm": 3540,
+    "idle": 3870,
+    "nom": 0.954,
+    "peak": 4.38,
+    "J": 188,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x75-60v",
+    "name": "BG66x75 dCore · 60 V",
+    "voltage": 60,
+    "rpm": 3410,
+    "idle": 3740,
+    "nom": 0.985,
+    "peak": 4.38,
+    "J": 188,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
+  },
+  {
+    "id": "bg66x75-110v",
+    "name": "BG66x75 dCore · 110 V",
+    "voltage": 110,
+    "rpm": 3530,
+    "idle": 3860,
+    "nom": 0.973,
+    "peak": 4.38,
+    "J": 188,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bg-66-dcore.pdf?la=pt-br&revision=cd7bf3dc-7542-4f5a-9bf1-67264365f5ca",
+    "note": "Offizielle Dunkermotoren-Datenblattwerte; keine automatische Freigabe der konkreten Motor-Getriebe-Konfiguration."
   }
 ];
 // Katalogbestätigte Einzelübersetzungen. Nicht automatisch mechanisch zu jedem Motor passend.
@@ -891,6 +1071,336 @@ export const gears=[
     "peak": 15,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ep.pdf",
     "note": "Bestätigte Katalogwerte: Wirkungsgrad 90 %, Dauer 7.5 Nm, Beschleunigung 15 Nm. Ausführung mit Aluminiumflansch; Sternchen-Varianten im Datenblatt beachten. Motoranschluss und Einsatzgrenzen separat prüfen."
+  },
+  {
+    "id": "plg75ht-4",
+    "name": "PLG 75 HT · 4:1",
+    "ratio": 4,
+    "eta": 0.9,
+    "cont": 25,
+    "peak": 50,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 1-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-4",
+    "name": "PLG 95 HT · 4:1",
+    "ratio": 4,
+    "eta": 0.9,
+    "cont": 40,
+    "peak": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 1-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-5_5",
+    "name": "PLG 75 HT · 5,5:1",
+    "ratio": 5.5,
+    "eta": 0.9,
+    "cont": 25,
+    "peak": 50,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 1-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-5_5",
+    "name": "PLG 95 HT · 5,5:1",
+    "ratio": 5.5,
+    "eta": 0.9,
+    "cont": 40,
+    "peak": 78,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 1-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-7",
+    "name": "PLG 75 HT · 7:1",
+    "ratio": 7,
+    "eta": 0.9,
+    "cont": 25,
+    "peak": 50,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 1-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-7",
+    "name": "PLG 95 HT · 7:1",
+    "ratio": 7,
+    "eta": 0.9,
+    "cont": 40,
+    "peak": 78,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 1-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-10",
+    "name": "PLG 75 HT · 10:1",
+    "ratio": 10,
+    "eta": 0.9,
+    "cont": 25,
+    "peak": 50,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 1-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-10",
+    "name": "PLG 95 HT · 10:1",
+    "ratio": 10,
+    "eta": 0.9,
+    "cont": 40,
+    "peak": 75,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 1-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-13_65",
+    "name": "PLG 75 HT · 13,65:1",
+    "ratio": 13.65,
+    "eta": 0.81,
+    "cont": 40,
+    "peak": 80,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-13_65",
+    "name": "PLG 95 HT · 13,65:1",
+    "ratio": 13.65,
+    "eta": 0.81,
+    "cont": 65,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-16_8",
+    "name": "PLG 75 HT · 16,8:1",
+    "ratio": 16.8,
+    "eta": 0.81,
+    "cont": 73,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-16_8",
+    "name": "PLG 95 HT · 16,8:1",
+    "ratio": 16.8,
+    "eta": 0.81,
+    "cont": 130,
+    "peak": 258,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-23_1",
+    "name": "PLG 75 HT · 23,1:1",
+    "ratio": 23.1,
+    "eta": 0.81,
+    "cont": 73,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-23_1",
+    "name": "PLG 95 HT · 23,1:1",
+    "ratio": 23.1,
+    "eta": 0.81,
+    "cont": 130,
+    "peak": 258,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-27_5",
+    "name": "PLG 75 HT · 27,5:1",
+    "ratio": 27.5,
+    "eta": 0.81,
+    "cont": 73,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-27_5",
+    "name": "PLG 95 HT · 27,5:1",
+    "ratio": 27.5,
+    "eta": 0.81,
+    "cont": 130,
+    "peak": 247,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-29_4",
+    "name": "PLG 75 HT · 29,4:1",
+    "ratio": 29.4,
+    "eta": 0.81,
+    "cont": 73,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-29_4",
+    "name": "PLG 95 HT · 29,4:1",
+    "ratio": 29.4,
+    "eta": 0.81,
+    "cont": 130,
+    "peak": 258,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-35",
+    "name": "PLG 75 HT · 35:1",
+    "ratio": 35,
+    "eta": 0.81,
+    "cont": 73,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-35",
+    "name": "PLG 95 HT · 35:1",
+    "ratio": 35,
+    "eta": 0.81,
+    "cont": 130,
+    "peak": 247,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-42",
+    "name": "PLG 75 HT · 42:1",
+    "ratio": 42,
+    "eta": 0.81,
+    "cont": 73,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-42",
+    "name": "PLG 95 HT · 42:1",
+    "ratio": 42,
+    "eta": 0.81,
+    "cont": 130,
+    "peak": 258,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-50",
+    "name": "PLG 75 HT · 50:1",
+    "ratio": 50,
+    "eta": 0.81,
+    "cont": 73,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "Herstellerdaten, 2-stufig; Tabellenwerte über zusammengefasste Stufenbereiche. Max. Beschleunigungsmoment nur für 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg95ht-50",
+    "name": "PLG 95 HT · 50:1",
+    "ratio": 50,
+    "eta": 0.81,
+    "cont": 130,
+    "peak": 247,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-95-ht.pdf?la=pt-br&revision=9b53d22f-c0a6-4839-918a-bda0cb33e1a8",
+    "note": "Herstellerdaten, 2-stufig; Beschleunigungsmoment max. 1 s. Motoranschluss einzeln prüfen."
+  },
+  {
+    "id": "plg75ht-70_56",
+    "name": "PLG 75 HT · 70,56:1",
+    "ratio": 70.56,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-84",
+    "name": "PLG 75 HT · 84:1",
+    "ratio": 84,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-100",
+    "name": "PLG 75 HT · 100:1",
+    "ratio": 100,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-115_5",
+    "name": "PLG 75 HT · 115,5:1",
+    "ratio": 115.5,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-147",
+    "name": "PLG 75 HT · 147:1",
+    "ratio": 147,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-175",
+    "name": "PLG 75 HT · 175:1",
+    "ratio": 175,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-210",
+    "name": "PLG 75 HT · 210:1",
+    "ratio": 210,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-250",
+    "name": "PLG 75 HT · 250:1",
+    "ratio": 250,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
+  },
+  {
+    "id": "plg75ht-350",
+    "name": "PLG 75 HT · 350:1",
+    "ratio": 350,
+    "eta": 0.73,
+    "cont": 90,
+    "peak": 130,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/plg/plg-75-ht.pdf?la=pt-br&revision=e62c4dc7-1833-42ee-8853-266c5b4e7ace",
+    "note": "PLG 75 HT, 3-stufig, Stahlflansch; Herstellerdaten (90 Nm Dauer / 130 Nm Beschleunigung; max. 1 s), Anbauprüfung erforderlich."
   }
 ];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42};
