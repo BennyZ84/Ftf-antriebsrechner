@@ -2,15 +2,17 @@ import {motors,gears,defaults,calc} from './calculator.js';
 import {combinationStatus,combinationSource} from './compatibility.js';
 import {auxiliaryDefaults,calculateInertia,calculateBattery} from './auxiliary.js';
 import {stabilityDefaults,calculateStability} from './stability.js';
+import {rollerDefaults,calculateRollerPressure} from './roller.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
-const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults};
+const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults};
 let config=clone(projectDefaults);
 const fields={
 "vehicle-fields":[["unloaded","Leergewicht","kg",1],["payload","Zuladung","kg",1],["drives","Antriebe","Stück",1],["wheel","Raddurchmesser","mm",1],["speed","Zielgeschwindigkeit","m/s",.01],["accel","Beschleunigung","m/s²",.01],["brake","Bremsverzögerung","m/s²",.01],["roll","Rollwiderstandsbeiwert","",.001]],
 "drive-fields":[["ratio","Getriebeübersetzung i","",.01],["eta","Auslegungswirkungsgrad","",.01],["rpm","Motor-Nenndrehzahl","min⁻¹",1],["idle","Motor-Leerlaufdrehzahl","min⁻¹",1],["nom","Motor-Nennmoment","Nm",.001],["peak","Motor-Spitzenmoment","Nm",.001],["J","Rotorträgheit","g·cm²",1],["cont","Getriebe-Dauermoment","Nm",.01],["gearPeak","Getriebe-Beschleunigungsmoment","Nm",.01]],
-"extended-fields":[["slope","Steigung (bergauf)","%",.1],["curveSpeed","Kurvengeschwindigkeit","m/s",.01],["positionSpeed","Positioniergeschwindigkeit","m/s",.01],["curveRadius","Kurvenradius (0=aus)","m",.01],["adhesion","Haftbeiwert (0=aus)","",.01],["drivenFraction","Anteil angetriebene Gewichtskraft","",.01],["reverseEta","Rücktriebswirkungsgrad (Annahme)","",.01],["startFactor","Anfahrfaktor (Excel-Vergleich)","",.05],["reactionTime","Systemreaktionszeit","s",.05],["speedTolerance","Geschwindigkeitstoleranz","m/s",.01],["brakeSafetyFactor","Bremswegfaktor (Excel-Vergleich)","",.05],["scannerTolerance","Scanner-Toleranz TR","mm",1],["clearanceAllowance","Bodenfreiheit-Zuschlag ZF","mm",1],["reflectionAllowance","Reflexions-Zuschlag ZR","mm",1]],
+"extended-fields":[["slope","Steigung (bergauf)","%",.1],["curveSpeed","Kurvengeschwindigkeit","m/s",.01],["positionSpeed","Positioniergeschwindigkeit","m/s",.01],["curveRadius","Kurvenradius (0=aus)","m",.01],["adhesion","Haftbeiwert (0=aus)","",.01],["drivenFraction","Anteil angetriebene Gewichtskraft","",.01],["reverseEta","Rücktriebswirkungsgrad (Annahme)","",.01],["startFactor","Anfahrfaktor","",.05],["reactionTime","Systemreaktionszeit","s",.05],["speedTolerance","Geschwindigkeitstoleranz","m/s",.01],["brakeSafetyFactor","Bremswegfaktor","",.05],["scannerTolerance","Scanner-Toleranz TR","mm",1],["clearanceAllowance","Bodenfreiheit-Zuschlag ZF","mm",1],["reflectionAllowance","Reflexions-Zuschlag ZR","mm",1]],
 "inertia-fields":[["ftfWidth","Breite FTF","mm",1],["ftfLength","Länge FTF","mm",1],["loadWidth","Breite Zuladung","mm",1],["loadLength","Länge Zuladung","mm",1],["ftfAxisOffset","Abstand FTF-SP zur Drehachse","mm",1],["loadAxisOffset","Abstand Last-SP zur Drehachse","mm",1]],
 "stability-fields":[["supportCount","Anzahl Auflagepunkte (3 oder 4)","",1],["radAx","Rad A – x","mm",1],["radAy","Rad A – y","mm",1],["radBx","Rad B – x","mm",1],["radBy","Rad B – y","mm",1],["radCx","Rad C – x","mm",1],["radCy","Rad C – y","mm",1],["ftfCogX","FTF-Schwerpunkt x","mm",1],["ftfCogY","FTF-Schwerpunkt y","mm",1],["ftfCogZ","FTF-Schwerpunkt z","mm",1],["loadCogX","Last-Schwerpunkt x","mm",1],["loadCogY","Last-Schwerpunkt y","mm",1],["loadCogZ","Last-Schwerpunkt z","mm",1],["lateralSlopeDegrees","Seitliche Bodenneigung","°",.1],["externalForceN","Externe Horizontalkraft","N",1],["externalForceHeight","Angriffshöhe externe Kraft","mm",1],["stabilityRadius","Kurvenradius Stabilität","mm",1]],
+"roller-fields":[["rollerLoadKg","Last je Rolle","kg",1],["rollerDiameter","Rollendurchmesser","mm",1],["rollerWidth","Rollenbreite","mm",1],["concreteModulus","E-Modul Beton","N/mm²",1],["paModulus","E-Modul PA6","N/mm²",1],["puModulus","E-Modul PU","N/mm²",1],["rollerPoisson","Querkontraktionszahl","",.01],["gravity","Erdbeschleunigung","m/s²",.01]],
 "battery-fields":[["systemVoltage","Systemspannung","V",1],["batteryVoltage","Batterie-Nennspannung","V",1],["batteryAh","Kapazität je Batterie","Ah",.1],["batteryCount","Batterieanzahl","Stück",1],["usableCapacity","Nutzbare Kapazität","%",1],["routeLength","Weglänge je Fahrkurs","m",1],["routeSpeed","Fahrgeschwindigkeit im Kurs","m/s",.01],["loadedFraction","Beladenanteil (0–1)","",.05],["tripsPerDay","Fahrkurse pro Tag","Stück",1],["routeOperatingHours","Betriebszeit pro Tag","h",.5],["routeStops","Anfahrvorgänge pro Fahrkurs","Stück",1],["controlPower","Steuerungsverbrauch","W",1],["conveyorPower","Fördertechnik-Verbrauch","W",1],["conveyorSecondsPerTrip","Fördertechnik je Fahrkurs","s",1],["chargingEfficiency","Ladewirkungsgrad (0–1)","",.01]]
 };
 const key='ftf-antriebsrechner-projects-v1';
@@ -74,6 +76,7 @@ function updateMode(){
  $('inertiaPanel').hidden=motorOnly;
  $('batteryPanel').hidden=motorOnly;
  $('stabilityPanel').hidden=motorOnly;
+ $('rollerPanel').hidden=motorOnly;
  $('resultActions').hidden=motorOnly;
  $('motorPanelTitle').textContent=motorOnly?'Motordaten':'Motor & Getriebe';
  $('motorSpecs').hidden=!motorOnly;
@@ -121,9 +124,9 @@ renderAdditionalResults();
 for(const [name,val,unit,formula] of data.results){const article=document.createElement('article');article.className='result';const info=document.createElement('div');const heading=document.createElement('strong');heading.textContent=name;const f=document.createElement('small');f.textContent=formula;info.append(heading,f);const value=document.createElement('b');value.textContent=fmt(val,unit==='min⁻¹'||unit==='kg'?0:unit==='%'?1:unit==='Nm'?3:2)+' '+unit;article.append(info,value);$('results').append(article);}
 }
 function renderAdditionalResults(){
- const inertia=calculateInertia(config),battery=calculateBattery(config),stability=calculateStability(config);
- const inertiaBox=$('inertiaResults'),batteryBox=$('batteryResults'),stabilityBox=$('stabilityResults');
- inertiaBox.replaceChildren();batteryBox.replaceChildren();stabilityBox.replaceChildren();
+ const inertia=calculateInertia(config),battery=calculateBattery(config),stability=calculateStability(config),roller=calculateRollerPressure(config);
+ const inertiaBox=$('inertiaResults'),batteryBox=$('batteryResults'),stabilityBox=$('stabilityResults'),rollerBox=$('rollerResults');
+ inertiaBox.replaceChildren();batteryBox.replaceChildren();stabilityBox.replaceChildren();rollerBox.replaceChildren();
  const add=(box,label,value,unit,digits=2)=>{
   const line=document.createElement('div');line.className='aux-result';
   const title=document.createElement('span');title.textContent=label;
@@ -137,6 +140,15 @@ function renderAdditionalResults(){
   add(inertiaBox,'Trägheitsmoment FTF (Drehachse)',inertia.ftfAxis,'kg·m²');
   add(inertiaBox,'Trägheitsmoment Last (Drehachse)',inertia.loadAxis,'kg·m²');
   add(inertiaBox,'Gesamt um Drehachse',inertia.total,'kg·m²');
+ }
+ if(roller.error)rollerBox.textContent=roller.error;
+ else{
+  add(rollerBox,'Rollenlast',roller.force,'N',1);
+  add(rollerBox,'Kombinierter E-Modul PA/Beton',roller.combinedPA,'N/mm²',1);
+  add(rollerBox,'Kombinierter E-Modul PU/Beton',roller.combinedPU,'N/mm²',1);
+  add(rollerBox,'Kontaktpressung PA6',roller.pressurePA,'N/mm²',2);
+  add(rollerBox,'Kontaktpressung PU',roller.pressurePU,'N/mm²',2);
+  for(const msg of roller.warnings){const el=document.createElement('p');el.className='aux-warning';el.textContent='Hinweis: '+msg;rollerBox.append(el);}
  }
  if(stability.error)stabilityBox.textContent=stability.error;
  else{
