@@ -3500,7 +3500,7 @@ const results=[
 ["Bremsweg inkl. Reaktion und Toleranz",brakingReaction,"m","s = kₛ · ((v+Δv) · tᵣ + (v+Δv)²/(2b))"],
 ["Schutzfeld-Vorauswahl inkl. Zuschläge",fieldLength,"m","s_Schutz = s + (TR + ZF + ZR)/1000"]
 ];
-const warnings=["Bremsweg/Schutzfeld dienen ausschließlich zur überschlägigen Planung; keine sicherheitstechnische Validierung oder Scannerfreigabe. Zuschläge stammen beispielhaft aus der hochgeladenen Excel-Datei.", "Nur vereinfachte Vorauslegung, keine Sicherheits- oder Herstellerfreigabe. Bremsreaktion, Haftung, thermisches Lastkollektiv, Rücktrieb und Kippstabilität gesondert prüfen.","Motor-/Getriebe-Kombinationen werden rechnerisch verglichen; mechanische Anbaubarkeit, Flansch, Kupplung, Radlast und thermisches Lastkollektiv sind nicht automatisch bestätigt."];
+const warnings=["Bremsweg/Schutzfeld dienen ausschließlich zur überschlägigen Planung; keine sicherheitstechnische Validierung oder Scannerfreigabe. Eingestellte Zuschläge sind projektspezifisch zu prüfen und sicherheitstechnisch zu validieren.", "Nur vereinfachte Vorauslegung, keine Sicherheits- oder Herstellerfreigabe. Bremsreaktion, Haftung, thermisches Lastkollektiv, Rücktrieb und Kippstabilität gesondert prüfen.","Motor-/Getriebe-Kombinationen werden rechnerisch verglichen; mechanische Anbaubarkeit, Flansch, Kupplung, Radlast und thermisches Lastkollektiv sind nicht automatisch bestätigt."];
 if(c.motorId==="bg95")warnings.unshift("BG95x40: bestätigte 48-V-Katalogwerte. Individuelle Artikelnummern/abweichende Ausführungen nicht automatisch bestätigt.");
 
 if(c.cont&&wheel>c.cont)warnings.unshift("Getriebe-Dauermoment überschritten.");
