@@ -8,7 +8,7 @@ const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
   assert.equal(motors.length,75);
-  assert.equal(gears.length,81);
+  assert.equal(gears.length,153);
   assert.equal(catalogScope.coverageComplete,false);
 });
 test('BG65 dCore und PLG63 EP als gelistete Baukastenfamilie', () => {
@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 75 mal 81 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 75 mal 153 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -41,7 +41,7 @@ test('Alle 75 mal 81 Motor/Getriebe-Kombinationen haben einen expliziten Status'
   }
   assert.ok(listed>0);
   assert.ok(unverified>0);
-  assert.equal(listed+unverified,75*81);
+  assert.equal(listed+unverified,75*153);
 });
 test('BG62 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG62x30'),gear('PLG 75 HT')).level,'family-listed');});
 test('BG66 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG66x25'),gear('PLG 75 HT')).level,'family-listed');});
@@ -75,9 +75,33 @@ test('BG75 dMove/dPro: Katalog-Baukasten NG250, NG500, PLG63, PLG75',()=>{
    assert.ok(g);
    const status=combinationStatus(m,g);
    assert.equal(status.level,'family-listed',series+' '+gname);
-   assert.match(status.reason,/nicht einzeln bestätigt/);
+   assert.match(status.reason,/nicht bestätigt/);
   }
   const ht=gears.find(x=>x.name.startsWith('PLG 75 HT ·'));
   assert.equal(combinationStatus(m,ht).level,'unverified');
+ }
+});
+
+test('Missing gearbox families are available with numeric manufacturer records',()=>{
+ const families={'PLG 60 LN':11,'PLG 60 LB':19,'PLG 80 LB':19,'STG 65':3,'SG 120':11,'SG 120 K':2,'KG 120':7};
+ for(const [family,count] of Object.entries(families)){
+  const found=gears.filter(g=>g.name.startsWith(family+' ·'));
+  assert.equal(found.length,count,family);
+  for(const g of found)for(const prop of ['ratio','eta','cont','peak']){
+   assert.ok(Number.isFinite(g[prop])&&g[prop]>0,family+' '+g.ratio+' '+prop);
+  }
+ }
+});
+test('PLG 80 LB 4:1 uses S8 torque not alternate S1 torque',()=>{
+ const g=gears.find(x=>x.id==='plg-80-lb-4');
+ assert.ok(g);assert.equal(g.eta,.97);assert.equal(g.cont,54);assert.equal(g.peak,110);
+ assert.equal(g.continuousS1,115);
+});
+test('BG75 dMove and dPro allow listed families but not blanket HT subtypes',()=>{
+ for(const series of ['dMove','dPro']){
+  const m=motors.find(x=>x.name.startsWith('BG75x25 '+series));
+  for(const family of ['PLG 60 LN','PLG 80 LB','STG 65','SG 120','KG 120'])
+   assert.equal(combinationStatus(m,gears.find(g=>g.name.startsWith(family+' ·'))).level,'family-listed',series+' '+family);
+  assert.equal(combinationStatus(m,gears.find(g=>g.name.startsWith('PLG 75 HT ·'))).level,'unverified');
  }
 });
