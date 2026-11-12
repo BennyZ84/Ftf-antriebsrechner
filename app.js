@@ -3,6 +3,7 @@ import {combinationStatus,combinationSource} from './compatibility.js';
 import {auxiliaryDefaults,calculateInertia,calculateBattery} from './auxiliary.js';
 import {stabilityDefaults,calculateStability} from './stability.js';
 import {rollerDefaults,calculateRollerPressure} from './roller.js';
+import {pendingCatalogFamilies} from './catalog-pending.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
 const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults};
 let config=clone(projectDefaults);
@@ -286,12 +287,29 @@ function renderGearOptions(){
   if(gear)Object.assign(config,{gearId:gear.id,ratio:gear.ratio,eta:gear.eta,cont:gear.cont,gearPeak:gear.peak});
  }
 }
+function renderPendingCatalog(){
+ const box=$('pendingCatalogFamilies');
+ if(!box)return;
+ box.replaceChildren();
+ for(const family of pendingCatalogFamilies){
+  const item=document.createElement('div');
+  item.className='catalog-pending-item';
+  const title=document.createElement('strong');
+  title.textContent=family.name+' · '+family.status;
+  const description=document.createElement('p');
+  description.textContent=family.details+' Fehlende Auslegungsdaten: '+family.missing;
+  const link=document.createElement('a');
+  link.textContent='Herstellerseite';
+  link.href=family.source;link.target='_blank';link.rel='noopener noreferrer';
+  item.append(title,description,link);box.append(item);
+ }
+}
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.2 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.3 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
-setupFields();updateCatalogSummary();
+setupFields();updateCatalogSummary();renderPendingCatalog();
 $('addRouteSegment').addEventListener('click',()=>{
  if(!Array.isArray(config.routeSegments))config.routeSegments=[];
  if(config.routeSegments.length>=100){toast('Maximal 100 Abschnitte');return;}
