@@ -10,11 +10,18 @@ Vorgesehene Adresse: https://bennyz84.github.io/Ftf-antriebsrechner/
 
 iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffnen → Hinzufügen. Nach dem ersten erfolgreichen Online-Aufruf werden wichtige App-Dateien offline gespeichert.
 
+
+## FTF-Draufsicht (v3.5)
+
+Die neue Registerkarte **FTF-Ansicht** zeigt ein rechteckiges Gestell als automatisch erzeugte SVG-Zeichnung. Unter **Eingaben → Fahrdaten** steuern „Antriebe“ und „Zusätzliche Laufräder (ohne Antrieb)“ die Anzahl der gezeichneten Räder. Voreinstellung: 2 Antriebsräder hinten und 2 Laufräder vorne. Die Gestellbreite/-länge wird aus „Trägheitsmoment · Geometrie“ übernommen. Die Angaben werden mit jedem Projekt lokal gespeichert und bleiben in dessen JSON-Export enthalten.
+
+Die Ansicht ist eine **schematische Draufsicht**, kein Konstruktions-, Stabilitäts- oder Einbaunachweis. Die Radpositionen werden zur Übersicht automatisch gleichmäßig verteilt; tatsächliche Aufstandspunkte, Lasten und Lagerungen müssen separat konstruiert und nachgewiesen werden.
+
 ## Eingaben
 
 Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-**Katalogstand v3.4 (12.11.2026): 152 Motor-Spannungs-/Steuerungsvarianten (12 davon vorläufig) und 346 Getriebeübersetzungen aus 32 Getriebebaureihen.** Die 17 Planetengetriebefamilien (PLG) der ausgewerteten Hersteller-Lieferübersicht sind als Baureihen vertreten. Motoren und Getriebe sind als technische Vorauslegungsdaten erfasst, nicht als vollständiges Sortiment aller Artikelnummern. Wo Herstellerdaten für Beschleunigungsgrenzen fehlen, wird **kein** fiktiver Peak-Wert ergänzt.
+**Katalogstand v3.5 (12.11.2026): 152 Motor-Spannungs-/Steuerungsvarianten (12 davon vorläufig) und 346 Getriebeübersetzungen aus 32 Getriebebaureihen.** Die 17 Planetengetriebefamilien (PLG) der ausgewerteten Hersteller-Lieferübersicht sind als Baureihen vertreten. Motoren und Getriebe sind als technische Vorauslegungsdaten erfasst, nicht als vollständiges Sortiment aller Artikelnummern. Wo Herstellerdaten für Beschleunigungsgrenzen fehlen, wird **kein** fiktiver Peak-Wert ergänzt.
 
 Motoren: BGA22 dCore, BG32/BG42 KI, ausgewählte BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, BG45/65/66/75 dMove und BG45/66/75/95 dPro. BG42/BGA22 dGo sind als ausdrücklich vorläufige Herstellerreferenzen enthalten. Noch nicht vollständig erfasst: BG45 dGo, weitere BGA, GR/PM und sonstige Schnittstellen-/Spannungsvarianten.
 
