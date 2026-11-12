@@ -8,7 +8,7 @@ const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
   assert.equal(motors.length,75);
-  assert.equal(gears.length,153);
+  assert.equal(gears.length,220);
   assert.equal(catalogScope.coverageComplete,false);
 });
 test('BG65 dCore und PLG63 EP als gelistete Baukastenfamilie', () => {
@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 75 mal 153 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 75 mal 220 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -41,7 +41,7 @@ test('Alle 75 mal 153 Motor/Getriebe-Kombinationen haben einen expliziten Status
   }
   assert.ok(listed>0);
   assert.ok(unverified>0);
-  assert.equal(listed+unverified,75*153);
+  assert.equal(listed+unverified,75*220);
 });
 test('BG62 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG62x30'),gear('PLG 75 HT')).level,'family-listed');});
 test('BG66 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG66x25'),gear('PLG 75 HT')).level,'family-listed');});
@@ -103,5 +103,16 @@ test('BG75 dMove and dPro allow listed families but not blanket HT subtypes',()=
   for(const family of ['PLG 60 LN','PLG 80 LB','STG 65','SG 120','KG 120'])
    assert.equal(combinationStatus(m,gears.find(g=>g.name.startsWith(family+' ·'))).level,'family-listed',series+' '+family);
   assert.equal(combinationStatus(m,gears.find(g=>g.name.startsWith('PLG 75 HT ·'))).level,'unverified');
+ }
+});
+
+test('Weitere Hersteller-Planetengetriebe mit genau dokumentierten Tabellenwerten',()=>{
+ const expected={'PLG 40 LB':19,'PLG 52 EB':18,'PLG 52 HT':10,'PLG 63 HT':12,'PLG 75 SL':8};
+ for(const [family,number] of Object.entries(expected)){
+  const found=gears.filter(g=>g.name.startsWith(family+' ·'));assert.equal(found.length,number,family);
+  for(const g of found){
+   assert.ok(g.ratio>0 && g.eta>0 && g.eta<=1 && g.cont>0 && g.peak>0,g.name);
+   assert.ok(g.source?.startsWith('https://www.dunkermotoren.com/'),g.name);
+  }
  }
 });
