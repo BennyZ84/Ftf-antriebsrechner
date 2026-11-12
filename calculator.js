@@ -3135,6 +3135,126 @@ export const gears=[
     "peak": 45,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/030_plg_75_sl.pdf?hash=0B68CFA78CE3699C9D8AF52B0B5D7425&la=en&revision=51c5d0b9-e9c0-4cd2-9d6d-6baa03e3bda7",
     "note": "Servo-Planetengetriebe 1-/2-stufig. Beschleunigungsmoment aus Herstellerdatenblatt, kurzzeitiges Maximalmoment separat angegeben."
+  },
+  {
+    "id": "plg-63-ht-3",
+    "name": "PLG 63 HT · 3:1",
+    "ratio": 3,
+    "eta": 0.9,
+    "cont": 10,
+    "peak": 20,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-4",
+    "name": "PLG 63 HT · 4:1",
+    "ratio": 4,
+    "eta": 0.9,
+    "cont": 15,
+    "peak": 30,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-13_65",
+    "name": "PLG 63 HT · 13,65:1",
+    "ratio": 13.65,
+    "eta": 0.81,
+    "cont": 25,
+    "peak": 50,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-16_8",
+    "name": "PLG 63 HT · 16,8:1",
+    "ratio": 16.8,
+    "eta": 0.81,
+    "cont": 58,
+    "peak": 70,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-70_56",
+    "name": "PLG 63 HT · 70,56:1",
+    "ratio": 70.56,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-84",
+    "name": "PLG 63 HT · 84:1",
+    "ratio": 84,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-100",
+    "name": "PLG 63 HT · 100:1",
+    "ratio": 100,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-147",
+    "name": "PLG 63 HT · 147:1",
+    "ratio": 147,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-175",
+    "name": "PLG 63 HT · 175:1",
+    "ratio": 175,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-210",
+    "name": "PLG 63 HT · 210:1",
+    "ratio": 210,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-250",
+    "name": "PLG 63 HT · 250:1",
+    "ratio": 250,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
+  },
+  {
+    "id": "plg-63-ht-350",
+    "name": "PLG 63 HT · 350:1",
+    "ratio": 350,
+    "eta": 0.73,
+    "cont": 58,
+    "peak": 88,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/013_plg_63_ht.pdf?la=pt-br&revision=c412fa70-c652-4acd-8dc4-2349d62def77",
+    "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
   }
 ];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42};
