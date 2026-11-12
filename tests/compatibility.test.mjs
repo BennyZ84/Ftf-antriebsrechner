@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 87 mal 346 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 124 mal 346 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -162,7 +162,7 @@ test('BG65 dMove: seven source-derived electrical variants and correct gearbox f
  assert.equal(combinationStatus(list[0],gear('PLG 42 K')).level,'unverified');
 });
 test('BG95 dPro PN/EC/EI: nine documented variants, source-linked families only',()=>{
- const list=motors.filter(m=>m.name.startsWith('BG95')&&m.series==='dPro');
+ const list=motors.filter(m=>m.name.startsWith('BG95')&&m.series==='dPro'&&m.name.includes('PN/EC/EI'));
  assert.equal(list.length,9);
  const byV=voltage=>list.find(m=>m.name.startsWith('BG95x40 ')&&m.voltage===voltage);
  assert.equal(byV(48).nom,2.14);
