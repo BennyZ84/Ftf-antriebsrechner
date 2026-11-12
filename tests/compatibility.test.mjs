@@ -8,7 +8,7 @@ const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
   assert.equal(motors.length,124);
-  assert.equal(gears.length,344);
+  assert.equal(gears.length,346);
   assert.equal(catalogScope.coverageComplete,false);
 });
 test('BG65 dCore und PLG63 EP als gelistete Baukastenfamilie', () => {
@@ -223,4 +223,13 @@ test('Neue SG-, KG-Getriebe und bewusst fehlende Grenzmomente',()=>{
  assert.equal(sg85.peakSpecified,false);
  const kg150=gears.find(g=>g.name.startsWith('KG 150 ·'));
  assert.equal(kg150.eta,.96);
+});
+
+test('SG65 confirmed and NG1000 WO preliminary remain explicitly distinct',()=>{
+ const sg=gears.find(g=>g.id==='sg65-10_25');
+ const ng=gears.find(g=>g.id==='ng1000wo-20-preliminary');
+ assert.ok(sg&&ng);
+ assert.equal(sg.ratio,10.25);assert.equal(sg.cont,4);assert.equal(sg.peak,7);
+ assert.equal(ng.preliminary,true);
+ assert.equal(combinationStatus(motor('BG95x40'),ng).level,'unverified');
 });
