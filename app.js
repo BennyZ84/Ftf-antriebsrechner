@@ -106,6 +106,11 @@ const selectedMotor=motors.find(x=>x.id===config.motorId);
 const selectedGear=gears.find(x=>x.id===config.gearId);
 const comp=combinationStatus(selectedMotor,selectedGear);
 const info=[];
+if(selectedGear?.preliminary){
+ const alert=document.createElement('p');
+ alert.textContent='⚠ Vorläufige Getriebedaten – keine belastbare Auslegungsfreigabe. Herstellerbestätigung erforderlich.';
+ warningsBox.append(alert);
+}
 if(comp.level!=='family-listed')info.push('Kombination nicht bestätigt: '+comp.reason);
 else info.push(comp.source?'Herstellerkombination dokumentiert; Betriebsbedingungen separat prüfen.':'Getriebebaureihe im Herstellerbaukasten aufgeführt; konkrete Ausführung separat prüfen.');
 const critical=/überschritten|nicht erreichen|reicht im Modell nicht|über Motornennwert|Negatives geregeltes Bremsmoment|Unvollständig/i;
@@ -260,7 +265,7 @@ function renderGearOptions(){
    if((status.level==='family-listed')!==(item.level==='family-listed'))continue;
    if(item.level==='other' && !$('showUnverified').checked && g.id!==selected)continue;
    const o=document.createElement('option');o.value=g.id;
-   o.textContent=g.name+(status.level==='family-listed'?' · gelistet':' · ungeprüft');
+   o.textContent=g.name+(g.preliminary?' · vorläufig':status.level==='family-listed'?' · gelistet':' · ungeprüft');
    grp.append(o);
   }
   if(grp.children.length)select.append(grp);
@@ -276,7 +281,7 @@ function renderGearOptions(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.0 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.1 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();
