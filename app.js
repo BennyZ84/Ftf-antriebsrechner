@@ -1,11 +1,15 @@
 import {motors,gears,defaults,calc} from './calculator.js';
 import {combinationStatus,combinationSource} from './compatibility.js';
+import {auxiliaryDefaults,calculateInertia,calculateBattery} from './auxiliary.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
-let config=clone(defaults);
+const projectDefaults={...defaults,...auxiliaryDefaults};
+let config=clone(projectDefaults);
 const fields={
 "vehicle-fields":[["unloaded","Leergewicht","kg",1],["payload","Zuladung","kg",1],["drives","Antriebe","Stück",1],["wheel","Raddurchmesser","mm",1],["speed","Zielgeschwindigkeit","m/s",.01],["accel","Beschleunigung","m/s²",.01],["brake","Bremsverzögerung","m/s²",.01],["roll","Rollwiderstandsbeiwert","",.001]],
 "drive-fields":[["ratio","Getriebeübersetzung i","",.01],["eta","Auslegungswirkungsgrad","",.01],["rpm","Motor-Nenndrehzahl","min⁻¹",1],["idle","Motor-Leerlaufdrehzahl","min⁻¹",1],["nom","Motor-Nennmoment","Nm",.001],["peak","Motor-Spitzenmoment","Nm",.001],["J","Rotorträgheit","g·cm²",1],["cont","Getriebe-Dauermoment","Nm",.01],["gearPeak","Getriebe-Beschleunigungsmoment","Nm",.01]],
-"extended-fields":[["slope","Steigung (bergauf)","%",.1],["curveSpeed","Kurvengeschwindigkeit","m/s",.01],["positionSpeed","Positioniergeschwindigkeit","m/s",.01],["curveRadius","Kurvenradius (0=aus)","m",.01],["adhesion","Haftbeiwert (0=aus)","",.01],["drivenFraction","Anteil angetriebene Gewichtskraft","",.01],["reverseEta","Rücktriebswirkungsgrad (Annahme)","",.01],["startFactor","Anfahrfaktor (Excel-Vergleich)","",.05],["reactionTime","Systemreaktionszeit","s",.05],["speedTolerance","Geschwindigkeitstoleranz","m/s",.01],["brakeSafetyFactor","Bremswegfaktor (Excel-Vergleich)","",.05],["scannerTolerance","Scanner-Toleranz TR","mm",1],["clearanceAllowance","Bodenfreiheit-Zuschlag ZF","mm",1],["reflectionAllowance","Reflexions-Zuschlag ZR","mm",1]]
+"extended-fields":[["slope","Steigung (bergauf)","%",.1],["curveSpeed","Kurvengeschwindigkeit","m/s",.01],["positionSpeed","Positioniergeschwindigkeit","m/s",.01],["curveRadius","Kurvenradius (0=aus)","m",.01],["adhesion","Haftbeiwert (0=aus)","",.01],["drivenFraction","Anteil angetriebene Gewichtskraft","",.01],["reverseEta","Rücktriebswirkungsgrad (Annahme)","",.01],["startFactor","Anfahrfaktor (Excel-Vergleich)","",.05],["reactionTime","Systemreaktionszeit","s",.05],["speedTolerance","Geschwindigkeitstoleranz","m/s",.01],["brakeSafetyFactor","Bremswegfaktor (Excel-Vergleich)","",.05],["scannerTolerance","Scanner-Toleranz TR","mm",1],["clearanceAllowance","Bodenfreiheit-Zuschlag ZF","mm",1],["reflectionAllowance","Reflexions-Zuschlag ZR","mm",1]],
+"inertia-fields":[["ftfWidth","Breite FTF","mm",1],["ftfLength","Länge FTF","mm",1],["loadWidth","Breite Zuladung","mm",1],["loadLength","Länge Zuladung","mm",1],["ftfAxisOffset","Abstand FTF-SP zur Drehachse","mm",1],["loadAxisOffset","Abstand Last-SP zur Drehachse","mm",1]],
+"battery-fields":[["systemVoltage","Systemspannung","V",1],["batteryVoltage","Batterie-Nennspannung","V",1],["batteryAh","Kapazität je Batterie","Ah",.1],["batteryCount","Batterieanzahl","Stück",1],["usableCapacity","Nutzbare Kapazität","%",1],["routeLength","Weglänge je Fahrkurs","m",1],["routeSpeed","Fahrgeschwindigkeit im Kurs","m/s",.01],["loadedFraction","Beladenanteil (0–1)","",.05],["tripsPerDay","Fahrkurse pro Tag","Stück",1],["routeOperatingHours","Betriebszeit pro Tag","h",.5],["routeStops","Anfahrvorgänge pro Fahrkurs","Stück",1],["controlPower","Steuerungsverbrauch","W",1],["conveyorPower","Fördertechnik-Verbrauch","W",1],["conveyorSecondsPerTrip","Fördertechnik je Fahrkurs","s",1],["chargingEfficiency","Ladewirkungsgrad (0–1)","",.01]]
 };
 const key='ftf-antriebsrechner-projects-v1';
 let projects=[];
@@ -108,7 +112,44 @@ for(const message of [...new Set(info)]){
 }
 notes.hidden=notesBox.childElementCount===0;
 $('results').replaceChildren();
+renderAdditionalResults();
 for(const [name,val,unit,formula] of data.results){const article=document.createElement('article');article.className='result';const info=document.createElement('div');const heading=document.createElement('strong');heading.textContent=name;const f=document.createElement('small');f.textContent=formula;info.append(heading,f);const value=document.createElement('b');value.textContent=fmt(val,unit==='min⁻¹'||unit==='kg'?0:unit==='%'?1:unit==='Nm'?3:2)+' '+unit;article.append(info,value);$('results').append(article);}
+}
+function renderAdditionalResults(){
+ const inertia=calculateInertia(config),battery=calculateBattery(config);
+ const inertiaBox=$('inertiaResults'),batteryBox=$('batteryResults');
+ inertiaBox.replaceChildren();batteryBox.replaceChildren();
+ const add=(box,label,value,unit,digits=2)=>{
+  const line=document.createElement('div');line.className='aux-result';
+  const title=document.createElement('span');title.textContent=label;
+  const number=document.createElement('strong');number.textContent=fmt(value,digits)+' '+unit;
+  line.append(title,number);box.append(line);
+ };
+ if(inertia.error)inertiaBox.textContent=inertia.error;
+ else{
+  add(inertiaBox,'Trägheitsmoment FTF (Schwerpunkt)',inertia.ftfCenter,'kg·m²');
+  add(inertiaBox,'Trägheitsmoment Last (Schwerpunkt)',inertia.loadCenter,'kg·m²');
+  add(inertiaBox,'Trägheitsmoment FTF (Drehachse)',inertia.ftfAxis,'kg·m²');
+  add(inertiaBox,'Trägheitsmoment Last (Drehachse)',inertia.loadAxis,'kg·m²');
+  add(inertiaBox,'Gesamt um Drehachse',inertia.total,'kg·m²');
+ }
+ if(battery.error)batteryBox.textContent=battery.error;
+ else{
+  add(batteryBox,'Reihen-/Parallelzweige',battery.series,'S',0);
+  add(batteryBox,'Parallelzweige',battery.parallel,'P',0);
+  add(batteryBox,'Batteriesystem',battery.totalAh,'Ah',1);
+  add(batteryBox,'Nominale Batterieenergie',battery.nominalWh,'Wh',1);
+  add(batteryBox,'Nutzbare Batterieenergie',battery.usableWh,'Wh',1);
+  add(batteryBox,'Fahrenergie pro Tag',battery.driveWh,'Wh',1);
+  add(batteryBox,'Steuerungsenergie pro Tag',battery.controlWh,'Wh',1);
+  add(batteryBox,'Fördertechnikenergie pro Tag',battery.conveyorWh,'Wh',1);
+  add(batteryBox,'Gesamter Tagesenergiebedarf',battery.dailyWh,'Wh',1);
+  add(batteryBox,'Netzenergie inkl. Ladeverlust',battery.totalChargeWh,'Wh',1);
+  add(batteryBox,'Fahrkurs-Belegungszeit',battery.occupiedHours,'h',2);
+  for(const msg of battery.warnings){
+   const warn=document.createElement('p');warn.className='aux-warning';warn.textContent='⚠ '+msg;batteryBox.append(warn);
+  }
+ }
 }
 function refresh(){
  if(config.mode!=='motor')config.mode='ftf';
@@ -121,9 +162,9 @@ function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes F
 function showProjects(){
 const box=$('projectList');box.replaceChildren();
 if(!projects.length){box.textContent='Noch keine Projekte gespeichert.';return;}
-for(const p of projects){const line=document.createElement('div');line.className='project-entry';const title=document.createElement('strong');title.textContent=p.projectName+' · '+fmt(Number(p.unloaded)+Number(p.payload),0)+' kg';const load=document.createElement('button');load.className='neutral';load.textContent='Öffnen';load.addEventListener('click',()=>{config={...clone(defaults),...clone(p)};refresh();tab('eingaben');toast('Projekt geladen');});const del=document.createElement('button');del.className='danger';del.textContent='Löschen';del.addEventListener('click',()=>{if(!confirm('Projekt „'+p.projectName+'“ wirklich löschen?'))return;projects=projects.filter(x=>x!==p);store();showProjects();});line.append(title,load,del);box.append(line);}}
+for(const p of projects){const line=document.createElement('div');line.className='project-entry';const title=document.createElement('strong');title.textContent=p.projectName+' · '+fmt(Number(p.unloaded)+Number(p.payload),0)+' kg';const load=document.createElement('button');load.className='neutral';load.textContent='Öffnen';load.addEventListener('click',()=>{config={...clone(projectDefaults),...clone(p)};refresh();tab('eingaben');toast('Projekt geladen');});const del=document.createElement('button');del.className='danger';del.textContent='Löschen';del.addEventListener('click',()=>{if(!confirm('Projekt „'+p.projectName+'“ wirklich löschen?'))return;projects=projects.filter(x=>x!==p);store();showProjects();});line.append(title,load,del);box.append(line);}}
 function exportJSON(){const data=JSON.stringify({version:1,created:new Date().toISOString(),projects},null,2);const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download='ftf-projekte-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
-async function importJSON(file){try{const obj=JSON.parse(await file.text());if(!Array.isArray(obj.projects))throw Error('Keine Projektliste vorhanden');let imported=0;for(const p of obj.projects){if(!p||typeof p.projectName!=='string')continue;const name=p.projectName.trim();if(!name)continue;let proposed=name;let n=2;while(projects.some(x=>x.projectName===proposed))proposed=name+' (Import '+n+++')';projects.push({...clone(defaults),...p,projectName:proposed});imported++;}store();showProjects();toast(imported+' Projekte importiert');}catch(e){toast('Import fehlgeschlagen: '+e.message);}}
+async function importJSON(file){try{const obj=JSON.parse(await file.text());if(!Array.isArray(obj.projects))throw Error('Keine Projektliste vorhanden');let imported=0;for(const p of obj.projects){if(!p||typeof p.projectName!=='string')continue;const name=p.projectName.trim();if(!name)continue;let proposed=name;let n=2;while(projects.some(x=>x.projectName===proposed))proposed=name+' (Import '+n+++')';projects.push({...clone(projectDefaults),...p,projectName:proposed});imported++;}store();showProjects();toast(imported+' Projekte importiert');}catch(e){toast('Import fehlgeschlagen: '+e.message);}}
 const seriesOf=m=>m?.series||(/\bdCore\b/.test(m?.name||'')?'dCore':null);
 function renderMotorOptions(){
  const box=$('motorSelect'),series=$('seriesSelect').value,selected=config.motorId;
@@ -197,7 +238,7 @@ $('projectName').addEventListener('input',e=>config.projectName=e.target.value);
 for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>tab(b.dataset.tab));
 $('showResults').addEventListener('click',()=>tab('ergebnisse'));
 $('save').addEventListener('click',save);
-$('new').addEventListener('click',()=>{if(!confirm('Eingaben zurücksetzen? Gespeicherte Projekte bleiben erhalten.'))return;config=clone(defaults);refresh();tab('eingaben');});
+$('new').addEventListener('click',()=>{if(!confirm('Eingaben zurücksetzen? Gespeicherte Projekte bleiben erhalten.'))return;config=clone(projectDefaults);refresh();tab('eingaben');});
 $('print').addEventListener('click',()=>window.print());
 $('export').addEventListener('click',exportJSON);
 $('import').addEventListener('change',async e=>{if(e.target.files?.[0])await importJSON(e.target.files[0]);e.target.value='';});
