@@ -57,11 +57,27 @@ test('dCore dPro dMove BG75x25 bleiben getrennte Typen',()=>{
  assert.equal(core.voltage,40);
  assert.equal(pro.rpm,3950);assert.equal(pro.nom,0.735);assert.equal(pro.J,240);
  assert.equal(move.nom,0.62);assert.equal(move.J,240);
- assert.equal(combinationStatus(pro,gears.find(g=>g.name.startsWith('PLG 75 EP'))).level,'unverified');
- assert.equal(combinationStatus(move,gears.find(g=>g.name.startsWith('PLG 75 EP'))).level,'unverified');
+ assert.equal(combinationStatus(pro,gears.find(g=>g.name.startsWith('PLG 75 EP'))).level,'family-listed');
+ assert.equal(combinationStatus(move,gears.find(g=>g.name.startsWith('PLG 75 EP'))).level,'family-listed');
 });
 test('alle 14 dPro/dMove BG75-Varianten haben vollständig bezifferte Kerndaten',()=>{
  const found=motors.filter(m=>['dPro','dMove'].includes(m.series));
  assert.equal(found.length,14);
  for(const m of found)for(const k of ['rpm','idle','nom','peak','J','voltage'])assert.ok(m[k]>0,m.id+': '+k);
+});
+
+test('BG75 dMove/dPro: Katalog-Baukasten NG250, NG500, PLG63, PLG75',()=>{
+ for(const series of ['dMove','dPro']){
+  const m=motors.find(x=>x.name.startsWith('BG75x25 '+series+' ') && x.voltage===48);
+  assert.ok(m);
+  for(const gname of ['NG 250','NG 500','PLG 63 EP','PLG 75 EP']){
+   const g=gears.find(x=>x.name.startsWith(gname+' ·'));
+   assert.ok(g);
+   const status=combinationStatus(m,g);
+   assert.equal(status.level,'family-listed',series+' '+gname);
+   assert.match(status.reason,/nicht einzeln bestätigt/);
+  }
+  const ht=gears.find(x=>x.name.startsWith('PLG 75 HT ·'));
+  assert.equal(combinationStatus(m,ht).level,'unverified');
+ }
 });
