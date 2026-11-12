@@ -1,28 +1,31 @@
-# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v2.4)
+# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.0)
 
-## Verifizierter, rechenbarer Datenbestand
+## Verifizierter Datenbestand
 
-**87 Motor-Spannungs-/Steuerungsvarianten** und **220 Getriebeübersetzungen aus 18 Getriebebaureihen**.
-Die Einträge enthalten die für die Vorauslegung benötigten Nenn-/Maximalmoment-, Drehzahl- und Trägheitswerte beziehungsweise Übersetzung, Wirkungsgrad und Momente. Jedes Datenobjekt besitzt eine Herstellerquelle.
+**124 Motor-Spannungs-/Steuerungsvarianten** und **301 Getriebeübersetzungen aus 23 Getriebebaureihen**. Diese Anzahl ist **keine Zahl verfügbarer Artikelnummern** und keine Vollständigkeitsbestätigung des Dunkermotoren-Portfolios.
 
-Motorkategorien: BG32, BG42, BG45, BG62, BG65, BG66, BG75, BG95 dCore; BG66/BG75 dMove; BG66/BG75 dPro (nur durch Herstellerunterlagen dokumentierte Schnittstellenvarianten).
+Erfasste Motorserien: BG32/42/45/62/65/66/75/95 dCore (Auswahl), BG45/65/66/75 dMove und BG45/66/75/95 dPro (Auswahl an CO/IO bzw. PN/EC/EI Varianten).
 
-Getriebebaureihen:
-
-- NG 250 (6), NG 500 (6)
-- PLG 40 LB (19), PLG 52 EB (18), PLG 52 HT (10)
-- PLG 60 LN (11), PLG 60 LB (19), PLG 63 EP (23), PLG 63 HT (12)
+**17/17 in der ausgewerteten PLG-Hersteller-Lieferübersicht enthaltene Baureihen haben Datenbankeinträge:**
+- PLG 22 HT (17), PLG 30 (14), PLG 32 (18)
+- PLG 40 LB (19), PLG 42 K (16), PLG 42 S (16)
+- PLG 52 EB (18), PLG 52 HT (10)
+- PLG 60 LN (11), PLG 60 LB (19)
+- PLG 63 EP (23), PLG 63 HT (12)
 - PLG 75 EP (13), PLG 75 HT (21), PLG 75 SL (8)
 - PLG 80 LB (19), PLG 95 HT (12)
-- STG 65 (3), SG 120 (11), SG 120 K (2), KG 120 (7)
 
-## Abgleich mit offiziellen Herstellerunterlagen 2025/26
+Andere erfasste Familien: NG 250 (6), NG 500 (6), STG 65 (3), SG 120 (11), SG 120 K (2), KG 120 (7).
 
-Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/1_gesamtkatalog_web.pdf?la=en&revision=be4584e4-0293-497c-bbba-99c687c6da7d) und [Lieferübersicht](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/4_lieferbersicht_web.pdf?la=en&revision=8da553d3-645f-4757-ad36-341ab63e1a7b).
+**Grenzwerte:** Bei den fünf zuletzt ergänzten kleinen Planetengetrieben (PLG 22 HT, 30, 32, 42 K/S) sind die Dauermomente und Wirkungsgrade nach Herstellerangaben eingetragen. Wo kein eindeutiger Beschleunigungsgrenzwert je Übersetzung belegt ist, wird `peak:0` als **nicht angegeben** gespeichert; daraus darf kein sicheres Spitzenmoment abgeleitet werden. Die App kennzeichnet solche Grenzwerte als unvollständig. Bei PLG42 S wurde die niedrigere Dauermoment-Angabe für Kunststoffplaneten berücksichtigt, nicht der höhere Wert für Stahlplaneten.
 
-Zu den **17 in der Lieferübersicht aufgeführten PLG-Getriebebaureihen** liegen jetzt in der Berechnungsdatenbank 12 Baureihen mit mindestens einigen belegten Einzelübersetzungen vor. Fehlende/noch nicht vollständig erfasste PLG-Familien: PLG22 HT, PLG30, PLG32, PLG42 K und PLG42 S. PLG63 HT enthält bewusst nur 12 tabellarisch belegte Ausführungen; unklare Tabellenzellen wurden nicht interpoliert.
+## Herstellerquellen und Vollständigkeitsgrenzen
 
-Weitere noch nicht vollständig erfasste Gruppen: SG45/62/65/80/85, KG80/150, WG52/63/75, NG1000 WO (vorläufige Herstellerwerte), bürstenbehaftete GR-/PM-Reihen, weitere BG/BGA-Varianten, weitere dGo-/dMove-/dPro-Schnittstellenvarianten sowie AC-Motoren. Die *Anzahl lieferbarer Einzelartikel* ist nicht aus dem Katalog ableitbar: Dunkermotoren weist auf einen separat gepflegten Online-Konfigurator und anwendungsspezifische Kombinationen hin.
+Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/1_gesamtkatalog_web.pdf?la=en&revision=be4584e4-0293-497c-bbba-99c687c6da7d), [Getriebe-Lieferübersicht](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/catalogues/de-and-en/4_lieferbersicht_web.pdf?la=en&revision=8da553d3-645f-4757-ad36-341ab63e1a7b) und die einzelnen verlinkten Herstellerdatenblätter direkt an jedem Getriebe- und Motordatensatz.
+
+**Weiterhin nicht vollständig erfasst:** SG 45/62/65/80/85, KG 80/150, WG 52/63/75, NG1000 WO; weitere BG/BGA-dGo, dMove und dPro Motoren, GR/G/PM/KD, Varianten mit anderen Elektronikschnittstellen sowie vollständige Hersteller-Artikelnummern, Wellen-/Flanschkombinationen und aktuelle lieferbare Konfigurationen. Bei den BG42 dGo/dMove sind in den derzeit verfügbaren Dokumenten teilweise ausdrücklich vorläufige Angaben markiert; diese werden nicht als bestätigte Auslegungswerte ausgegeben.
+
+**Katalog nicht vollständig** bleibt deshalb eine korrekte Kennzeichnung. Die 17 PLG-Familien sind baureihenseitig abgedeckt, aber nicht alle Artikelkonfigurationen und zulässigen Lastkollektive.
 
 ## Kompatibilität und Einschränkungen
 
