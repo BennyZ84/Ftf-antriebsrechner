@@ -5288,6 +5288,76 @@ export const gears=[
     "peakSpecified": false,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/025_sg_85.pdf?la=pt-br&revision=495fa53d-87d4-4172-bc9b-1a2331c5b2ee",
     "note": "SG85 Türantrieb in Betriebsart S5. Peak-Moment ist im zugeordneten Produktblatt nicht eindeutig ausgewiesen. Nicht ohne Lastkollektivabgleich für FTF freigeben."
+  },
+  {
+    "id": "kg-80-25_2",
+    "name": "KG 80 · 25,2:1",
+    "ratio": 25.2,
+    "eta": 0.8,
+    "cont": 11,
+    "peak": 17,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
+  },
+  {
+    "id": "kg-80-30",
+    "name": "KG 80 · 30:1",
+    "ratio": 30,
+    "eta": 0.8,
+    "cont": 11,
+    "peak": 17,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
+  },
+  {
+    "id": "kg-80-44_1",
+    "name": "KG 80 · 44,1:1",
+    "ratio": 44.1,
+    "eta": 0.8,
+    "cont": 11,
+    "peak": 17,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
+  },
+  {
+    "id": "kg-80-52_5",
+    "name": "KG 80 · 52,5:1",
+    "ratio": 52.5,
+    "eta": 0.8,
+    "cont": 11,
+    "peak": 17,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
+  },
+  {
+    "id": "kg-80-63",
+    "name": "KG 80 · 63:1",
+    "ratio": 63,
+    "eta": 0.8,
+    "cont": 11,
+    "peak": 17,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
+  },
+  {
+    "id": "kg-80-75",
+    "name": "KG 80 · 75:1",
+    "ratio": 75,
+    "eta": 0.8,
+    "cont": 11,
+    "peak": 17,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
+  },
+  {
+    "id": "kg-80-91_35",
+    "name": "KG 80 · 91,35:1",
+    "ratio": 91.35,
+    "eta": 0.8,
+    "cont": 6,
+    "peak": 10,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
+    "note": "KG80 dreistufig; Nenn-/Beschleunigungsmoment nach Hersteller-Gesamtkatalog 2025/26, Einsatzfall und Getriebewirkungsgrad individuell prüfen."
   }
 ];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42,startFactor:1.3,reactionTime:0.4,speedTolerance:0.05,brakeSafetyFactor:1.2,scannerTolerance:65,clearanceAllowance:150,reflectionAllowance:350};
