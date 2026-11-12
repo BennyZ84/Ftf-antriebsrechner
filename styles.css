@@ -75,3 +75,15 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .route-segment .form-grid{margin-top:8px}
 
 .catalog-pending-item{border-bottom:1px solid #e4eaee;padding:10px 0}.catalog-pending-item:last-child{border-bottom:0}.catalog-pending-item strong{font-size:13px;color:#274a5d}.catalog-pending-item p{font-size:12px;line-height:1.45;color:#566a7a;margin:6px 0}.catalog-pending-item a{font-size:12px}
+
+/* v3.5: skalierte schematische Draufsicht */
+.vehicle-layout-page{max-width:850px;margin:0 auto}
+.vehicle-svg-wrap{width:100%;border:1px solid #d7e3eb;border-radius:16px;overflow:hidden;background:#f4f8fc}
+.vehicle-svg-wrap svg{display:block;width:100%;height:auto;max-height:580px}
+.vehicle-layout-stats{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.layout-stat{border-radius:999px;padding:8px 13px;font-size:13px;font-weight:700;background:#eef4f9;color:#36516a}
+.layout-stat.drive{background:#d7ecf5;color:#155a79}
+.layout-stat.caster{background:#e7ebef;color:#536473}
+.layout-footer{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.layout-footer button{flex:1 1 160px}
+@media(max-width:520px){.vehicle-layout-page{padding:14px}.vehicle-layout-stats{gap:7px}.layout-stat{font-size:12px;padding:7px 10px}.tabs{overflow-x:auto;white-space:nowrap}}
