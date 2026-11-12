@@ -5167,6 +5167,127 @@ export const gears=[
     "peak": 8,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/kg/kg-80.pdf?la=pt-br&revision=63306cd8-f150-488d-b4c2-b690cd9c9079",
     "note": "KG80 zweistufig. Nur Übersetzungen mit eindeutig zugeordnetem Dauer- und Beschleunigungsmoment übernommen; weitere Getriebevarianten aus Datenblatt nicht vollständig ausgewertet."
+  },
+  {
+    "id": "sg-80-5",
+    "name": "SG 80 · 5:1",
+    "ratio": 5,
+    "eta": 0.7,
+    "cont": 2,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-10",
+    "name": "SG 80 · 10:1",
+    "ratio": 10,
+    "eta": 0.65,
+    "cont": 2.5,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-15",
+    "name": "SG 80 · 15:1",
+    "ratio": 15,
+    "eta": 0.55,
+    "cont": 3.5,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-24",
+    "name": "SG 80 · 24:1",
+    "ratio": 24,
+    "eta": 0.5,
+    "cont": 3.5,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-38",
+    "name": "SG 80 · 38:1",
+    "ratio": 38,
+    "eta": 0.4,
+    "cont": 3.5,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-50",
+    "name": "SG 80 · 50:1",
+    "ratio": 50,
+    "eta": 0.35,
+    "cont": 4,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-75",
+    "name": "SG 80 · 75:1",
+    "ratio": 75,
+    "eta": 0.25,
+    "cont": 4,
+    "peak": 8,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-k-7",
+    "name": "SG 80 K · 7:1",
+    "ratio": 7,
+    "eta": 0.82,
+    "cont": 2.5,
+    "peak": 5,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80 K; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-k-10",
+    "name": "SG 80 K · 10:1",
+    "ratio": 10,
+    "eta": 0.8,
+    "cont": 2.5,
+    "peak": 5,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80 K; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-k-15",
+    "name": "SG 80 K · 15:1",
+    "ratio": 15,
+    "eta": 0.7,
+    "cont": 3.5,
+    "peak": 7,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80 K; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-80-k-24_5",
+    "name": "SG 80 K · 24,5:1",
+    "ratio": 24.5,
+    "eta": 0.65,
+    "cont": 3.5,
+    "peak": 7,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/gearboxes/angular/sg/sg-80_sg-80-h_sg-80-k.pdf?la=pt-br&revision=e2a59b94-0ed0-4370-a83e-8e53c1bf90d0",
+    "note": "Winkel-Schneckengetriebe SG 80 K; S1/S8 bzw. nur S8 bei K, Beschleunigungsmoment maximal 1 % Betriebszeit bei 3000 min⁻¹ Eingangsdrehzahl. Rücktriebsverhalten und Gehäuseausführung separat prüfen."
+  },
+  {
+    "id": "sg-85-11_9",
+    "name": "SG 85 · 11,9:1",
+    "ratio": 11.9,
+    "eta": 0.8,
+    "cont": 4,
+    "peak": 0,
+    "peakSpecified": false,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/006_gearboxes/025_sg_85.pdf?la=pt-br&revision=495fa53d-87d4-4172-bc9b-1a2331c5b2ee",
+    "note": "SG85 Türantrieb in Betriebsart S5. Peak-Moment ist im zugeordneten Produktblatt nicht eindeutig ausgewiesen. Nicht ohne Lastkollektivabgleich für FTF freigeben."
   }
 ];
 export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42,startFactor:1.3,reactionTime:0.4,speedTolerance:0.05,brakeSafetyFactor:1.2,scannerTolerance:65,clearanceAllowance:150,reflectionAllowance:350};
