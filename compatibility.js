@@ -14,9 +14,9 @@ export const listedFamilies=Object.freeze({
 });
 export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG45/BG65/BG66/BG75 dMove; BG45/BG66/BG75/BG95 dPro (ausgewählte Schnittstellen)",
- gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien (teils unvollständige Grenzwerte); SG45/62/120/K, STG65, KG80/120/150",
+ gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien; SG45/62/80/80K/85/120/120K, STG65, KG80/120/150",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
- missingGearExamples:"SG65/80/85, WG52/63/75, NG1000 WO und weitere Untervarianten; konkrete Motor/Getriebe-Kombinationen nicht vollständig bestätigt",
+ missingGearExamples:"SG65, WG52/63/75, NG1000 WO und weitere Untervarianten; konkrete Motor/Getriebe-Kombinationen nicht vollständig bestätigt",
  coverageComplete:false
 });
 export function motorFamily(motor){
@@ -26,7 +26,7 @@ export function motorFamily(motor){
 }
 export function gearFamily(gear){
  if(!gear)return null;
- for(const name of ["PLG 22 HT","PLG 30","PLG 32","PLG 40 LB","PLG 42 K","PLG 42 S","PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","PLG 75 SL","PLG 80 LB","PLG 95 HT","STG 65","SG 45","SG 62","SG 120 K","SG 120","KG 80","KG 120","KG 150","NG 250","NG 500"])
+ for(const name of ["PLG 22 HT","PLG 30","PLG 32","PLG 40 LB","PLG 42 K","PLG 42 S","PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","PLG 75 SL","PLG 80 LB","PLG 95 HT","STG 65","SG 45","SG 62","SG 65","SG 80 K","SG 80","SG 85","SG 120 K","SG 120","KG 80","KG 120","KG 150","NG 250","NG 500"])
   if(gear.name?.startsWith(name+" ·"))return name;
  return null;
 }
@@ -34,7 +34,7 @@ export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
  // BG45 dPro CO/IO: PLG42S, PLG52 EB/HT and PLG40 LB on manufacturer modular list.
  if(m==="bg45" && motor?.series==="dPro"){
-  const listed=["PLG 40 LB","PLG 42 S","PLG 52 EB","PLG 52 HT","SG 45","SG 62"];
+  const listed=["PLG 40 LB","PLG 42 S","PLG 52 EB","PLG 52 HT","SG 45","SG 62","SG 80"];
   if(listed.includes(g))return {level:"family-listed",label:"BG45 dPro · Baukastenfamilie",
    reason:"Hersteller führt "+g+" für BG45 dPro auf Baureihenebene. Einzelne Artikelkombinationen und Anbauten prüfen.",
    source:motor.source||combinationSource};
@@ -52,7 +52,7 @@ export function combinationStatus(motor,gear){
  }
  // BG65 dMove: per BG65 dMove CO/IO datasheet.
  if(m==="bg65" && motor?.series==="dMove"){
-  const listed=["PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","SG 120","STG 65","KG 80"];
+  const listed=["PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","SG 80","SG 120","STG 65","KG 80"];
   if(listed.includes(g))return {level:"family-listed",label:"BG65 dMove · Getriebebaureihe im Herstellerbaukasten",
    reason:"BG65 dMove und "+g+" sind als Baureihen aufgeführt. Konkrete Flansch-, Wellen- und Übersetzungsvariante sowie Belastbarkeit separat bestätigen.",
    source:motor.source||combinationSource};
