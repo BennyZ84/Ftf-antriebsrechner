@@ -14,7 +14,13 @@ iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffne
 
 Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-Motoren: BG95x40 mit 48-V-Standardreferenz (40-V-Projektmotor 88595.01992 nicht individuell bestätigt); BG75x25 ist nur ein **Platzhalter ohne Herstellerwerte**. Getriebe: NG500, 16:1, Dauer- und Beschleunigungsmoment. Eine vollständige Dunkermotoren-Datenbank ist noch nicht vorhanden.
+Katalogstand **v1.6 (12.11.2026)**: 61 einzeln dokumentierte Motor-Spannungsvarianten aus **BG32, BG42, BG45, BG62, BG65, BG66, BG75 und BG95 dCore** sowie 81 Getriebeübersetzungen aus **NG250, NG500, PLG63 EP, PLG75 EP/HT und PLG95 HT**. BG45-Nennwerte sind thermisch angebundene Werte; ohne ausreichende Kühlung ist die Nennbelastbarkeit geringer. BG42x45 24 V wurde wegen vorläufig markierter Daten nicht übernommen.
+
+**Kompatibilität:** Die Auswahlliste zeigt standardmäßig ausschließlich vom Hersteller auf **Baureihenebene** genannte Motor/Getriebe-Kombinationen. Auch dort sind Übersetzung, Flansch, Welle, Drehzahl, zulässige Last und Artikelnummer nicht automatisch bestätigt. Nicht belegte Verbindungen lassen sich nur über die zusätzliche Vergleichsoption einblenden. Die vorhandene BG95x40/NG500-Referenz bleibt als **nicht baureihenbestätigt** markiert.
+
+**Nicht vollständig:** Der Dunkermotoren-Gesamtkatalog 2025/26 enthält weitere Motoren (darunter dGo/dMove/dPro, GR/G und andere BG/BGA-Reihen) und weitere Planeten-, Winkel-, Schnecken- und Nabengetriebe, deren konkreten Einzelvarianten hier **noch nicht vollständig erfasst** sind. Fehlende Werte werden nicht erfunden. Für eine freigegebene Produktkombination bitte immer den Herstellerkonfigurator oder eine individuelle Herstellerbestätigung verwenden.
+
+Quellen: [Gesamtkatalog 2025/26](https://www.dunkermotoren.com/de-de/downloads/catalogues), [BLDC-Motoren](https://www.dunkermotoren.com/de-de/products/brushless-dc-motors/for-external-controllers), [Getriebe](https://www.dunkermotoren.com/de-de/products/gearboxes). Alle neuen Einträge enthalten eigene Datenblatt-Links im Quellcode.
 
 Die App berechnet Motordrehzahlen, Geschwindigkeit, Roll- und Steigungswiderstände, Rad- und Motormomente, Beschleunigungs- und Bremswege sowie Reserven. Rotorträgheit wird motorseitig berücksichtigt. Die Auslegung ist **keine Sicherheitsfreigabe**.
 
