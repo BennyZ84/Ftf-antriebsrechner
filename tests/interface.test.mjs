@@ -82,3 +82,11 @@ test('Motor recommendation UI has functional controls and attached module',()=>{
  assert.ok(js.includes('recommendDrives(config,motors,gears'));
  assert.ok(sw.includes('drive-recommender.js'));
 });
+
+test('Drive selection separates recommendation and manual selection',()=>{
+ assert.ok(html.includes('class="drive-workflow"'));
+ assert.ok(html.includes('class="drive-manual"'));
+ assert.ok(html.includes('id="recommendSummary"'));
+ assert.ok(js.includes('updateRecommendationSummary();'));
+ assert.ok(js.includes('recommend-metrics'));
+});
