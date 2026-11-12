@@ -79,14 +79,18 @@ test('Second plan view exposes load dimensions and signed midpoint offsets',()=>
 test('Motor recommendation UI has functional controls and attached module',()=>{
  for(const id of ['recommendRun','recommendVoltage','recommendReserve','recommendResults'])
   assert.ok(html.includes('id="'+id+'"'));
- assert.ok(js.includes('recommendDrives(config,motors,gears'));
+ assert.ok(js.includes('recommendMotors(motors'));
  assert.ok(sw.includes('drive-recommender.js'));
 });
 
 test('Drive selection separates recommendation and manual selection',()=>{
  assert.ok(html.includes('class="drive-workflow"'));
  assert.ok(html.includes('class="drive-manual"'));
- assert.ok(html.includes('id="recommendSummary"'));
- assert.ok(js.includes('updateRecommendationSummary();'));
+ assert.ok(html.includes('id="recommendRpm"'));
+ assert.ok(html.includes('id="recommendTorque"'));
+ assert.ok(html.includes('id="recommendPeak"'));
+ assert.ok(html.includes('id="driveModeDirect"'));
+ assert.ok(html.includes('id="driveModeSuggest"'));
+ assert.ok(js.includes('setDriveSelectionMode('));
  assert.ok(js.includes('recommend-metrics'));
 });
