@@ -82,7 +82,26 @@ const data=calc(config);$('error').hidden=!data.error;
 $('error').textContent=data.error||'';
 if(data.error){$('kpis').replaceChildren();$('results').replaceChildren();$('warnings').replaceChildren();return;}
 $('kpis').innerHTML=[['Gesamtgewicht',fmt(data.metrics.mass,0)+' kg'],['Motordrehzahl',fmt(data.metrics.rpm,0)+' min⁻¹'],['Radmoment',fmt(data.metrics.wheel)+' Nm'],['Motormoment',fmt(data.metrics.motor,3)+' Nm'],['Bremsweg',fmt(data.metrics.brakeDist)+' m']].map(x=>'<article class="kpi"><span>'+x[0]+'</span><strong>'+x[1]+'</strong></article>').join('');
-$('warnings').replaceChildren();const comp=combinationStatus(motors.find(x=>x.id===config.motorId),gears.find(x=>x.id===config.gearId));if(comp.level!=='family-listed'){const p=document.createElement('p');p.textContent='⚠ '+comp.label+' – '+comp.reason;$('warnings').append(p);}else{const p=document.createElement('p');p.textContent=comp.source?'Herstellerkombination dokumentiert; Einsatzlast separat prüfen.':'Baukastenfamilie aufgeführt; konkrete Ausführung separat prüfen.';$('warnings').append(p);}for(const warning of data.warnings){let p=document.createElement('p');p.textContent='⚠ '+warning;$('warnings').append(p);}
+// Only actionable limit violations are shown directly; general assumptions are collapsible.
+const warningsBox=$('warnings'), notesBox=$('calculationNoteList'), notes=$('calculationNotes');
+warningsBox.replaceChildren();notesBox.replaceChildren();
+const selectedMotor=motors.find(x=>x.id===config.motorId);
+const selectedGear=gears.find(x=>x.id===config.gearId);
+const comp=combinationStatus(selectedMotor,selectedGear);
+const info=[];
+if(comp.level!=='family-listed')info.push('Kombination nicht bestätigt: '+comp.reason);
+else info.push(comp.source?'Herstellerkombination dokumentiert; Betriebsbedingungen separat prüfen.':'Getriebebaureihe im Herstellerbaukasten aufgeführt; konkrete Ausführung separat prüfen.');
+const critical=/überschritten|nicht erreichen|reicht im Modell nicht|über Motornennwert|Negatives geregeltes Bremsmoment|Unvollständig/i;
+for(const warning of data.warnings){
+ if(critical.test(warning)){
+  const p=document.createElement('p');p.textContent='⚠ '+warning;warningsBox.append(p);
+ }else info.push(warning);
+}
+warningsBox.hidden=warningsBox.childElementCount===0;
+for(const message of [...new Set(info)]){
+ const p=document.createElement('p');p.textContent=message;notesBox.append(p);
+}
+notes.hidden=notesBox.childElementCount===0;
 $('results').replaceChildren();
 for(const [name,val,unit,formula] of data.results){const article=document.createElement('article');article.className='result';const info=document.createElement('div');const heading=document.createElement('strong');heading.textContent=name;const f=document.createElement('small');f.textContent=formula;info.append(heading,f);const value=document.createElement('b');value.textContent=fmt(val,unit==='min⁻¹'||unit==='kg'?0:unit==='%'?1:unit==='Nm'?3:2)+' '+unit;article.append(info,value);$('results').append(article);}
 }
