@@ -17,3 +17,9 @@
 .spec-footnote{font-size:12px;color:#536b7a;line-height:1.5;margin:13px 0 7px!important}
 .motor-specs a{font-size:13px;color:#087d99;font-weight:650}
 @media(max-width:400px){.spec-grid{grid-template-columns:1fr 1fr}.motor-spec strong{font-size:15px}}
+
+.mode-description{font-size:13px;color:#587184;margin:-7px 0 16px;line-height:1.5}
+body.motor-only #view-eingaben .columns{grid-template-columns:minmax(0,1fr)}
+body.motor-only #view-eingaben #motorSpecs{background:#f0f8fc}
+body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:650px){body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
