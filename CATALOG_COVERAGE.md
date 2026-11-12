@@ -1,10 +1,10 @@
-# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.3)
+# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.4)
 
 ## Erfasster Datenbestand (einschließlich ausdrücklich vorläufiger Referenzwerte)
 
-**135 Motor-Spannungs-/Steuerungsvarianten (davon 11 vorläufig)** und **346 Getriebeübersetzungen aus 32 Getriebebaureihen**. Diese Anzahl ist **keine Zahl verfügbarer Artikelnummern** und keine Vollständigkeitsbestätigung des Dunkermotoren-Portfolios.
+**152 Motor-Spannungs-/Steuerungsvarianten (davon 12 vorläufig)** und **346 Getriebeübersetzungen aus 32 Getriebebaureihen**. Diese Anzahl ist **keine Zahl verfügbarer Artikelnummern** und keine Vollständigkeitsbestätigung des Dunkermotoren-Portfolios.
 
-Erfasste Motorserien: BG32/42/45/62/65/66/75/95 dCore (Auswahl), BG45/65/66/75 dMove und BG45/66/75/95 dPro (Auswahl an CO/IO bzw. PN/EC/EI Varianten). Neu: BG42 dGo (5 Spannungsausführungen, vorläufig) und BGA22 dGo (6 Wicklungs-/Spannungsvarianten, vorläufig).
+Erfasste Motorserien: BGA22 dCore, BG32/42/45/62/65/66/75/95 dCore, BG32/BG42 KI (Auswahl), BG45/65/66/75 dMove und BG45/66/75/95 dPro (Auswahl an CO/IO bzw. PN/EC/EI Varianten). Neu: BG42 dGo (5 Spannungsausführungen, vorläufig) und BGA22 dGo (6 Wicklungs-/Spannungsvarianten, vorläufig).
 
 **17/17 in der ausgewerteten PLG-Hersteller-Lieferübersicht enthaltene Baureihen haben Datenbankeinträge:**
 - PLG 22 HT (17), PLG 30 (14), PLG 32 (18)
@@ -52,7 +52,7 @@ Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com
 - **WG52/63/75:** Neuere offiziell gelistete Kombinationsgetriebe. Mangels eindeutiger, verifizierbarer Einzelübersetzungs-/Grenzwerttabellen nicht mit interpolierten Werten ergänzt. [Offizielle Baureihenseite](https://www.dunkermotoren.com/de-de/products/gearboxes/angular-gears/combination-gearboxes).
 - **dGo/BGA22 und weitere dMove/dPro:** Einige aktuelle Herstellerunterlagen bezeichnen die Kennwerte als vorläufig. Diese Motoren sind weiterhin nicht als **bestätigte** Berechnungsdatensätze aufgenommen. [BG42 dGo Datenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-dgo.pdf?la=pt-br&revision=6d0ce8b1-fc74-42a3-b71b-63a19d6b6125).
 
-**Status: 135 Motordatensätze (davon 11 vorläufig); 346 Getriebeübersetzungsdatensätze (davon 1 vorläufig). Vollständigkeit des Gesamtportfolios nicht bestätigt.**
+**Status: 152 Motordatensätze (davon 12 vorläufig); 346 Getriebeübersetzungsdatensätze (davon 1 vorläufig). Vollständigkeit des Gesamtportfolios nicht bestätigt.**
 
 ## Nachtrag v3.2 – dGo und externe Sicherung
 
@@ -68,3 +68,11 @@ Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com
 Die Herstellerfamilien **WG 52, WG 63, WG 75** sowie **BG 45 dGo** sind nun in der App unter **Projekte & Export → Weitere Herstellerbaureihen** ausdrücklich als Katalogeinträge sichtbar. Sie werden **nicht** zu den numerisch berechenbaren 346 Getriebeübersetzungen beziehungsweise 135 Motorvarianten gezählt. Für die WG-Serie nennt Dunkermotoren maximal 320:1 sowie S1/S8 und 3000 min⁻¹ abhängig von der Ausführung, jedoch sind keine eindeutig überprüften Grenzmoment-/Wirkungsgradtabellen je konkreter Übersetzung aus den zugänglichen Herstellertexten übernommen worden. Diese Daten werden weder interpoliert noch aus anderen Baureihen übertragen. Verweis: https://www.dunkermotoren.com/de-de/products/gearboxes/angular-gears/combination-gearboxes
 
 **Damit ist die Familienerfassung erweitert, die vollständige katalogisierte Produktdatenbank jedoch noch nicht bewiesen.** Es fehlen nach wie vor variantenspezifische Werte und weitere Dunkermotoren-Motorfamilien.
+
+## Nachtrag v3.4 – ergänzte KI- und dCore-Varianten
+
+- **BGA22x22 dCore** – acht dokumentierte Wicklungsvarianten bei 6/12/24 V; Drehzahlen, Nennmomente, Rotorträgheit und teils Maximalmomente gemäß [BGA22-dCore-Herstellerdatenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dcore/bga-22-dcore.pdf?la=pt-br&revision=90ca2a24-7ff9-4090-9219-d18e96e5928b). Bei Varianten ohne Maximalmoment bleibt `peak=0`; das separate Anhaltemoment wird ausdrücklich **nicht** als freigegebenes Maximalmoment eingesetzt. Hersteller-Baukasten: PLG22 HT und PLG32.
+- **BG32 KI** – vier Spannungs-/Baugrößenvarianten, 12 und 24 V für BG32x10/x20. Nenn-, Leerlauf- und Rotorwerte dokumentiert; Anhaltemomente gespeichert, zulässige maximale Drehmomente nicht angegeben. Hersteller-Baukasten: PLG32 und PLG42 K/S. [Datenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-32-ki.pdf?la=pt-br&revision=56a16fd7-cd67-4a92-a30f-33263a95fce0).
+- **BG42 KI** – fünf Spannungs-/Baugrößenvarianten (BG42x15/x30/x45) mit separater Reihe „KI“ in der App. Die 24-V-Variante BG42x45 ist vom Hersteller als vorläufig ausgewiesen. Im aktuellen Datenblatt steht kein numerisch freigegebenes maximales Drehmoment, daher `peak=0`. Hersteller-Baukasten: PLG42 S, PLG52 EB/HT, PLG40 LB, SG45/62. [Datenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-ki.pdf?la=pt-br&revision=6d1759aa-422c-4142-81b6-8d4a43c8b4e6).
+
+**Verifizierter Software-Umfang:** 152 Motordatensätze, darunter 12 mit Vorläufigkeitsvermerk; 346 Getriebedatensätze, darunter 1 vorläufig. WG52/63/75 sind weiterhin als Herstellerbaureihen ohne belegte Einzeldrehmomente und -übersetzungen erfasst.
