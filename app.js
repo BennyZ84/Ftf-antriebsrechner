@@ -155,6 +155,13 @@ function renderGearOptions(){
   if(grp.children.length)select.append(grp);
  }
  select.value=selected;
+ // Always keep current project's choice visible; if missing, display first available documented option.
+ if(select.selectedIndex<0 && select.options.length){
+  const initial=select.options[0];
+  select.value=initial.value;
+  const gear=gears.find(x=>x.id===initial.value);
+  if(gear)Object.assign(config,{gearId:gear.id,ratio:gear.ratio,eta:gear.eta,cont:gear.cont,gearPeak:gear.peak});
+ }
 }
 function init(){
 setupFields();
