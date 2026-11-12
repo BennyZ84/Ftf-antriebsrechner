@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Verify JavaScript and calculations
+        run: |
+          node --check app.js
+          node --check calculator.js
+          npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
