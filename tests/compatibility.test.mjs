@@ -7,7 +7,7 @@ const motor = (p) => motors.find(m => m.name.startsWith(p));
 const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
-  assert.equal(motors.length,118);
+  assert.equal(motors.length,124);
   assert.equal(gears.length,301);
   assert.equal(catalogScope.coverageComplete,false);
 });
@@ -194,4 +194,16 @@ test('BG95 dPro CO/IO vs PN/EC/EI kept separate',()=>{
  assert.equal(pn120.nom,3.8);
  assert.notEqual(co120.id,pn120.id);
  assert.equal(combinationStatus(co120,gear('NG 500')).level,'family-listed');
+});
+
+test('BG45 dPro CO/IO nominal and thermal ratings are separate',()=>{
+ const found=motors.filter(m=>m.name.startsWith('BG45')&&m.series==='dPro');
+ assert.equal(found.length,6);
+ for(const m of found){
+  assert.ok(m.nomThermallyConnected>=m.nom);
+  assert.equal(combinationStatus(m,gear('PLG 42 S')).level,'family-listed');
+  assert.equal(combinationStatus(m,gear('PLG 63 HT')).level,'unverified');
+ }
+ const model=found.find(m=>m.name.startsWith('BG45x30 ')&&m.voltage===48);
+ assert.equal(model.nom,.24);assert.equal(model.nomThermallyConnected,.36);
 });
