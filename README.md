@@ -14,7 +14,7 @@ iPhone: Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffne
 
 Referenzkonfiguration: **200 kg Leergewicht, 550 kg Zuladung, 750 kg Gesamtmasse**, 2 Antriebe, 160 mm Rad, Übersetzung 16:1, Auslegungswirkungsgrad 80 %, 1,40 m/s, 0,50 m/s² Beschleunigung und 0,70 m/s² Bremsverzögerung. Alle Werte lassen sich verändern.
 
-**Katalogstand v3.2 (12.11.2026): 135 Motor-Spannungs-/Steuerungsvarianten (11 davon vorläufig) und 346 Getriebeübersetzungen aus 32 Getriebebaureihen.** Die 17 Planetengetriebefamilien (PLG) der ausgewerteten Hersteller-Lieferübersicht sind als Baureihen vertreten. Motoren und Getriebe sind als technische Vorauslegungsdaten erfasst, nicht als vollständiges Sortiment aller Artikelnummern. Wo Herstellerdaten für Beschleunigungsgrenzen fehlen, wird **kein** fiktiver Peak-Wert ergänzt.
+**Katalogstand v3.3 (12.11.2026): 135 Motor-Spannungs-/Steuerungsvarianten (11 davon vorläufig) und 346 Getriebeübersetzungen aus 32 Getriebebaureihen.** Die 17 Planetengetriebefamilien (PLG) der ausgewerteten Hersteller-Lieferübersicht sind als Baureihen vertreten. Motoren und Getriebe sind als technische Vorauslegungsdaten erfasst, nicht als vollständiges Sortiment aller Artikelnummern. Wo Herstellerdaten für Beschleunigungsgrenzen fehlen, wird **kein** fiktiver Peak-Wert ergänzt.
 
 Motoren: ausgewählte BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, BG45/65/66/75 dMove und BG45/66/75/95 dPro. BG42/BGA22 dGo sind als ausdrücklich vorläufige Herstellerreferenzen enthalten. Noch nicht vollständig erfasst: BG45 dGo, weitere BGA, GR/PM und sonstige Schnittstellen-/Spannungsvarianten.
 
@@ -43,3 +43,7 @@ Das Modell basiert auf dem Projekt-Rechenblatt „Berechnung mit Formeln FTF BG9
 ## Sicherung und Plattformwechsel
 
 Die Anwendung ist eine statische Progressive Web App und kann ohne GitHub-spezifische Berechnungsdienste auf anderen HTTPS-Hostern bereitgestellt werden. Unter **Projekte & Export** stehen zwei getrennte Sicherungsoptionen: **Projekt-JSON** (lokale Benutzerdaten) und **Quellcode-ZIP** (Programmdateien). Ein vollständiger Umzug benötigt beide Dateien. Der Quellcode liegt zusätzlich mit Versionshistorie im GitHub-Repository. Eine separate Sicherung außerhalb von GitHub wurde dadurch **noch nicht automatisch erstellt** – ZIP/Git-Mirror auf eigenem Speicher/NAS ablegen. Weitere Hinweise: [MIGRATION_BACKUP.md](MIGRATION_BACKUP.md).
+
+## Noch nicht berechenbare Herstellerfamilien
+
+WG52/WG63/WG75 und BG45 dGo sind als explizite Herstellerfamilien im Bereich **Projekte & Export** aufgeführt. Diese Einträge sind nicht mit frei erfundenen Übersetzungen oder Grenzwerten versehen und werden deshalb noch nicht als auswählbare Rechenkonfiguration angeboten. Quellen und fehlende Daten: [Katalog-Abdeckungsbericht](CATALOG_COVERAGE.md).
