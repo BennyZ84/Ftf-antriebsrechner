@@ -3443,12 +3443,35 @@ export const gears=[
     "note": "PLG63 HT bestätigter Katalog-Tabellenwert, Beschleunigungsmoment maximal 1 s. Weitere Übersetzungen mit nicht eindeutig ausgewiesenen Drehmomenten werden nicht ohne Herstellernachweis übernommen."
   }
 ];
-export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42};
+export const defaults={projectName:"FTF BG95x40 / NG500",unloaded:200,payload:550,drives:2,wheel:160,ratio:16,eta:.8,roll:.02,slope:0,speed:1.4,accel:.5,brake:.7,curveSpeed:.3,positionSpeed:.1,curveRadius:0,adhesion:0,drivenFraction:1,reverseEta:.8,motorId:"bg95",gearId:"ng500",rpm:3940,idle:4400,nom:1.7,peak:6.33,J:950,cont:21,gearPeak:42,startFactor:1,reactionTime:0.4,speedTolerance:0.05,brakeSafetyFactor:1.2,scannerTolerance:65,clearanceAllowance:150,reflectionAllowance:350};
 export function calc(c){
 const m=c.unloaded+c.payload,r=c.wheel/2000,z=c.drives,i=c.ratio,eta=c.eta,g=9.81,ang=Math.atan(c.slope/100),J=c.J*1e-7;
 for(const k of ["unloaded","payload","drives","wheel","ratio","eta","roll","slope","speed","accel","brake","curveSpeed","positionSpeed","curveRadius","adhesion","drivenFraction","reverseEta","rpm","idle","nom","peak","J","cont","gearPeak"])if(!Number.isFinite(c[k]))return {error:"Ungültiger Zahlenwert: "+k};
 if(m<=0||c.unloaded<0||c.payload<0||!Number.isInteger(z)||z<1||r<=0||i<=0||eta<=0||eta>1||c.reverseEta<=0||c.reverseEta>1||c.drivenFraction<=0||c.drivenFraction>1||c.roll<0||c.speed<0||c.accel<0||c.brake<=0||c.curveRadius<0||c.adhesion<0||Math.abs(c.slope)>100||[c.rpm,c.idle,c.nom,c.peak,c.J,c.cont,c.gearPeak,c.curveSpeed,c.positionSpeed].some(v=>v<0))return {error:"Unzulässige Eingaben – positive Massen, Durchmesser, Übersetzung, Wirkungsgrade und Rampen prüfen."};
 const roll=m*g*Math.cos(ang)*c.roll,hill=m*g*Math.sin(ang),res=roll+hill,force=m*c.accel+res,n=c.speed*60*i/(2*Math.PI*r),wheel=force*r/z,motor=wheel/(i*eta)+J*(c.accel/r)*i,wb=(m*c.brake-res)*r/z,mb=wb*c.reverseEta/i+J*(c.brake/r)*i,maxA=(z*c.gearPeak/r-res)/m,atLimit=c.gearPeak/(i*eta)+J*(maxA/r)*i,adh=c.adhesion?m*g*Math.cos(ang)*c.adhesion*c.drivenFraction:null;
+// Excel "Antriebsdaten": optionale Anfahrzuschläge und separate Leistungsfälle.
+// Für bisherige Projekte gelten neutrale Rückfallwerte, falls neue Eingaben fehlen.
+const startFactor=c.startFactor??1;
+const reactionTime=c.reactionTime??0;
+const speedTolerance=c.speedTolerance??0;
+const brakeSafetyFactor=c.brakeSafetyFactor??1;
+const scannerTolerance=c.scannerTolerance??0;
+const clearanceAllowance=c.clearanceAllowance??0;
+const reflectionAllowance=c.reflectionAllowance??0;
+const opts=[startFactor,reactionTime,speedTolerance,brakeSafetyFactor,scannerTolerance,clearanceAllowance,reflectionAllowance];
+if(opts.some(v=>!Number.isFinite(v))||startFactor<1||reactionTime<0||speedTolerance<0||brakeSafetyFactor<1||scannerTolerance<0||clearanceAllowance<0||reflectionAllowance<0)return {error:"Ungültige Zuschläge / Reaktionszeiten"};
+const vStop=c.speed+speedTolerance;
+const brakingOnly=c.speed*c.speed/(2*c.brake);
+const brakingReaction=brakeSafetyFactor*(vStop*reactionTime+vStop*vStop/(2*c.brake));
+const fieldLength=brakingReaction+(scannerTolerance+clearanceAllowance+reflectionAllowance)/1000;
+const accelForceAdjusted=m*c.accel*startFactor+res;
+const wheelAdjusted=accelForceAdjusted*r/z;
+const motorAdjusted=wheelAdjusted/(i*eta)+J*(c.accel/r)*i;
+const unloadedRoll=c.unloaded*g*Math.cos(ang)*c.roll;
+const unloadedHill=c.unloaded*g*Math.sin(ang);
+const unloadedAccelForce=c.unloaded*c.accel*startFactor+unloadedRoll+unloadedHill;
+const loadedPower=accelForceAdjusted*c.speed/eta;
+const unloadedPower=unloadedAccelForce*c.speed/eta;
 const results=[
 ["Gesamtmasse",m,"kg","m = Leergewicht + Zuladung"],
 ["Motordrehzahl bei Zielgeschwindigkeit",n,"min⁻¹","n = v · 60 · i / (2πr)"],
@@ -3469,9 +3492,15 @@ const results=[
 ["Bremszeit",c.speed/c.brake,"s","t = v/b"],
 ["Bremsweg ohne Reaktionszeit",c.speed*c.speed/(2*c.brake),"m","s = v²/(2b)"],
 ["Haftkraft (grobes Modell)",adh,"N","Fₕₐ𝒇𝓽 = μ · m · g · cos(α) · Antriebsachslastanteil"],
-["Querbeschleunigung",c.curveRadius?c.curveSpeed*c.curveSpeed/c.curveRadius:null,"m/s²","a_q = vₖ²/R"]
+["Querbeschleunigung",c.curveRadius?c.curveSpeed*c.curveSpeed/c.curveRadius:null,"m/s²","a_q = vₖ²/R"],
+["Anfahrkraft mit Faktor",accelForceAdjusted,"N","F = m · a · kₐ + Fᵣ + Fₕ"],
+["Motormoment mit Anfahrfaktor",motorAdjusted,"Nm","Mₘ = F · r/(z iη) + J · (a/r) · i"],
+["Fahrleistung beladen (Modell)",loadedPower,"W","P ≈ F · v / η; stationärer/Anfahr-Lastfall"],
+["Fahrleistung unbeladen (Modell)",unloadedPower,"W","P ≈ F_unbeladen · v / η"],
+["Bremsweg inkl. Reaktion und Toleranz",brakingReaction,"m","s = kₛ · ((v+Δv) · tᵣ + (v+Δv)²/(2b))"],
+["Schutzfeld-Vorauswahl inkl. Zuschläge",fieldLength,"m","s_Schutz = s + (TR + ZF + ZR)/1000"]
 ];
-const warnings=["Nur vereinfachte Vorauslegung, keine Sicherheits- oder Herstellerfreigabe. Bremsreaktion, Haftung, thermisches Lastkollektiv, Rücktrieb und Kippstabilität gesondert prüfen.","Motor-/Getriebe-Kombinationen werden rechnerisch verglichen; mechanische Anbaubarkeit, Flansch, Kupplung, Radlast und thermisches Lastkollektiv sind nicht automatisch bestätigt."];
+const warnings=["Bremsweg/Schutzfeld dienen ausschließlich zur überschlägigen Planung; keine sicherheitstechnische Validierung oder Scannerfreigabe. Zuschläge stammen beispielhaft aus der hochgeladenen Excel-Datei.", "Nur vereinfachte Vorauslegung, keine Sicherheits- oder Herstellerfreigabe. Bremsreaktion, Haftung, thermisches Lastkollektiv, Rücktrieb und Kippstabilität gesondert prüfen.","Motor-/Getriebe-Kombinationen werden rechnerisch verglichen; mechanische Anbaubarkeit, Flansch, Kupplung, Radlast und thermisches Lastkollektiv sind nicht automatisch bestätigt."];
 if(c.motorId==="bg95")warnings.unshift("BG95x40: bestätigte 48-V-Katalogwerte. Individuelle Artikelnummern/abweichende Ausführungen nicht automatisch bestätigt.");
 
 if(c.cont&&wheel>c.cont)warnings.unshift("Getriebe-Dauermoment überschritten.");
@@ -3483,5 +3512,5 @@ if(adh!==null&&force>adh)warnings.unshift("Haftkraft reicht im Modell nicht.");
 if(c.slope)warnings.push("Steigungsmodell für Bergauffahrt; Bremsen bergab separat prüfen.");
 if(wb<0)warnings.push("Negatives geregeltes Bremsmoment: passive Fahrwiderstände übersteigen die Sollverzögerung.");
 if(!c.nom||!c.peak||!c.cont||!c.gearPeak)warnings.push("Motor-/Getriebegrenzen unvollständig; Reserven nicht zuverlässig bewertbar.");
-return {results,warnings,metrics:{mass:m,rpm:n,wheel,motor,brakeDist:c.speed*c.speed/(2*c.brake)}};
+return {results,warnings,metrics:{mass:m,rpm:n,wheel,motor,brakeDist:brakingOnly,brakeReaction:brakingReaction,fieldLength,loadedPower}};
 }
