@@ -5,6 +5,7 @@ import {stabilityDefaults,calculateStability} from './stability.js';
 import {rollerDefaults,calculateRollerPressure} from './roller.js';
 import {pendingCatalogFamilies} from './catalog-pending.js';
 import {layoutDefaults,calculateLayout,calculateLoadLayout} from './vehicle-layout.js';
+import {recommendDrives} from './drive-recommender.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
 const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults,...layoutDefaults};
 let config=clone(projectDefaults);
@@ -332,6 +333,37 @@ function renderLoadLayout(){
   ' Schematische Geometrie – keine Prüfung von Schwerpunkt, Kippsicherheit oder Lastaufnahme.';
 }
 
+function runRecommendations(){
+ const box=$('recommendResults');box.replaceChildren();
+ const voltage=Number($('recommendVoltage').value),reserve=Number($('recommendReserve').value);
+ const result=recommendDrives(config,motors,gears,{voltage,reserve});
+ const intro=document.createElement('p');
+ intro.className='fineprint';
+ if(result.error){intro.textContent=result.error;box.append(intro);return;}
+ intro.textContent=result.total
+  ? result.total+' rechnerisch passende, im Baukasten gelistete Kombinationen gefunden. Die ersten '+result.candidates.length+' sind nach Motornennmoment sortiert.'
+  : 'Keine Kombination erfüllt alle konservativen Anforderungen mit vollständig dokumentierten Grenzwerten. Prüfe Fahrdaten und Motorspannung; fehlende Nachweise werden nicht als passende Kombination angezeigt.';
+ box.append(intro);
+ for(const item of result.candidates){
+  const card=document.createElement('div');card.className='recommend-item';
+  const name=document.createElement('strong');name.textContent=item.motorName+' + '+item.gearName;
+  const details=document.createElement('p');details.textContent=
+   'Bedarf: '+fmt(item.requiredRpm,0)+' min⁻¹ / '+fmt(item.requiredMotor,3)+' Nm Anfahren; Motor: '+fmt(item.rpm,0)+' min⁻¹ / '+fmt(item.nominal,3)+' Nm Nennmoment. Getriebe: '+fmt(item.wheelAccel,2)+' Nm Anfahrbedarf, '+fmt(item.gearPeak,2)+' Nm Beschleunigungsgrenze.';
+  const status=document.createElement('p');status.className='fineprint';status.textContent=item.status+' · Keine Hersteller-Einzelfreigabe.';
+  const btn=document.createElement('button');btn.type='button';btn.className='neutral';btn.textContent='Motor & Getriebe übernehmen';
+  btn.addEventListener('click',()=>{
+   const m=motors.find(m=>m.id===item.motorId),g=gears.find(g=>g.id===item.gearId);
+   if(!m||!g)return;
+   Object.assign(config,{motorId:m.id,rpm:m.rpm,idle:m.idle,nom:m.nom,peak:m.peak,J:m.J,
+    gearId:g.id,ratio:g.ratio,eta:g.eta,cont:g.cont,gearPeak:g.peak});
+   refresh();toast('Vorschlag ins Projekt übernommen – Berechnung prüfen');
+  });
+  card.append(name,details,status,btn);box.append(card);
+ }
+ const caution=document.createElement('p');caution.className='fineprint';
+ caution.textContent=result.note+' Berücksichtigte Baukastenpaare: '+result.documented+', mit vollständigen Prüfwerten: '+result.fullySpecified+'.';
+ box.append(caution);
+}
 function refresh(){
  if(config.mode!=='motor')config.mode='ftf';
  const selected=motors.find(m=>m.id===config.motorId);
@@ -409,10 +441,11 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.7 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.8 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
+$('recommendRun').addEventListener('click',runRecommendations);
  for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset'],['layoutLoadWidth','loadWidth'],['layoutLoadLength','loadLength'],['layoutLoadOffsetX','loadOffsetX'],['layoutLoadOffsetY','loadOffsetY']]){$(id).addEventListener('input',()=>{const value=$(id).value;if(value==='')return;config[key]=Number(value);refresh();});}
 $('addRouteSegment').addEventListener('click',()=>{
  if(!Array.isArray(config.routeSegments))config.routeSegments=[];
