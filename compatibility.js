@@ -13,7 +13,7 @@ export const listedFamilies=Object.freeze({
   bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","PLG 80 LB"]
 });
 export const catalogScope=Object.freeze({
- motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG75 dMove CO/IO und dPro CO/IO",
+ motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG66/BG75 dMove CO/IO und BG75 dPro CO/IO",
  gearFamilies:"NG250/NG500; PLG40 LB, PLG52 EB/HT, PLG60 LN/LB, PLG63 EP/HT, PLG75 EP/HT/SL, PLG80 LB, PLG95 HT; STG65, SG120/K, KG120",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
  missingGearExamples:"PLG22/30/32/42, weitere SG- und KG-Familien sowie WG, NG1000 WO; teils noch nicht vollständig katalogisiert",
@@ -32,6 +32,17 @@ export function gearFamily(gear){
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ // BG66 dMove: explicit modular-system table in BG66 dMove CO/IO datasheet.
+ if(m==="bg66" && motor?.series==="dMove"){
+  const confirmed=["PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","PLG 80 LB","NG 250","STG 65","SG 120"];
+  if(confirmed.includes(g))return {
+   level:"family-listed",label:"BG66 dMove · Getriebebaureihe im Herstellerkatalog",
+   reason:"Hersteller-Baukasten BG66 dMove führt die Getriebebaureihe "+g+" auf. Die konkrete Bauform, Unterübersetzung, mechanische Schnittstelle und das Lastkollektiv sind getrennt zu bestätigen.",
+   source:motor.source||combinationSource
+  };
+  return {level:"unverified",label:"Für BG66 dMove nicht nachgewiesen",
+   reason:"Die gewählte Getriebevariante steht nicht in der ausgewerteten BG66-dMove-Baukastenliste."};
+ }
  // dMove/dPro BG75: Hersteller nennt PLG63, PLG75, NG250 und NG500 ausdrücklich
  // im modularen Baukastensystem. Die Untervariante EP/HT ist dort nicht spezifiziert.
  if((motor?.series==="dMove"||motor?.series==="dPro") && m==="bg75"){
