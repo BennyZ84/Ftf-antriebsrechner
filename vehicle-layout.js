@@ -1,5 +1,5 @@
 // Schematische FTF-Draufsicht. Keine konstruktive Radlast-, Achs- oder Kippnachweisberechnung.
-export const layoutDefaults=Object.freeze({casterCount:2,wheelSideInset:100});
+export const layoutDefaults=Object.freeze({casterCount:2,wheelSideInset:100,loadOffsetX:0,loadOffsetY:0});
 export function calculateLayout(input){
  const drives=Number(input.drives),casters=Number(input.casterCount??2);
  const width=Number(input.ftfWidth??1600),length=Number(input.ftfLength??1200);
@@ -16,4 +16,20 @@ export function calculateLayout(input){
  return {drives,casters,width,length,wheelSideInset,total:drives+casters,
   wheels:[...row(casters,"caster",0.12),...row(drives,"drive",0.88)],
   note:"Schematische Anordnung: Laufräder vorn, Antriebsräder hinten. Der Seitenabstand bezeichnet die Radmitte zur Gestellaußenkante (bei nur einem Rad mittig). Radabmessungen, Einbauraum und Radlasten sind separat zu prüfen."};
+}
+
+/** FTF/Last in mm; x positiv rechts, y positiv in Fahrtrichtung (vorne). */
+export function calculateLoadLayout(input){
+ const width=Number(input.ftfWidth),length=Number(input.ftfLength);
+ const loadWidth=Number(input.loadWidth),loadLength=Number(input.loadLength);
+ const offsetX=Number(input.loadOffsetX??0),offsetY=Number(input.loadOffsetY??0);
+ if(![width,length,loadWidth,loadLength,offsetX,offsetY].every(Number.isFinite)||
+    [width,length,loadWidth,loadLength].some(n=>n<=0))
+  return {error:'Gestell- und Lastabmessungen müssen positiv und alle Versätze gültige Zahlen sein.'};
+ const left=offsetX-loadWidth/2,right=offsetX+loadWidth/2;
+ const front=offsetY+loadLength/2,rear=offsetY-loadLength/2;
+ const overhangX=Math.max(0,-width/2-left,right-width/2);
+ const overhangY=Math.max(0,front-length/2,-length/2-rear);
+ return {width,length,loadWidth,loadLength,offsetX,offsetY,overhangX,overhangY,
+  overhang:overhangX>0||overhangY>0};
 }
