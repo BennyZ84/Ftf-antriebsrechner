@@ -8,7 +8,7 @@ const gear = (p) => gears.find(g => g.name.startsWith(p+' ·'));
 
 test('Katalogabdeckung wird korrekt als unvollständig gekennzeichnet', () => {
   assert.equal(motors.length,124);
-  assert.equal(gears.length,301);
+  assert.equal(gears.length,344);
   assert.equal(catalogScope.coverageComplete,false);
 });
 test('BG65 dCore und PLG63 EP als gelistete Baukastenfamilie', () => {
@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 87 mal 301 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 87 mal 344 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -41,7 +41,7 @@ test('Alle 87 mal 301 Motor/Getriebe-Kombinationen haben einen expliziten Status
   }
   assert.ok(listed>0);
   assert.ok(unverified>0);
-  assert.equal(listed+unverified,87*301);
+  assert.equal(listed+unverified,87*344);
 });
 test('BG62 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG62x30'),gear('PLG 75 HT')).level,'family-listed');});
 test('BG66 und PLG75 HT sind gelistete Baukastenfamilie',()=>{assert.equal(combinationStatus(motor('BG66x25'),gear('PLG 75 HT')).level,'family-listed');});
@@ -206,4 +206,21 @@ test('BG45 dPro CO/IO nominal and thermal ratings are separate',()=>{
  }
  const model=found.find(m=>m.name.startsWith('BG45x30 ')&&m.voltage===48);
  assert.equal(model.nom,.24);assert.equal(model.nomThermallyConnected,.36);
+});
+
+test('Neue SG-, KG-Getriebe und bewusst fehlende Grenzmomente',()=>{
+ const fam={'SG 45':8,'SG 62':6,'SG 80':7,'SG 80 K':4,'SG 85':1,'KG 80':10,'KG 150':7};
+ for(const [name,n] of Object.entries(fam)){
+  const found=gears.filter(g=>g.name.startsWith(name+' ·'));
+  assert.equal(found.length,n,name);
+  for(const g of found){
+   assert.equal(gearFamily(g),name);
+   assert.ok(g.ratio>0&&g.eta>0&&g.eta<=1&&g.cont>0&&g.source);
+  }
+ }
+ const sg85=gears.find(g=>g.name.startsWith('SG 85 ·'));
+ assert.equal(sg85.peak,0);
+ assert.equal(sg85.peakSpecified,false);
+ const kg150=gears.find(g=>g.name.startsWith('KG 150 ·'));
+ assert.equal(kg150.eta,.96);
 });
