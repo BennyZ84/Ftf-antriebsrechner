@@ -6,7 +6,7 @@ export const listedFamilies=Object.freeze({
   bg32:[],
   bg42:[],
   bg45:[],
-  bg62:["PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT"],
+  bg62:["PLG 63 EP","PLG 75 EP","PLG 75 HT"],
   bg65:["PLG 63 EP","PLG 75 EP"],
   bg66:["PLG 63 EP","PLG 63 HT","PLG 75 HT"],
   bg75:["PLG 63 EP","PLG 75 EP","PLG 75 HT","PLG 80 LB"],
@@ -26,7 +26,7 @@ export function motorFamily(motor){
 }
 export function gearFamily(gear){
  if(!gear)return null;
- for(const name of ["PLG 40 LB","PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 75 EP","PLG 75 HT","PLG 75 SL","PLG 80 LB","PLG 95 HT","STG 65","SG 120 K","SG 120","KG 120","NG 250","NG 500"])
+ for(const name of ["PLG 40 LB","PLG 52 EB","PLG 52 HT","PLG 60 LN","PLG 60 LB","PLG 63 EP","PLG 63 HT","PLG 75 EP","PLG 75 HT","PLG 75 SL","PLG 80 LB","PLG 95 HT","STG 65","SG 120 K","SG 120","KG 120","NG 250","NG 500"])
   if(gear.name?.startsWith(name+" ·"))return name;
  return null;
 }
