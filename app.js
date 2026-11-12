@@ -4,11 +4,12 @@ import {auxiliaryDefaults,calculateInertia,calculateBattery} from './auxiliary.j
 import {stabilityDefaults,calculateStability} from './stability.js';
 import {rollerDefaults,calculateRollerPressure} from './roller.js';
 import {pendingCatalogFamilies} from './catalog-pending.js';
+import {layoutDefaults,calculateLayout} from './vehicle-layout.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
-const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults};
+const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults,...layoutDefaults};
 let config=clone(projectDefaults);
 const fields={
-"vehicle-fields":[["unloaded","Leergewicht","kg",1],["payload","Zuladung","kg",1],["drives","Antriebe","Stück",1],["wheel","Raddurchmesser","mm",1],["speed","Zielgeschwindigkeit","m/s",.01],["accel","Beschleunigung","m/s²",.01],["brake","Bremsverzögerung","m/s²",.01],["roll","Rollwiderstandsbeiwert","",.001]],
+"vehicle-fields":[["unloaded","Leergewicht","kg",1],["payload","Zuladung","kg",1],["drives","Antriebe","Stück",1],["casterCount","Zusätzliche Laufräder (ohne Antrieb)","Stück",1],["wheel","Raddurchmesser","mm",1],["speed","Zielgeschwindigkeit","m/s",.01],["accel","Beschleunigung","m/s²",.01],["brake","Bremsverzögerung","m/s²",.01],["roll","Rollwiderstandsbeiwert","",.001]],
 "drive-fields":[["ratio","Getriebeübersetzung i","",.01],["eta","Auslegungswirkungsgrad","",.01],["rpm","Motor-Nenndrehzahl","min⁻¹",1],["idle","Motor-Leerlaufdrehzahl","min⁻¹",1],["nom","Motor-Nennmoment","Nm",.001],["peak","Motor-Spitzenmoment","Nm",.001],["J","Rotorträgheit","g·cm²",1],["cont","Getriebe-Dauermoment","Nm",.01],["gearPeak","Getriebe-Beschleunigungsmoment","Nm",.01]],
 "extended-fields":[["slope","Steigung (bergauf)","%",.1],["curveSpeed","Kurvengeschwindigkeit","m/s",.01],["positionSpeed","Positioniergeschwindigkeit","m/s",.01],["curveRadius","Kurvenradius (0=aus)","m",.01],["adhesion","Haftbeiwert (0=aus)","",.01],["drivenFraction","Anteil angetriebene Gewichtskraft","",.01],["reverseEta","Rücktriebswirkungsgrad (Annahme)","",.01],["startFactor","Anfahrfaktor","",.05],["reactionTime","Systemreaktionszeit","s",.05],["speedTolerance","Geschwindigkeitstoleranz","m/s",.01],["brakeSafetyFactor","Bremswegfaktor","",.05],["scannerTolerance","Scanner-Toleranz TR","mm",1],["clearanceAllowance","Bodenfreiheit-Zuschlag ZF","mm",1],["reflectionAllowance","Reflexions-Zuschlag ZR","mm",1]],
 "inertia-fields":[["ftfWidth","Breite FTF","mm",1],["ftfLength","Länge FTF","mm",1],["loadWidth","Breite Zuladung","mm",1],["loadLength","Länge Zuladung","mm",1],["ftfAxisOffset","Abstand FTF-SP zur Drehachse","mm",1],["loadAxisOffset","Abstand Last-SP zur Drehachse","mm",1]],
@@ -229,13 +230,71 @@ function renderAdditionalResults(){
   }
  }
 }
+function renderVehicleLayout(){
+ const model=calculateLayout(config);
+ const svg=$('vehicleSvg'),stats=$('vehicleLayoutStats'),note=$('vehicleLayoutNote');
+ svg.replaceChildren();stats.replaceChildren();
+ note.textContent=model.error||model.note;
+ if(model.error)return;
+ const NS='http://www.w3.org/2000/svg';
+ const el=(tag,attrs={},parent=svg)=>{
+  const node=document.createElementNS(NS,tag);
+  for(const [key,value] of Object.entries(attrs))node.setAttribute(key,String(value));
+  parent.append(node);return node;
+ };
+ const txt=(value,x,y,attrs={})=>{
+  const t=el('text',{x,y,'text-anchor':'middle',fill:'#28425b','font-family':'system-ui, sans-serif','font-size':13,...attrs});
+  t.textContent=value;return t;
+ };
+ // Innere Fläche 96..504 x 78..418, unabhängig vom Maßstabsverhältnis:
+ // Gestell wird maßstabsgetreu mit Breite/Länge maximal in die Fläche eingepasst.
+ const span=400;
+ const k=Math.min(span/model.width,310/model.length);
+ const w=model.width*k,h=model.length*k;
+ const x=300-w/2,y=250-h/2;
+ svg.setAttribute('viewBox','0 0 600 510');
+ svg.setAttribute('role','img');
+ svg.setAttribute('aria-label',`FTF-Draufsicht mit ${model.drives} Antriebsrädern hinten und ${model.casters} Laufrädern vorn`);
+ el('rect',{x:0,y:0,width:600,height:510,rx:22,fill:'#f4f8fc'});
+ // Fahrtrichtung (von oben nach unten ist hinten).
+ el('path',{d:'M 300 46 L 300 16 M 291 27 L 300 16 L 309 27',fill:'none',stroke:'#267fa0','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});
+ txt('VORNE · FAHRTRICHTUNG',300,64,{'font-size':12,'font-weight':650,fill:'#236d88'});
+ el('rect',{x,y,width:w,height:h,rx:12,fill:'#e4edf5',stroke:'#3a5972','stroke-width':3});
+ el('rect',{x:x+12,y:y+12,width:Math.max(0,w-24),height:Math.max(0,h-24),rx:7,fill:'none',stroke:'#8ba6b7','stroke-width':1.5,'stroke-dasharray':'6 5'});
+ // Typkennzeichnung durch Farbe/Form: Antrieb und freie Räder sind getrennt.
+ const tyreWidth=Math.min(31,Math.max(12,w/(model.drives+model.casters+3)));
+ const tyreHeight=48;
+ for(const wheel of model.wheels){
+  const cx=x+w*wheel.x,cy=y+h*wheel.y;
+  const isDrive=wheel.type==='drive',fill=isDrive?'#247c9c':'#9eacba';
+  const group=el('g');
+  el('rect',{x:cx-tyreWidth/2,y:cy-tyreHeight/2,width:tyreWidth,height:tyreHeight,rx:6,
+    fill,stroke:isDrive?'#15526d':'#687b8a','stroke-width':2},group);
+  el('path',{d:`M ${cx-tyreWidth/2+4} ${cy-11} H ${cx+tyreWidth/2-4} M ${cx-tyreWidth/2+4} ${cy+11} H ${cx+tyreWidth/2-4}`,
+    stroke:'#ffffff','stroke-opacity':.6,'stroke-width':2},group);
+  if(isDrive)el('circle',{cx,cy,r:5,fill:'#e7fcff',stroke:'#1b5a79','stroke-width':1.3},group);
+ }
+ // Bemaßung auf der Symbolansicht. Kein Einbaunachweis.
+ el('path',{d:`M ${x} ${y+h+20} H ${x+w} M ${x} ${y+h+15} V ${y+h+25} M ${x+w} ${y+h+15} V ${y+h+25}`,stroke:'#6a8596','stroke-width':1.5,fill:'none'});
+ txt(`${Math.round(model.width)} mm`,300,Math.min(486,y+h+42),{'font-size':12});
+ el('path',{d:`M ${x+w+20} ${y} V ${y+h} M ${x+w+15} ${y} H ${x+w+25} M ${x+w+15} ${y+h} H ${x+w+25}`,stroke:'#6a8596','stroke-width':1.5,fill:'none'});
+ const len=txt(`${Math.round(model.length)} mm`,Math.min(554,x+w+43),250,{'font-size':12});
+ len.setAttribute('transform',`rotate(90 ${Math.min(554,x+w+43)} 250)`);
+ const details=[
+  [`Antriebsräder: ${model.drives}`,'drive'],[`Laufräder: ${model.casters}`,'caster'],
+  [`Räder insgesamt: ${model.total}`,'total']
+ ];
+ for(const [label,type] of details){
+  const chip=document.createElement('span');chip.className='layout-stat '+type;chip.textContent=label;stats.append(chip);
+ }
+}
 function refresh(){
  if(config.mode!=='motor')config.mode='ftf';
  const selected=motors.find(m=>m.id===config.motorId);
  if(selected){$('seriesSelect').value=seriesOf(selected)||'dCore';renderMotorOptions();}
- renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();render();
+ renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();renderVehicleLayout();render();
 }
-function tab(id){if(id==='ergebnisse' && config.mode==='motor')id='eingaben';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
+function tab(id){if((id==='ergebnisse'||id==='ansicht') && config.mode==='motor')id='eingaben';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ansicht','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
 function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes FTF';const existing=projects.findIndex(x=>x.projectName===config.projectName);const item=clone(config);if(existing<0)projects.push(item);else projects[existing]=item;store();showProjects();toast('Projekt lokal gespeichert');}
 function showProjects(){
 const box=$('projectList');box.replaceChildren();
@@ -306,7 +365,7 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.4 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.5 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
