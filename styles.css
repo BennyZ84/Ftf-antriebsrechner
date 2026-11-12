@@ -73,3 +73,5 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .route-segment-head{margin-bottom:10px}
 .route-segment-head strong{font-size:13px}
 .route-segment .form-grid{margin-top:8px}
+
+.catalog-pending-item{border-bottom:1px solid #e4eaee;padding:10px 0}.catalog-pending-item:last-child{border-bottom:0}.catalog-pending-item strong{font-size:13px;color:#274a5d}.catalog-pending-item p{font-size:12px;line-height:1.45;color:#566a7a;margin:6px 0}.catalog-pending-item a{font-size:12px}
