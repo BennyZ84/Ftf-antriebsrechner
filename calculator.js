@@ -921,7 +921,7 @@ const results=[
 ["Haftkraft (grobes Modell)",adh,"N","Fₕₐ𝒇𝓽 = μ · m · g · cos(α) · Antriebsachslastanteil"],
 ["Querbeschleunigung",c.curveRadius?c.curveSpeed*c.curveSpeed/c.curveRadius:null,"m/s²","a_q = vₖ²/R"]
 ];
-const warnings=["Nur vereinfachte Vorauslegung, keine Sicherheits- oder Herstellerfreigabe. Bremsreaktion, Haftung, thermisches Lastkollektiv, Rücktrieb und Kippstabilität gesondert prüfen."];
+const warnings=["Nur vereinfachte Vorauslegung, keine Sicherheits- oder Herstellerfreigabe. Bremsreaktion, Haftung, thermisches Lastkollektiv, Rücktrieb und Kippstabilität gesondert prüfen.","Motor-/Getriebe-Kombinationen werden rechnerisch verglichen; mechanische Anbaubarkeit, Flansch, Kupplung, Radlast und thermisches Lastkollektiv sind nicht automatisch bestätigt."];
 if(c.motorId==="bg95")warnings.unshift("BG95x40: bestätigte 48-V-Katalogwerte. Individuelle Artikelnummern/abweichende Ausführungen nicht automatisch bestätigt.");
 
 if(c.cont&&wheel>c.cont)warnings.unshift("Getriebe-Dauermoment überschritten.");
