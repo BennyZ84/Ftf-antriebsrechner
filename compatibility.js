@@ -13,7 +13,7 @@ export const listedFamilies=Object.freeze({
   bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","PLG 80 LB"]
 });
 export const catalogScope=Object.freeze({
- motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG45/BG65/BG66/BG75 dMove; BG66/BG75/BG95 dPro (ausgewählte Schnittstellen)",
+ motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG45/BG65/BG66/BG75 dMove; BG45/BG66/BG75/BG95 dPro (ausgewählte Schnittstellen)",
  gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien (teilweise begrenzte Tabellenwerte); STG65, SG120/K, KG120",
  missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
  missingGearExamples:"Weitere SG-, KG- und WG-Familien sowie NG1000 WO; konkrete Motor/Getriebe-Einzelkonfigurationen sind nicht vollständig bestätigt",
@@ -32,6 +32,15 @@ export function gearFamily(gear){
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ // BG45 dPro CO/IO: PLG42S, PLG52 EB/HT and PLG40 LB on manufacturer modular list.
+ if(m==="bg45" && motor?.series==="dPro"){
+  const listed=["PLG 40 LB","PLG 42 S","PLG 52 EB","PLG 52 HT"];
+  if(listed.includes(g))return {level:"family-listed",label:"BG45 dPro · Baukastenfamilie",
+   reason:"Hersteller führt "+g+" für BG45 dPro auf Baureihenebene. Einzelne Artikelkombinationen und Anbauten prüfen.",
+   source:motor.source||combinationSource};
+  return {level:"unverified",label:"BG45-dPro-Kombination nicht bestätigt",
+   reason:"Im ausgewerteten Baukasten für BG45 dPro nicht als Getriebebaureihe genannt."};
+ }
  // BG45 dMove CO/IO: official BG45 modular-system listing.
  if(m==="bg45" && motor?.series==="dMove"){
   const listed=["PLG 40 LB","PLG 42 S","PLG 52 EB","PLG 52 HT"];
