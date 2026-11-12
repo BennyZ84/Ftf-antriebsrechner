@@ -26,3 +26,13 @@ test('Leistung beladen und unbeladen getrennt und neue Eingaben validiert',()=>{
  assert.ok(calc({...defaults,reactionTime:-1}).error);
  assert.ok(calc({...defaults,brakeSafetyFactor:0}).error);
 });
+
+test('Excel Antriebsdaten: beladen 18000 kg bei 0,3 m/s, 0,1 m/s², Steigung 0,5 Prozent',()=>{
+ const x=calc({...defaults,unloaded:3000,payload:15000,speed:.3,accel:.1,roll:.015,slope:.5,eta:.77,wheel:360,ratio:120,drives:2,startFactor:1.3});
+ assert.ok(!x.error);
+ const get=(name)=>x.results.find(row=>row[0]===name)[1];
+ // Excel nennt F_Roll=2648,7 N ohne cos(alpha); App berücksichtigt cos(alpha) explizit.
+ assert.ok(Math.abs(get('Rollwiderstand')-2648.7)<0.04);
+ assert.ok(Math.abs(get('Anfahrkraft mit Faktor')-5871.5889639569)<0.04);
+ assert.ok(Math.abs(get('Fahrleistung beladen (Modell)')-2287.6320638793)<0.02);
+});
