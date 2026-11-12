@@ -31,7 +31,7 @@ test('Referenz BG95x40 dCore + NG500 ist laut NG500 Herstellerzeichnung dokument
   assert.match(s.label,/Hersteller dokumentiert|Hersteller dokumentiert|vom Hersteller dokumentiert/);
   assert.match(s.source,/ng-500\.pdf/);
 });
-test('Alle 87 mal 344 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
+test('Alle 87 mal 346 Motor/Getriebe-Kombinationen haben einen expliziten Status', () => {
   let listed=0,unverified=0;
   for (const m of motors) for (const g of gears) {
     const s=combinationStatus(m,g);
@@ -232,4 +232,25 @@ test('SG65 confirmed and NG1000 WO preliminary remain explicitly distinct',()=>{
  assert.equal(sg.ratio,10.25);assert.equal(sg.cont,4);assert.equal(sg.peak,7);
  assert.equal(ng.preliminary,true);
  assert.equal(combinationStatus(motor('BG95x40'),ng).level,'unverified');
+});
+
+test('SG65 exakt dokumentierte Einzelvariante aus Herstellerdatenblatt',()=>{
+ const sg=gears.find(g=>g.id==='sg65-10_25');
+ assert.ok(sg);
+ assert.equal(gearFamily(sg),'SG 65');
+ assert.equal(sg.ratio,10.25);
+ assert.equal(sg.eta,0.8);
+ assert.equal(sg.cont,4);
+ assert.equal(sg.peak,7);
+ assert.match(sg.source,/sg-65\.pdf/);
+});
+test('NG1000 WO nur als vorläufige Herstellerangabe, niemals pauschal bestätigt',()=>{
+ const ng=gears.find(g=>g.id==='ng1000wo-20-preliminary');
+ assert.ok(ng);
+ assert.equal(gearFamily(ng),'NG 1000 WO');
+ assert.equal(ng.preliminary,true);
+ assert.deepEqual([ng.ratio,ng.eta,ng.cont,ng.peak],[20,.85,80,160]);
+ const motor=motors.find(m=>m.name.startsWith('BG95x80 dPro'));
+ assert.ok(motor);
+ assert.equal(combinationStatus(motor,ng).level,'unverified');
 });
