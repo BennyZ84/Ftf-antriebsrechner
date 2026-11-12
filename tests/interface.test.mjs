@@ -75,3 +75,10 @@ test('Second plan view exposes load dimensions and signed midpoint offsets',()=>
  assert.ok(js.includes('calculateLoadLayout(config)'));
  assert.ok(js.includes('renderLoadLayout();'));
 });
+
+test('Motor recommendation UI has functional controls and attached module',()=>{
+ for(const id of ['recommendRun','recommendVoltage','recommendReserve','recommendResults'])
+  assert.ok(html.includes('id="'+id+'"'));
+ assert.ok(js.includes('recommendDrives(config,motors,gears'));
+ assert.ok(sw.includes('drive-recommender.js'));
+});
