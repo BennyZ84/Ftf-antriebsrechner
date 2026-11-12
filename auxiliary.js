@@ -4,7 +4,7 @@ export const auxiliaryDefaults=Object.freeze({
  ftfWidth:1600,ftfLength:620,loadWidth:500,loadLength:500,ftfAxisOffset:150,loadAxisOffset:250,
  systemVoltage:48,batteryVoltage:24,batteryAh:21,batteryCount:4,usableCapacity:80,
  routeLength:100,routeSpeed:0.5,loadedFraction:0.5,tripsPerDay:10,
- controlPower:200,routeOperatingHours:8,routeStops:1,
+ controlPower:200,routeOperatingHours:8,routeStops:1,routeSegments:[],
  conveyorPower:0,conveyorSecondsPerTrip:0,chargingEfficiency:0.9
 });
 function finitePositive(v,allowZero=false){return Number.isFinite(v)&&(allowZero?v>=0:v>0);}
@@ -40,10 +40,31 @@ export function calculateBattery(c){
  const steadyEmpty=Math.max(0,grade(mEmpty)*c.routeLength/c.eta/3600);
  const accelerationLoaded=0.5*mLoaded*c.routeSpeed*c.routeSpeed/c.eta/3600*c.routeStops;
  const accelerationEmpty=0.5*mEmpty*c.routeSpeed*c.routeSpeed/c.eta/3600*c.routeStops;
- const drivePerTrip=c.loadedFraction*(steadyLoaded+accelerationLoaded)+(1-c.loadedFraction)*(steadyEmpty+accelerationEmpty);
- const tripTime=c.routeLength/c.routeSpeed+c.conveyorSecondsPerTrip;
+ let drivePerTrip=c.loadedFraction*(steadyLoaded+accelerationLoaded)+(1-c.loadedFraction)*(steadyEmpty+accelerationEmpty);
+ let tripTime=c.routeLength/c.routeSpeed+c.conveyorSecondsPerTrip;
+ let conveyorSecondsPerTrip=c.conveyorSecondsPerTrip;
+ const segments=Array.isArray(c.routeSegments)?c.routeSegments:[];
+ const segmentDetails=[];
+ if(segments.length){
+  if(segments.length>100)return {error:'Maximal 100 Fahrkursabschnitte zulässig'};
+  drivePerTrip=0;tripTime=0;conveyorSecondsPerTrip=0;
+  for(const [ix,s] of segments.entries()){
+   const fields=['distance','speed','loadFactor','stops','dwellSeconds','conveyorSeconds'];
+   if(!s||fields.some(k=>!Number.isFinite(s[k]))||s.distance<0||s.speed<=0||s.loadFactor<0||s.loadFactor>1||!Number.isInteger(s.stops)||s.stops<0||s.dwellSeconds<0||s.conveyorSeconds<0)
+    return {error:'Fahrkursabschnitt '+(ix+1)+': ungültige Distanz, Geschwindigkeit, Lastanteil oder Zeiten'};
+   const mass=mEmpty+c.payload*s.loadFactor;
+   const linearForce=Math.max(0,grade(mass));
+   const travelWh=linearForce*s.distance/c.eta/3600;
+   const startWh=0.5*mass*s.speed**2*s.stops/c.eta/3600;
+   const energyWh=travelWh+startWh;
+   const duration=s.distance/s.speed+s.dwellSeconds+s.conveyorSeconds;
+   drivePerTrip+=energyWh;tripTime+=duration;
+   conveyorSecondsPerTrip+=s.conveyorSeconds;
+   segmentDetails.push({index:ix+1,distance:s.distance,speed:s.speed,loadFactor:s.loadFactor,energyWh,duration});
+  }
+ }
  const occupiedHours=tripTime*c.tripsPerDay/3600;
- const conveyorWh=c.conveyorPower*c.conveyorSecondsPerTrip*c.tripsPerDay/3600;
+ const conveyorWh=c.conveyorPower*conveyorSecondsPerTrip*c.tripsPerDay/3600;
  const driveWh=drivePerTrip*c.tripsPerDay;
  const controlWh=c.controlPower*c.routeOperatingHours;
  const dailyWh=driveWh+conveyorWh+controlWh;
@@ -52,7 +73,7 @@ export function calculateBattery(c){
  if(occupiedHours>c.routeOperatingHours+1e-8)warnings.push('Fahrkursdauer überschreitet die eingestellten Betriebsstunden pro Tag.');
  if(dailyWh>usableWh)warnings.push('Tagesenergiebedarf überschreitet die nutzbare Batterieenergie ohne Zwischenladung.');
  if(c.slope<0)warnings.push('Bergabfahrt: Modell rechnet keine Rekuperation an und setzt negative Zugenergie auf null.');
- if(c.routeStops>0)warnings.push('Anfahrenergie pro Stopp pauschal über kinetische Energie; Rotation, Beschleunigungsprofil und Stromspitzen separat prüfen.');
- return {series,parallel,totalAh,nominalWh,usableWh,steadyLoaded,steadyEmpty,drivePerTrip,driveWh,conveyorWh,controlWh,dailyWh,totalChargeWh,occupiedHours,warnings,
+ if(segments.length?segments.some(s=>s.stops>0):c.routeStops>0)warnings.push('Anfahrenergie pro Stopp pauschal über kinetische Energie; Rotation, Beschleunigungsprofil und Stromspitzen separat prüfen.');
+ return {series,parallel,totalAh,nominalWh,usableWh,steadyLoaded,steadyEmpty,drivePerTrip,driveWh,conveyorWh,controlWh,dailyWh,totalChargeWh,occupiedHours,segmentDetails,warnings,
  source:'Vereinfachte Fahrkursauslegung mit Energieverbrauchern, ohne Rekuperation.'};
 }
