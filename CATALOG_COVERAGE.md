@@ -1,10 +1,10 @@
-# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.1)
+# Dunkermotoren-Katalogabdeckung – Stand 12.11.2026 (App v3.2)
 
 ## Verifizierter Datenbestand
 
-**124 Motor-Spannungs-/Steuerungsvarianten** und **346 Getriebeübersetzungen aus 32 Getriebebaureihen**. Diese Anzahl ist **keine Zahl verfügbarer Artikelnummern** und keine Vollständigkeitsbestätigung des Dunkermotoren-Portfolios.
+**135 Motor-Spannungs-/Steuerungsvarianten (davon 11 vorläufig)** und **346 Getriebeübersetzungen aus 32 Getriebebaureihen**. Diese Anzahl ist **keine Zahl verfügbarer Artikelnummern** und keine Vollständigkeitsbestätigung des Dunkermotoren-Portfolios.
 
-Erfasste Motorserien: BG32/42/45/62/65/66/75/95 dCore (Auswahl), BG45/65/66/75 dMove und BG45/66/75/95 dPro (Auswahl an CO/IO bzw. PN/EC/EI Varianten).
+Erfasste Motorserien: BG32/42/45/62/65/66/75/95 dCore (Auswahl), BG45/65/66/75 dMove und BG45/66/75/95 dPro (Auswahl an CO/IO bzw. PN/EC/EI Varianten). Neu: BG42 dGo (5 Spannungsausführungen, vorläufig) und BGA22 dGo (6 Wicklungs-/Spannungsvarianten, vorläufig).
 
 **17/17 in der ausgewerteten PLG-Hersteller-Lieferübersicht enthaltene Baureihen haben Datenbankeinträge:**
 - PLG 22 HT (17), PLG 30 (14), PLG 32 (18)
@@ -52,4 +52,13 @@ Hauptquelle: [Dunkermotoren Gesamtkatalog 2025/26](https://www.dunkermotoren.com
 - **WG52/63/75:** Neuere offiziell gelistete Kombinationsgetriebe. Mangels eindeutiger, verifizierbarer Einzelübersetzungs-/Grenzwerttabellen nicht mit interpolierten Werten ergänzt. [Offizielle Baureihenseite](https://www.dunkermotoren.com/de-de/products/gearboxes/angular-gears/combination-gearboxes).
 - **dGo/BGA22 und weitere dMove/dPro:** Einige aktuelle Herstellerunterlagen bezeichnen die Kennwerte als vorläufig. Diese Motoren sind weiterhin nicht als **bestätigte** Berechnungsdatensätze aufgenommen. [BG42 dGo Datenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-dgo.pdf?la=pt-br&revision=6d0ce8b1-fc74-42a3-b71b-63a19d6b6125).
 
-**Status: 124 Motordatensätze; 346 Getriebeübersetzungsdatensätze (davon 1 vorläufig). Vollständigkeit des Gesamtportfolios nicht bestätigt.**
+**Status: 135 Motordatensätze (davon 11 vorläufig); 346 Getriebeübersetzungsdatensätze (davon 1 vorläufig). Vollständigkeit des Gesamtportfolios nicht bestätigt.**
+
+## Nachtrag v3.2 – dGo und externe Sicherung
+
+- BG42 dGo: 5 Varianten mit Nenndrehzahl, Drehmoment, Leerlaufdrehzahl und Rotorträgheit aus dem [BG42-dGo-Herstellerdatenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-dgo.pdf?la=pt-br&revision=6d0ce8b1-fc74-42a3-b71b-63a19d6b6125). **Sämtliche Werte als vorläufig gekennzeichnet; Motor/Getriebe-Verbindungen nicht als freigegeben eingestuft.**
+- BGA22x22 dGo: 6 Wicklungen (6/12/24 V) aus dem [Produktdatenblatt](https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bga-22-dgo.pdf?la=pt-br&revision=3f536c48-3639-4db1-a408-d7ecabd80e0a); die Funktionsbeschreibung bezeichnet technische Daten als vorläufig. Der Hersteller nennt ein **Anhaltemoment**, kein freigegebenes Spitzenmoment. Deshalb bleibt `peak=0` (nicht angegeben), während `stallTorque` separat gespeichert ist.
+- Noch nicht einzeln belastbar belegte neue WG52/63/75-Getriebewerte werden **nicht erfunden**. Die Hersteller-Produktseite nennt eine WG-Übersetzung bis 320:1, aber keine vollständige Zuordnung von Übersetzung, Wirkungsgrad, Dauer- und Beschleunigungsmoment je Baugröße. [WG-Baureihenseite](https://www.dunkermotoren.com/de-de/products/gearboxes/angular-gears/combination-gearboxes).
+- Vorhandene App-/Projekt-Sicherungs- und Migrationsanleitung: [MIGRATION_BACKUP.md](MIGRATION_BACKUP.md). GitHub ist Versionsverwaltung, aber **kein unabhängiges Offline-Backup**; Quellcode-ZIP und Browserprojekt-JSON müssen getrennt gesichert werden.
+
+**Gesamtkatalog vollständig? Nein.** Es gibt weiter offene Baukasten- und Artikelnummern-Zuordnungen, neuere Baureihen und einen nicht abgeschlossenen Hersteller-Nachweis auf Einzelartikelniveau.
