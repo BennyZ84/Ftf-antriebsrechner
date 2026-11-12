@@ -41,3 +41,23 @@ Alle ursprünglichen Referenzwerte des Nutzers (200 kg leer + 550 kg Last, 160 m
 
 ## Prüfung
 Die GitHub Actions führen bei jeder Änderung syntax- und kalkulationsbezogene Tests aus. Keine funktionale oder sicherheitstechnische Freigabe.
+
+## Ergänzung v2.6: Trägheitsmoment und Batterie
+
+### Trägheitsmoment (direkte Formelentsprechung)
+Das Excel-Blatt `Trägheitsmoment` verwendet in F21/F22 `J=m(b²+c²)/12` für rechteckige Massen und in F25/F26 den Satz von Steiner `J_Achse=J_Schwerpunkt+m*x²`. Diese Gleichungen sind mit variablen Abmessungen und Achsversätzen in `auxiliary.js` umgesetzt. Die Excel-Referenz (3000 kg FTF, 15000 kg Zuladung, Rechtecke 1600×620 bzw. 500×500 mm, Achsversätze 150 und 250 mm) ergibt 2366,10 kg·m². Ein automatisierter Vergleichstest prüft alle fünf Werte.
+
+### Batterie und Fahrkurs (eigene vereinfachte Vorauslegung, **keine** Excel-Formelgleichheit)
+Die Excel-Datei enthält detaillierte Segmentzeiten und Verbraucherprofile. `auxiliary.js` bietet dafür eine erste konfigurierbare Basis mit:
+- Batteriesystem: `n_serie = U_system/U_modul`, `n_parallel = n_module/n_serie`, `Ah = n_parallel*Ah_modul`, `Wh = n_module*U_modul*Ah_modul`
+- Tagesenergie: Fahrenergie + pauschale Anfahrenergie pro Fahrkurs + Steuerungsverbrauch während Betriebszeit + Fördertechnikverbrauch während eingetragener Zeiten
+- Ladeenergie inklusive einstellbarem Ladewirkungsgrad
+- Plausibilitätswarnungen bei zu langer Fahrkurszeit und zu geringem Energieinhalt
+- **Nicht berücksichtigt:** einzelner Start-/Stopp- und Wartezeitverlauf jeder Kursstation, Sleep-Mode, Ladepunkte, Leistungsspitzen, Erholung der Batterie, C-Raten und Rückspeisung
+
+Das Excel-Beispiel 4 × 24 V / 21 Ah bei 48 V wird auf 2S2P = 42 Ah und 2016 Wh geprüft. Die Startwerte für Kurslänge, Zyklenzahl und Verbraucher in der App sind **veränderbare Beispielannahmen** und keine Übernahme eines realen Arbeitszyklus.
+
+## Ergänzung v2.7: Standfestigkeit (konservative geometrische Vorausprüfung)
+Die Eingabeparameter für Radpositionen, Schwerpunktkoordinaten, 3-/4-Punkt-Auflage, Boden-Seitenneigung, Kurvenfahrt und äußere Kraft stammen aus dem Blatt `Standfestigkeit`. Das Berechnungsmodell erstellt das konvexe Stützpolygon und berechnet den kürzesten Abstand der resultierenden Schwerpunktprojektion zu seinen Kanten. Seitenneigung, Kurvenbeschleunigung und äußere Kräfte werden als Worst-Case-Verschiebungen abgezogen.
+
+**Dieses Modell ist keine direkte Übertragung aller Excel-Formeln.** Insbesondere fehlen die dort berücksichtigten Federkräfte und die einzelnen Kippachsen-/Radkontaktfälle, Seitenneigungs-Transformationen sowie die dynamischen Achslasten. Daher sind die Resultate als `geometrische Vorausprüfung` beschriftet und nicht als Standfestigkeitsnachweis. Die Tests prüfen den 3-/4-Punkt-Fall, äußere Einflüsse und einen Schwerpunkt außerhalb der Stützfläche.
