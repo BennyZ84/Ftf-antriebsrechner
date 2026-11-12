@@ -15,7 +15,7 @@ export const listedFamilies=Object.freeze({
 export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore; BG45/BG65/BG66/BG75 dMove; BG45/BG66/BG75/BG95 dPro (ausgewählte Schnittstellen)",
  gearFamilies:"NG250/NG500; alle 17 PLG-Katalogfamilien; SG45/62/65/80/80K/85/120/120K, STG65, KG80/120/150; NG1000 WO nur vorläufig",
- missingMotorExamples:"dGo und weitere dMove-/dPro-Baureihen, BGA22, GR/G, KD/DR",
+ missingMotorExamples:"BG45 dGo, weitere dMove-/dPro-Baureihen, GR/G, KD/DR; BG42/BGA22 dGo nur als vorläufige Referenzen",
  missingGearExamples:"WG52/63/75 mit noch nicht einzeln belegten Übersetzungen und Grenzwerten; NG1000 WO nur vorläufig; konkrete Motor/Getriebe-Kombinationen nicht vollständig bestätigt",
  coverageComplete:false
 });
@@ -32,6 +32,10 @@ export function gearFamily(gear){
 }
 export function combinationStatus(motor,gear){
  const m=motorFamily(motor),g=gearFamily(gear);
+ if(motor?.preliminary)return {level:"unverified",label:"Vorläufige Motordaten – keine Freigabe",
+  reason:"Die Motordaten sind vorläufig bzw. die zulässigen Beschleunigungsmomente sind nicht vollständig angegeben. Herstellerfreigabe vor Auslegung erforderlich.",
+  source:motor.source||combinationSource};
+
  // Vorläufige Daten dürfen nicht als bestätigte Auslegungswerte geführt werden.
  if(gear?.preliminary)return {
   level:"unverified",label:"Vorläufige Herstellerdaten – keine Auslegungsfreigabe",
