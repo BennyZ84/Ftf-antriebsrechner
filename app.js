@@ -4,7 +4,7 @@ import {auxiliaryDefaults,calculateInertia,calculateBattery} from './auxiliary.j
 import {stabilityDefaults,calculateStability} from './stability.js';
 import {rollerDefaults,calculateRollerPressure} from './roller.js';
 import {pendingCatalogFamilies} from './catalog-pending.js';
-import {layoutDefaults,calculateLayout} from './vehicle-layout.js';
+import {layoutDefaults,calculateLayout,calculateLoadLayout} from './vehicle-layout.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
 const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults,...layoutDefaults};
 let config=clone(projectDefaults);
@@ -35,7 +35,7 @@ if(input.value==='')return;config[k]=Number(input.value);refresh();});
 wrap.append(input);if(unit){const u=document.createElement('small');u.textContent=unit;wrap.append(u);}
 label.append(span,wrap);$(id).append(label);
 }}}
-function syncFields(){for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset']]){const input=$(id);if(input&&document.activeElement!==input)input.value=String(config[key]);}for(const k of Object.keys(config)){const input=$('field-'+k);if(input&&document.activeElement!==input)input.value=String(config[k]);}$('projectName').value=config.projectName;$('motorSelect').value=config.motorId;$('gearboxSelect').value=config.gearId;setNotes();}
+function syncFields(){for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset'],['layoutLoadWidth','loadWidth'],['layoutLoadLength','loadLength'],['layoutLoadOffsetX','loadOffsetX'],['layoutLoadOffsetY','loadOffsetY']]){const input=$(id);if(input&&document.activeElement!==input)input.value=String(config[key]);}for(const k of Object.keys(config)){const input=$('field-'+k);if(input&&document.activeElement!==input)input.value=String(config[k]);}$('projectName').value=config.projectName;$('motorSelect').value=config.motorId;$('gearboxSelect').value=config.gearId;setNotes();}
 function renderMotorSpecs(){
  const motor=motors.find(x=>x.id===config.motorId);
  const grid=$('motorSpecGrid');grid.replaceChildren();
@@ -290,11 +290,53 @@ function renderVehicleLayout(){
   const chip=document.createElement('span');chip.className='layout-stat '+type;chip.textContent=label;stats.append(chip);
  }
 }
+
+function renderLoadLayout(){
+ const model=calculateLoadLayout(config),svg=$('loadSvg'),note=$('loadLayoutNote');
+ svg.replaceChildren();
+ if(model.error){note.textContent=model.error;return;}
+ const NS='http://www.w3.org/2000/svg';
+ const el=(tag,attrs={},parent=svg)=>{
+  const node=document.createElementNS(NS,tag);
+  for(const [key,value] of Object.entries(attrs))node.setAttribute(key,String(value));
+  parent.append(node);return node;
+ };
+ const txt=(value,x,y,attrs={})=>{
+  const t=el('text',{x,y,'text-anchor':'middle',fill:'#28425b','font-family':'system-ui, sans-serif','font-size':13,...attrs});
+  t.textContent=value;return t;
+ };
+ // FTF/Last im selben Maßstab. Auch überstehende Last bleibt sichtbar.
+ const xMin=Math.min(-model.width/2,model.offsetX-model.loadWidth/2);
+ const xMax=Math.max(model.width/2,model.offsetX+model.loadWidth/2);
+ const yMin=Math.min(-model.length/2,model.offsetY-model.loadLength/2);
+ const yMax=Math.max(model.length/2,model.offsetY+model.loadLength/2);
+ const k=Math.min(400/(xMax-xMin),310/(yMax-yMin));
+ const originX=300-(xMin+xMax)/2*k,originY=250+(yMin+yMax)/2*k;
+ const rect=(cx,cy,w,h,attrs={})=>el('rect',{x:originX+(cx-w/2)*k,y:originY-(cy+h/2)*k,width:w*k,height:h*k,...attrs});
+ svg.setAttribute('viewBox','0 0 600 510');
+ el('rect',{x:0,y:0,width:600,height:510,rx:22,fill:'#f4f8fc'});
+ el('path',{d:'M 300 46 L 300 16 M 291 27 L 300 16 L 309 27',fill:'none',stroke:'#267fa0','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'});
+ txt('VORNE · FAHRTRICHTUNG',300,64,{'font-size':12,'font-weight':650,fill:'#236d88'});
+ rect(0,0,model.width,model.length,{rx:8,fill:'#e4edf5',stroke:'#3a5972','stroke-width':3});
+ // FTF-Mittelpunkt und Hilfsachsen.
+ el('path',{d:`M ${originX-model.width*k/2} ${originY} H ${originX+model.width*k/2} M ${originX} ${originY-model.length*k/2} V ${originY+model.length*k/2}`,fill:'none',stroke:'#849eaf','stroke-width':1.4,'stroke-dasharray':'6 5'});
+ el('circle',{cx:originX,cy:originY,r:4,fill:'#34516a'});
+ rect(model.offsetX,model.offsetY,model.loadWidth,model.loadLength,{rx:4,fill:'#e8ae5e','fill-opacity':.78,stroke:'#a25c1b','stroke-width':2.4});
+ const lx=originX+model.offsetX*k,ly=originY-model.offsetY*k;
+ el('path',{d:`M ${lx-9} ${ly} h 18 M ${lx} ${ly-9} v 18`,fill:'none',stroke:'#713b0a','stroke-width':2});
+ el('circle',{cx:lx,cy:ly,r:3,fill:'#713b0a'});
+ txt(`Last ${Math.round(model.loadWidth)} × ${Math.round(model.loadLength)} mm`,300,458,{'font-size':14,'font-weight':650});
+ txt(`FTF ${Math.round(model.width)} × ${Math.round(model.length)} mm`,300,480,{'font-size':12});
+ note.textContent=`Lastmitte: X ${model.offsetX} mm (rechts +), Y ${model.offsetY} mm (vorne +).`+
+  (model.overhang?` Achtung: Last überragt das Gestell seitlich um bis zu ${Math.round(model.overhangX)} mm und längs um bis zu ${Math.round(model.overhangY)} mm.`:'')+
+  ' Schematische Geometrie – keine Prüfung von Schwerpunkt, Kippsicherheit oder Lastaufnahme.';
+}
+
 function refresh(){
  if(config.mode!=='motor')config.mode='ftf';
  const selected=motors.find(m=>m.id===config.motorId);
  if(selected){$('seriesSelect').value=seriesOf(selected)||'dCore';renderMotorOptions();}
- renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();renderVehicleLayout();render();
+ renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();renderVehicleLayout();renderLoadLayout();render();
 }
 function tab(id){if((id==='ergebnisse'||id==='ansicht') && config.mode==='motor')id='eingaben';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ansicht','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
 function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes FTF';const existing=projects.findIndex(x=>x.projectName===config.projectName);const item=clone(config);if(existing<0)projects.push(item);else projects[existing]=item;store();showProjects();toast('Projekt lokal gespeichert');}
@@ -367,11 +409,11 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.6 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.7 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
- for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset']]){$(id).addEventListener('input',()=>{const value=$(id).value;if(value==='')return;config[key]=Number(value);refresh();});}
+ for(const [id,key] of [['layoutWidth','ftfWidth'],['layoutLength','ftfLength'],['layoutWheelInset','wheelSideInset'],['layoutLoadWidth','loadWidth'],['layoutLoadLength','loadLength'],['layoutLoadOffsetX','loadOffsetX'],['layoutLoadOffsetY','loadOffsetY']]){$(id).addEventListener('input',()=>{const value=$(id).value;if(value==='')return;config[key]=Number(value);refresh();});}
 $('addRouteSegment').addEventListener('click',()=>{
  if(!Array.isArray(config.routeSegments))config.routeSegments=[];
  if(config.routeSegments.length>=100){toast('Maximal 100 Abschnitte');return;}
