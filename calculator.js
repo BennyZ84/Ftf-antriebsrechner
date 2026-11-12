@@ -1949,6 +1949,76 @@ export const motors=[
     "stallTorque": 0.207,
     "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-32-ki.pdf?la=pt-br&revision=56a16fd7-cd67-4a92-a30f-33263a95fce0",
     "note": "Integrierte Kommutierungselektronik. Datenblatt nennt Anhaltemoment, aber kein separat freigegebenes maximales Beschleunigungsmoment. Spitzenmoment daher nicht angegeben."
+  },
+  {
+    "id": "bg42x15-ki-12v",
+    "name": "BG42x15 KI · 12 V",
+    "series": "KI",
+    "voltage": 12,
+    "rpm": 3610,
+    "idle": 4300,
+    "nom": 0.101,
+    "peak": 0,
+    "J": 24,
+    "preliminary": false,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-ki.pdf?la=pt-br&revision=6d1759aa-422c-4142-81b6-8d4a43c8b4e6",
+    "note": "Herstellerdatenblatt BG42 KI: Nenn- und Leerlaufwerte angegeben; kein separat zugeordneter maximaler Drehmomentwert. Spitzendrehmoment daher offen."
+  },
+  {
+    "id": "bg42x15-ki-24v",
+    "name": "BG42x15 KI · 24 V",
+    "series": "KI",
+    "voltage": 24,
+    "rpm": 3610,
+    "idle": 4250,
+    "nom": 0.106,
+    "peak": 0,
+    "J": 24,
+    "preliminary": false,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-ki.pdf?la=pt-br&revision=6d1759aa-422c-4142-81b6-8d4a43c8b4e6",
+    "note": "Herstellerdatenblatt BG42 KI: Nenn- und Leerlaufwerte angegeben; kein separat zugeordneter maximaler Drehmomentwert. Spitzendrehmoment daher offen."
+  },
+  {
+    "id": "bg42x30-ki-12v",
+    "name": "BG42x30 KI · 12 V",
+    "series": "KI",
+    "voltage": 12,
+    "rpm": 3750,
+    "idle": 4175,
+    "nom": 0.138,
+    "peak": 0,
+    "J": 44,
+    "preliminary": false,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-ki.pdf?la=pt-br&revision=6d1759aa-422c-4142-81b6-8d4a43c8b4e6",
+    "note": "Herstellerdatenblatt BG42 KI: Nenn- und Leerlaufwerte angegeben; kein separat zugeordneter maximaler Drehmomentwert. Spitzendrehmoment daher offen."
+  },
+  {
+    "id": "bg42x30-ki-24v",
+    "name": "BG42x30 KI · 24 V",
+    "series": "KI",
+    "voltage": 24,
+    "rpm": 3670,
+    "idle": 4120,
+    "nom": 0.166,
+    "peak": 0,
+    "J": 44,
+    "preliminary": false,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-ki.pdf?la=pt-br&revision=6d1759aa-422c-4142-81b6-8d4a43c8b4e6",
+    "note": "Herstellerdatenblatt BG42 KI: Nenn- und Leerlaufwerte angegeben; kein separat zugeordneter maximaler Drehmomentwert. Spitzendrehmoment daher offen."
+  },
+  {
+    "id": "bg42x45-ki-24v",
+    "name": "BG42x45 KI · 24 V (vorläufig)",
+    "series": "KI",
+    "voltage": 24,
+    "rpm": 3600,
+    "idle": 4500,
+    "nom": 0.245,
+    "peak": 0,
+    "J": 64,
+    "preliminary": true,
+    "source": "https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/products/new/motors/bg/dgo/bg-42-ki.pdf?la=pt-br&revision=6d1759aa-422c-4142-81b6-8d4a43c8b4e6",
+    "note": "Herstellerdatenblatt BG42 KI: Nenn- und Leerlaufwerte angegeben; kein separat zugeordneter maximaler Drehmomentwert. Spitzendrehmoment daher offen. Diese Variante ist vom Hersteller als vorläufig gekennzeichnet."
   }
 ];
 // Katalogbestätigte Einzelübersetzungen. Nicht automatisch mechanisch zu jedem Motor passend.
