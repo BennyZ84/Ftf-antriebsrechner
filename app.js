@@ -35,7 +35,7 @@ function setNotes(){
  el.className='compatibility '+s.level;
  el.textContent=s.label+' – '+s.reason;
  const link=$('combinationSource');
- link.href=combinationSource;
+ link.href=s.source||combinationSource;
 }
 function render(){
 const data=calc(config);$('error').hidden=!data.error;
