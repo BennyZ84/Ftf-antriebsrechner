@@ -10,7 +10,7 @@ export const listedFamilies=Object.freeze({
   bg65:["PLG 63 EP","PLG 75 EP"],
   bg66:["PLG 63 EP","PLG 75 HT"],
   bg75:["PLG 63 EP","PLG 75 EP","PLG 75 HT"],
-  bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT","NG 500"]
+  bg95:["PLG 75 EP","PLG 75 HT","PLG 95 HT"]
 });
 export const catalogScope=Object.freeze({
  motorFamilies:"BG32/BG42/BG45/BG62/BG65/BG66/BG75/BG95 dCore, dokumentierte Spannungsvarianten",
