@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {layoutDefaults,calculateLayout} from '../vehicle-layout.js';
+import {layoutDefaults,calculateLayout,calculateLoadLayout} from '../vehicle-layout.js';
 test('FTF default: two drive wheels at rear, two free wheels at front',()=>{
  const x=calculateLayout({drives:2,...layoutDefaults,ftfWidth:1600,ftfLength:620});
  assert.ok(!x.error);
@@ -34,4 +34,16 @@ test('Wheel side inset is adjustable in millimetres and validates boundaries',()
  assert.ok(calculateLayout({drives:2,casterCount:2,ftfWidth:1000,ftfLength:1200,wheelSideInset:501}).error);
  assert.ok(calculateLayout({drives:2,casterCount:2,ftfWidth:1000,ftfLength:1200,wheelSideInset:-1}).error);
  assert.equal(calculateLayout({drives:1,casterCount:1,ftfWidth:1000,ftfLength:1200,wheelSideInset:80}).wheels[0].x,.5);
+});
+
+test('Load layout shares FTF geometry and supports signed X/Y midpoint offsets',()=>{
+ const m=calculateLoadLayout({ftfWidth:1600,ftfLength:620,loadWidth:500,loadLength:400,loadOffsetX:100,loadOffsetY:-50});
+ assert.equal(m.offsetX,100);
+ assert.equal(m.offsetY,-50);
+ assert.equal(m.overhang,false);
+ const protrusion=calculateLoadLayout({ftfWidth:1000,ftfLength:600,loadWidth:1200,loadLength:800,loadOffsetX:100,loadOffsetY:0});
+ assert.equal(protrusion.overhang,true);
+ assert.equal(protrusion.overhangX,200);
+ assert.equal(protrusion.overhangY,100);
+ assert.ok(calculateLoadLayout({ftfWidth:1000,ftfLength:600,loadWidth:0,loadLength:400}).error);
 });
