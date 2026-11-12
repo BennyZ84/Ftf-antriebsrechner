@@ -61,23 +61,19 @@ function updateMode(){
  $('drive-fields').hidden=motorOnly;
  $('extendedPanel').hidden=motorOnly;
  $('resultActions').hidden=motorOnly;
- const notice=document.querySelector('#view-eingaben .notice');
- if(notice)notice.hidden=motorOnly;
- $('modeDescription').textContent=motorOnly
-  ? 'Motordatenblatt ohne Fahrzeug- und Getriebeberechnung'
-  : 'Vollständige FTF-Auslegung mit Motor, Getriebe und Fahrzeugdaten';
+ $('motorPanelTitle').textContent=motorOnly?'Motordaten':'Motor & Getriebe';
+ $('motorSpecs').hidden=!motorOnly;
  const resultTab=document.querySelector('[data-tab="ergebnisse"]');
  resultTab.hidden=motorOnly;
  if(motorOnly && resultTab.classList.contains('active'))tab('eingaben');
 }
 function setNotes(){
  const m=motors.find(x=>x.id===config.motorId),g=gears.find(x=>x.id===config.gearId);
- $('motorNote').textContent=m?.note||'Motor nicht im Katalog gefunden.';
- $('gearboxNote').textContent=g?.note||'Getriebe nicht im Katalog gefunden.';
+ $('gearboxNote').textContent=g?.note||'Keine Getriebedaten vorhanden.';
  const s=combinationStatus(m,g);
  const el=$('combinationStatus');
  el.className='compatibility '+s.level;
- el.textContent=s.label+' – '+s.reason;
+ el.textContent=s.label;
  const link=$('combinationSource');
  link.href=s.source||combinationSource;
 }
@@ -86,7 +82,7 @@ const data=calc(config);$('error').hidden=!data.error;
 $('error').textContent=data.error||'';
 if(data.error){$('kpis').replaceChildren();$('results').replaceChildren();$('warnings').replaceChildren();return;}
 $('kpis').innerHTML=[['Gesamtgewicht',fmt(data.metrics.mass,0)+' kg'],['Motordrehzahl',fmt(data.metrics.rpm,0)+' min⁻¹'],['Radmoment',fmt(data.metrics.wheel)+' Nm'],['Motormoment',fmt(data.metrics.motor,3)+' Nm'],['Bremsweg',fmt(data.metrics.brakeDist)+' m']].map(x=>'<article class="kpi"><span>'+x[0]+'</span><strong>'+x[1]+'</strong></article>').join('');
-$('warnings').replaceChildren();const comp=combinationStatus(motors.find(x=>x.id===config.motorId),gears.find(x=>x.id===config.gearId));if(comp.level!=='family-listed'){const p=document.createElement('p');p.textContent='⚠ Kombination nicht bestätigt: '+comp.reason;$('warnings').append(p);}else{const p=document.createElement('p');p.textContent='Hinweis: Nur die Getriebebaureihe ist für die Motorbaureihe gelistet. Eine Einzelkombination ist nicht freigegeben.';$('warnings').append(p);}for(const warning of data.warnings){let p=document.createElement('p');p.textContent='⚠ '+warning;$('warnings').append(p);}
+$('warnings').replaceChildren();const comp=combinationStatus(motors.find(x=>x.id===config.motorId),gears.find(x=>x.id===config.gearId));if(comp.level!=='family-listed'){const p=document.createElement('p');p.textContent='⚠ '+comp.label+' – '+comp.reason;$('warnings').append(p);}else{const p=document.createElement('p');p.textContent=comp.source?'Herstellerkombination dokumentiert; Einsatzlast separat prüfen.':'Baukastenfamilie aufgeführt; konkrete Ausführung separat prüfen.';$('warnings').append(p);}for(const warning of data.warnings){let p=document.createElement('p');p.textContent='⚠ '+warning;$('warnings').append(p);}
 $('results').replaceChildren();
 for(const [name,val,unit,formula] of data.results){const article=document.createElement('article');article.className='result';const info=document.createElement('div');const heading=document.createElement('strong');heading.textContent=name;const f=document.createElement('small');f.textContent=formula;info.append(heading,f);const value=document.createElement('b');value.textContent=fmt(val,unit==='min⁻¹'||unit==='kg'?0:unit==='%'?1:unit==='Nm'?3:2)+' '+unit;article.append(info,value);$('results').append(article);}
 }
@@ -124,8 +120,8 @@ function renderGearOptions(){
  const selected=config.gearId;
  select.replaceChildren();
  const groups=[
-  {label:'Im Hersteller-Baukasten genannte Getriebebaureihen (Einzelkombination prüfen)',level:'family-listed'},
-  {label:'Nicht als Kombination bestätigt – nur zur technischen Vorausrechnung',level:'other'}
+  {label:'Im Baukasten aufgeführt',level:'family-listed'},
+  {label:'Nicht bestätigt – Vergleichsrechnung',level:'other'}
  ];
  for(const item of groups){
   const grp=document.createElement('optgroup');grp.label=item.label;
@@ -134,7 +130,7 @@ function renderGearOptions(){
    if((status.level==='family-listed')!==(item.level==='family-listed'))continue;
    if(item.level==='other' && !$('showUnverified').checked && g.id!==selected)continue;
    const o=document.createElement('option');o.value=g.id;
-   o.textContent=g.name+(status.level==='family-listed'?' · Baukastenfamilie':' · ungeprüft');
+   o.textContent=g.name+(status.level==='family-listed'?' · gelistet':' · ungeprüft');
    grp.append(o);
   }
   if(grp.children.length)select.append(grp);
@@ -166,7 +162,7 @@ $('projectName').addEventListener('input',e=>config.projectName=e.target.value);
 for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>tab(b.dataset.tab));
 $('showResults').addEventListener('click',()=>tab('ergebnisse'));
 $('save').addEventListener('click',save);
-$('new').addEventListener('click',()=>{if(!confirm('Aktuelle Eingaben auf Referenzwerte zurücksetzen? Gespeicherte Projekte bleiben erhalten.'))return;config=clone(defaults);refresh();tab('eingaben');});
+$('new').addEventListener('click',()=>{if(!confirm('Eingaben zurücksetzen? Gespeicherte Projekte bleiben erhalten.'))return;config=clone(defaults);refresh();tab('eingaben');});
 $('print').addEventListener('click',()=>window.print());
 $('export').addEventListener('click',exportJSON);
 $('import').addEventListener('change',async e=>{if(e.target.files?.[0])await importJSON(e.target.files[0]);e.target.value='';});
