@@ -104,3 +104,8 @@ test('Ordering references are linked to selected motor, gearbox and exact pair',
  assert.ok(js.includes('saveOrderReference(kind)'));
  assert.ok(js.includes('orderReferences'));
 });
+
+test('Official Dunkermotoren configuration lookup is linked but no inferred article number is claimed',()=>{
+ assert.ok(html.includes('https://www.dunkermotoren.de/de-de/konfigurator'));
+ assert.ok(html.includes('Bestellnummer prüfen'));
+});
