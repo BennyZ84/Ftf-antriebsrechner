@@ -146,3 +146,14 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .drive-requirements{margin:12px 0!important}
 #motorPanel>.drive-workflow[hidden],#motorPanel>.drive-manual[hidden]{display:none!important}
 @media(max-width:450px){.drive-choice button{font-size:12px}}
+
+/* v3.11: eindeutig zugeordnete Bestellreferenzen */
+.order-references{margin:20px 0 16px;padding:16px;border:1px solid #cbdde7;background:#f8fbfd;border-radius:13px}
+.order-header h3{margin:0 0 6px;color:#164057;font-size:17px}
+.order-selection{font-size:13px;font-weight:700;color:#184e68;margin:14px 0 12px;line-height:1.4;overflow-wrap:anywhere}
+.order-fields{display:grid;grid-template-columns:1fr;gap:12px}
+.order-fields .field input{display:block;width:100%;min-width:0;background:white;border:1px solid #cbd9e3;border-radius:9px;padding:12px 10px;font-size:15px;font-weight:600;color:#173c51}
+.order-fields .field input::placeholder{font-size:13px;font-weight:400;color:#8699a6}
+.order-references #orderCopy{width:100%;margin-top:10px}
+.order-references #orderReferenceStatus{margin:12px 0 4px;line-height:1.5}
+@media(max-width:480px){.order-references{padding:12px}}
