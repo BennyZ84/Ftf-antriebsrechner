@@ -123,3 +123,11 @@ test('Order display distinguishes unverified personal entries from manufacturer 
  assert.ok(js.includes('Keine eindeutige Hersteller-Bestellnummer belegt'));
  assert.ok(js.includes('nicht vom Hersteller verifiziert'));
 });
+
+test('Manufacturer article number ranges have sources and must not masquerade as orderable part numbers',()=>{
+ assert.ok(js.includes("manufacturerNumberInfo('motor',motor)"));
+ assert.ok(js.includes("manufacturerNumberInfo('gear',gear)"));
+ assert.ok(js.includes('Original-Herstellerdokument'));
+ assert.ok(js.includes('nicht bestellfähig'));
+ assert.ok(sw.includes('order-catalog.js'));
+});
