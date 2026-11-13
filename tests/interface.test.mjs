@@ -120,7 +120,7 @@ test('Fixed URL and automatic update discovery with offline fallback',()=>{
 });
 test('Order display distinguishes unverified personal entries from manufacturer numbers',()=>{
  assert.ok(html.includes('id="orderProof"'));
- assert.ok(js.includes('Keine eindeutige Hersteller-Bestellnummer belegt'));
+ assert.ok(js.includes('Für diese Auswahl sind keine vollständigen Artikelnummern hinterlegt.'));
  assert.ok(js.includes('nicht verifiziert'));
 });
 
@@ -130,4 +130,13 @@ test('Manufacturer article number ranges have sources and must not masquerade as
  assert.ok(js.includes('Original-Herstellerdokument'));
  assert.ok(js.includes('nicht bestellfähig'));
  assert.ok(sw.includes('order-catalog.js'));
+});
+
+test('Only entered part numbers are shown; empty fields and manufacturer number ranges are folded away',()=>{
+ assert.ok(html.includes('id="orderProof" class="order-proof" aria-live="polite" hidden'));
+ assert.ok(html.includes('id="orderDetails" class="order-details"'));
+ assert.ok(html.includes('id="orderCatalogProof"'));
+ assert.ok(js.includes('proof.hidden=given===0'));
+ assert.ok(js.includes("$('orderCopy').hidden=given===0"));
+ assert.ok(js.includes('if(value){'));
 });
