@@ -4,7 +4,7 @@
 // NG: Offizielle Funktions- und Schnittstellenbeschreibung Getriebe, Titelseite.
 const dcoreSource='https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/manuals/brushless-dc-motors/001_bg_xxdcore.pdf?la=pt-br&revision=691d9823-9a5e-412a-a052-573836dc3440';
 const gearboxSource='https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/manuals/gearboxes/001_funktions-_und_schnittstellenbeschreibung_getriebe.pdf?la=pt-br&revision=3e964ef5-dd70-48e8-a1d4-1c3cb910a262';
-const dproSource='https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/manuals/brushless-dc-motors/019_bg95_dpro_co_io_pn_ec_ei.pdf';
+const dproSource='https://www.dunkermotoren.com/-/media/project/oneweb/oneweb/dunkermotoren/downloads/pdf/downloads/manuals/brushless-dc-motors/031_bg_95dpro.pdf?la=pt-br&revision=a58d460e-a5ac-46a5-9399-b61b9d040b06';
 const dcorePrefixes=Object.freeze({
  'BGA22':'88522.XXXXX','BG32':'88532.XXXXX','BG42':'88542.XXXXX',
  'BG45':'88545.XXXXX','BG62':'88562.XXXXX','BG65':'88565.XXXXX',
