@@ -96,12 +96,14 @@ test('Drive selection separates recommendation and manual selection',()=>{
 });
 
 test('Ordering references are linked to selected motor, gearbox and exact pair',()=>{
- for(const id of ['orderReferences','orderMotor','orderGear','orderCombo','orderCopy','orderReferenceStatus']){
+ for(const id of ['orderReferences','orderProof','orderDetails','orderCopy','orderReferenceStatus']){
   assert.ok(html.includes('id="'+id+'"'),id+' missing');
  }
  assert.ok(js.includes("motor.id+'::'+gear.id"));
  assert.ok(js.includes('renderOrderReferences();'));
- assert.ok(js.includes('saveOrderReference(kind)'));
+ assert.ok(!html.includes('id="orderMotor"'));
+ assert.ok(!html.includes('id="orderGear"'));
+ assert.ok(!html.includes('id="orderCombo"'));
  assert.ok(js.includes('orderReferences'));
 });
 
@@ -120,14 +122,14 @@ test('Fixed URL and automatic update discovery with offline fallback',()=>{
 });
 test('Order display distinguishes unverified personal entries from manufacturer numbers',()=>{
  assert.ok(html.includes('id="orderProof"'));
- assert.ok(js.includes('Für diese Auswahl sind keine vollständigen Artikelnummern hinterlegt.'));
+ assert.ok(js.includes('Für diese Auswahl ist keine vollständige Bestellnummer nachgewiesen.'));
  assert.ok(js.includes('nicht verifiziert'));
 });
 
 test('Manufacturer article number ranges have sources and must not masquerade as orderable part numbers',()=>{
  assert.ok(js.includes("manufacturerNumberInfo('motor',motor)"));
  assert.ok(js.includes("manufacturerNumberInfo('gear',gear)"));
- assert.ok(js.includes('Original-Herstellerdokument'));
+ assert.ok(js.includes('Herstellerdokument'));
  assert.ok(js.includes('nicht bestellfähig'));
  assert.ok(sw.includes('order-catalog.js'));
 });
@@ -136,7 +138,7 @@ test('Only entered part numbers are shown; empty fields and manufacturer number 
  assert.ok(html.includes('id="orderProof" class="order-proof" aria-live="polite" hidden'));
  assert.ok(html.includes('id="orderDetails" class="order-details"'));
  assert.ok(html.includes('id="orderCatalogProof"'));
- assert.ok(js.includes('proof.hidden=given===0'));
- assert.ok(js.includes("$('orderCopy').hidden=given===0"));
- assert.ok(js.includes('if(value){'));
+ assert.ok(js.includes('proof.hidden=count===0'));
+ assert.ok(js.includes("$('orderCopy').hidden=count===0"));
+ assert.ok(js.includes("typeof number==='string'&&number.trim()"));
 });
