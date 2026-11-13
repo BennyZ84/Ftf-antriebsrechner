@@ -109,3 +109,17 @@ test('Official Dunkermotoren configuration lookup is linked but no inferred arti
  assert.ok(html.includes('https://www.dunkermotoren.de/de-de/konfigurator'));
  assert.ok(html.includes('Bestellnummer prüfen'));
 });
+
+test('Fixed URL and automatic update discovery with offline fallback',()=>{
+ assert.ok(html.includes('id="updateNotice"'));
+ assert.ok(html.includes('id="updateApply"'));
+ assert.ok(js.includes("fetch('./version.json',{cache:'no-store'})"));
+ assert.ok(js.includes("navigator.serviceWorker.register('./sw.js'"));
+ assert.ok(sw.includes("fetch(request,{cache:'no-store'})"));
+ assert.ok(sw.includes("request.mode==='navigate'"));
+});
+test('Order display distinguishes unverified personal entries from manufacturer numbers',()=>{
+ assert.ok(html.includes('id="orderProof"'));
+ assert.ok(js.includes('Keine eindeutige Hersteller-Bestellnummer belegt'));
+ assert.ok(js.includes('nicht vom Hersteller verifiziert'));
+});
