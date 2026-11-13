@@ -1,1 +1,19 @@
-const CACHE='ftf-rechner-v3.12';const ASSETS=['./','./index.html','./styles.css','./styles.css?v=3.12','./calculator.js','./compatibility.js','./catalog-pending.js','./vehicle-layout.js','./drive-recommender.js','./auxiliary.js','./stability.js','./roller.js','./app.js','./app.js?v=3.12','./manifest.webmanifest','./icons/icon.svg'];self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(response=>{if(response.ok&&new URL(e.request.url).origin===self.location.origin){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(e.request,copy))}return response}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
+// Online-first PWA: die feste Startadresse lädt stets die neueste veröffentlichte Ausgabe.
+const CACHE='ftf-rechner-v3.13';
+const ASSETS=['./','./index.html','./styles.css?v=3.13','./calculator.js','./compatibility.js','./catalog-pending.js','./vehicle-layout.js','./drive-recommender.js','./auxiliary.js','./stability.js','./roller.js','./app.js?v=3.13','./version.json','./manifest.webmanifest','./icons/icon.svg'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('ftf-rechner-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
+self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting();});
+self.addEventListener('fetch',event=>{
+ if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;
+ const request=event.request;
+ event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{
+  if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy)).catch(()=>{});}
+  return response;
+ }).catch(async()=>{
+  const cached=await caches.match(request);
+  if(cached)return cached;
+  if(request.mode==='navigate')return caches.match('./index.html');
+  return Response.error();
+ }));
+});
