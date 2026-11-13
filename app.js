@@ -90,6 +90,66 @@ function updateMode(){
  resultTab.hidden=motorOnly;
  if(motorOnly && (resultTab.classList.contains('active')||layoutTab.classList.contains('active')))tab('eingaben');
 }
+
+function orderData(){
+ if(!config.orderReferences||typeof config.orderReferences!=='object')
+  config.orderReferences={};
+ for(const kind of ['motors','gears','combinations']){
+  if(!config.orderReferences[kind]||typeof config.orderReferences[kind]!=='object'||Array.isArray(config.orderReferences[kind]))
+   config.orderReferences[kind]={};
+ }
+ return config.orderReferences;
+}
+function selectedOrderItems(){
+ return {motor:motors.find(m=>m.id===config.motorId),gear:gears.find(g=>g.id===config.gearId)};
+}
+function renderOrderReferences(){
+ const {motor,gear}=selectedOrderItems(),refs=orderData();
+ const comboKey=motor&&gear?motor.id+'::'+gear.id:null;
+ const pairs=[['orderMotor',motor?.id,refs.motors],['orderGear',gear?.id,refs.gears],['orderCombo',comboKey,refs.combinations]];
+ for(const [id,key,record] of pairs){
+  const field=$(id),value=key?record[key]||'':'';
+  if(document.activeElement!==field)field.value=value;
+  field.disabled=!key;
+ }
+ $('orderGearWrap').hidden=config.mode==='motor';
+ $('orderComboWrap').hidden=config.mode==='motor';
+ const selection=$('orderSelection');
+ selection.textContent=motor?(motor.name+(config.mode==='motor'?'':' + '+(gear?.name||'kein Getriebe'))):'Kein Motor ausgewählt';
+ const active=pairs.filter((_,i)=>config.mode!=='motor'||i===0);
+ const given=active.filter(([id])=>$(id).value.trim()).length;
+ const status=$('orderReferenceStatus');
+ status.textContent=given
+ ?'Selbst eingetragene Nummern: '+given+'/'+active.length+'. Bitte vor der Bestellung mit Herstellerangebot oder Datenblatt abgleichen.'
+ :'Für diese Auswahl sind keine verifizierten Bestellartikelnummern hinterlegt. Motorbezeichnung und Herstellerquelle können für eine Anfrage verwendet werden.';
+ $('orderCopy').disabled=!motor;
+}
+function saveOrderReference(kind){
+ const refs=orderData(),{motor,gear}=selectedOrderItems();
+ const keys={motors:motor?.id,gears:gear?.id,combinations:motor&&gear?motor.id+'::'+gear.id:null};
+ const key=keys[kind];if(!key)return;
+ const input=$({motors:'orderMotor',gears:'orderGear',combinations:'orderCombo'}[kind]);
+ const value=input.value.trim();
+ if(value)refs[kind][key]=value;else delete refs[kind][key];
+ renderOrderReferences();
+}
+function copyOrderInformation(){
+ const {motor,gear}=selectedOrderItems();if(!motor)return;
+ const refs=orderData();
+ const lines=['Motor: '+motor.name,
+  'Motor-Artikelnummer (eigene Angabe): '+(refs.motors[motor.id]||'nicht hinterlegt')];
+ if(config.mode!=='motor'&&gear){
+  lines.push('Getriebe: '+gear.name);
+  lines.push('Getriebe-Artikelnummer (eigene Angabe): '+(refs.gears[gear.id]||'nicht hinterlegt'));
+  lines.push('Kombinations-Bestellnummer (eigene Angabe): '+(refs.combinations[motor.id+'::'+gear.id]||'nicht hinterlegt'));
+  lines.push('Kombinationsstatus: '+combinationStatus(motor,gear).label);
+ }
+ lines.push('Hinweis: Artikelnummern sind nicht automatisch verifiziert; vor Bestellung vom Hersteller bestätigen lassen.');
+ const content=lines.join('\n');
+ if(navigator.clipboard?.writeText)navigator.clipboard.writeText(content).then(()=>toast('Bestellinformationen kopiert')).catch(()=>toast('Kopieren nicht möglich'));
+ else toast('Kopieren in diesem Browser nicht verfügbar');
+}
+
 function setNotes(){
  const m=motors.find(x=>x.id===config.motorId),g=gears.find(x=>x.id===config.gearId);
  $('gearboxNote').textContent=g?.note||'Keine Getriebedaten vorhanden.';
@@ -386,7 +446,7 @@ function refresh(){
  if(config.mode!=='motor')config.mode='ftf';
  const selected=motors.find(m=>m.id===config.motorId);
  if(selected){$('seriesSelect').value=seriesOf(selected)||'dCore';renderMotorOptions();}
- renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderRouteSegments();renderVehicleLayout();renderLoadLayout();render();
+ renderGearOptions();syncFields();renderMotorSpecs();updateMode();renderOrderReferences();renderRouteSegments();renderVehicleLayout();renderLoadLayout();render();
 }
 function tab(id){if((id==='ergebnisse'||id==='ansicht') && config.mode==='motor')id='eingaben';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===id);for(const key of ['eingaben','ansicht','ergebnisse','projekte'])$('view-'+key).hidden=key!==id;if(id==='projekte')showProjects();if(id==='ergebnisse')render();}
 function save(){config.projectName=$('projectName').value.trim()||'Unbenanntes FTF';const existing=projects.findIndex(x=>x.projectName===config.projectName);const item=clone(config);if(existing<0)projects.push(item);else projects[existing]=item;store();showProjects();toast('Projekt lokal gespeichert');}
@@ -459,11 +519,15 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.10 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.11 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
 $('recommendRun').addEventListener('click',runRecommendations);
+for(const [id,kind] of [['orderMotor','motors'],['orderGear','gears'],['orderCombo','combinations']]){
+ $(id).addEventListener('input',()=>saveOrderReference(kind));
+}
+$('orderCopy').addEventListener('click',copyOrderInformation);
 $('driveModeDirect').addEventListener('click',()=>setDriveSelectionMode('direct'));
 $('driveModeSuggest').addEventListener('click',()=>setDriveSelectionMode('suggest'));
 setDriveSelectionMode('direct');
