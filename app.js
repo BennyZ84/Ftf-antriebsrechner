@@ -118,6 +118,17 @@ function renderOrderReferences(){
  selection.textContent=motor?(motor.name+(config.mode==='motor'?'':' + '+(gear?.name||'kein Getriebe'))):'Kein Motor ausgewählt';
  const active=pairs.filter((_,i)=>config.mode!=='motor'||i===0);
  const given=active.filter(([id])=>$(id).value.trim()).length;
+ const proof=$('orderProof');
+ proof.replaceChildren();
+ for(const [title,part,fieldId] of [['Motor',motor,'orderMotor'],['Getriebe',gear,'orderGear'],['Komplettantrieb',motor&&gear?{name:motor.name+' + '+gear.name}:null,'orderCombo']]){
+  if(!part||(config.mode==='motor'&&title!=='Motor'))continue;
+  const line=document.createElement('div');line.className='order-proof-line';
+  const name=document.createElement('strong');name.textContent=title+': '+part.name;
+  const number=document.createElement('span');number.textContent=$(fieldId).value.trim()
+   ?'Artikelnummer selbst eingetragen – nicht vom Hersteller verifiziert'
+   :'Keine eindeutige Hersteller-Bestellnummer belegt';
+  line.append(name,number);proof.append(line);
+ }
  const status=$('orderReferenceStatus');
  status.textContent=given
  ?'Selbst eingetragene Nummern: '+given+'/'+active.length+'. Bitte vor der Bestellung mit Herstellerangebot oder Datenblatt abgleichen.'
@@ -519,7 +530,53 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.12 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.13 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+}
+// Stabiler App-Link: Versionsprüfung unabhängig vom URL-Queryparameter.
+const APP_VERSION='3.13';
+function initAppUpdates(){
+ const notice=$('updateNotice'),apply=$('updateApply');
+ let registration=null,available=false;
+ const show=()=>{available=true;notice.hidden=false;};
+ const check=async()=>{
+  try{
+   const response=await fetch('./version.json',{cache:'no-store'});
+   if(response.ok){
+    const version=await response.json();
+    if(version.version&&version.version!==APP_VERSION)show();
+   }
+   if(registration)await registration.update();
+  }catch{}
+ };
+ apply.addEventListener('click',async()=>{
+  if(!available)return;
+  if(registration?.waiting){
+   registration.waiting.postMessage({type:'SKIP_WAITING'});
+   return;
+  }
+  window.location.reload();
+ });
+ if(!('serviceWorker'in navigator)){check();return;}
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{
+  // Avoid an endless reload loop when activation is already complete.
+  if(sessionStorage.getItem('ftf-sw-reload')===APP_VERSION)return;
+  sessionStorage.setItem('ftf-sw-reload',APP_VERSION);
+  window.location.reload();
+ });
+ navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>{
+  registration=reg;
+  if(reg.waiting&&navigator.serviceWorker.controller)show();
+  reg.addEventListener('updatefound',()=>{
+   const worker=reg.installing;
+   if(!worker)return;
+   worker.addEventListener('statechange',()=>{
+    if(worker.state==='installed'&&navigator.serviceWorker.controller)show();
+   });
+  });
+  check();
+ }).catch(()=>check());
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)check();});
+ window.addEventListener('focus',check);
 }
 function init(){
 setupFields();updateCatalogSummary();renderPendingCatalog();
@@ -571,6 +628,6 @@ $('import').addEventListener('change',async e=>{if(e.target.files?.[0])await imp
 const install=$('install');let prompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();prompt=e;install.hidden=false;});
 install.addEventListener('click',async()=>{if(prompt){await prompt.prompt();prompt=null;install.hidden=true;}else alert('Auf dem iPhone Safari öffnen → Teilen → Zum Home-Bildschirm → Als Web-App öffnen.');});
 refresh();showProjects();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+initAppUpdates();
 }
 init();
