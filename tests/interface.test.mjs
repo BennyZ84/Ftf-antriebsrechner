@@ -121,7 +121,7 @@ test('Fixed URL and automatic update discovery with offline fallback',()=>{
 test('Order display distinguishes unverified personal entries from manufacturer numbers',()=>{
  assert.ok(html.includes('id="orderProof"'));
  assert.ok(js.includes('Keine eindeutige Hersteller-Bestellnummer belegt'));
- assert.ok(js.includes('nicht vom Hersteller verifiziert'));
+ assert.ok(js.includes('nicht verifiziert'));
 });
 
 test('Manufacturer article number ranges have sources and must not masquerade as orderable part numbers',()=>{
