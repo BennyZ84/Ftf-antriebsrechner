@@ -94,3 +94,13 @@ test('Drive selection separates recommendation and manual selection',()=>{
  assert.ok(js.includes('setDriveSelectionMode('));
  assert.ok(js.includes('recommend-metrics'));
 });
+
+test('Ordering references are linked to selected motor, gearbox and exact pair',()=>{
+ for(const id of ['orderReferences','orderMotor','orderGear','orderCombo','orderCopy','orderReferenceStatus']){
+  assert.ok(html.includes('id="'+id+'"'),id+' missing');
+ }
+ assert.ok(js.includes("motor.id+'::'+gear.id"));
+ assert.ok(js.includes('renderOrderReferences();'));
+ assert.ok(js.includes('saveOrderReference(kind)'));
+ assert.ok(js.includes('orderReferences'));
+});
