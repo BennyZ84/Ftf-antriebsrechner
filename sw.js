@@ -1,6 +1,6 @@
 // Online-first PWA: die feste Startadresse lädt stets die neueste veröffentlichte Ausgabe.
-const CACHE='ftf-rechner-v3.15';
-const ASSETS=['./','./index.html','./styles.css?v=3.15','./calculator.js','./compatibility.js','./catalog-pending.js','./vehicle-layout.js','./drive-recommender.js','./order-catalog.js','./auxiliary.js','./stability.js','./roller.js','./app.js?v=3.15','./version.json','./manifest.webmanifest','./icons/icon.svg'];
+const CACHE='ftf-rechner-v3.16';
+const ASSETS=['./','./index.html','./styles.css?v=3.16','./calculator.js','./compatibility.js','./catalog-pending.js','./vehicle-layout.js','./drive-recommender.js','./order-catalog.js','./auxiliary.js','./stability.js','./roller.js','./app.js?v=3.16','./version.json','./manifest.webmanifest','./icons/icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('ftf-rechner-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting();});
