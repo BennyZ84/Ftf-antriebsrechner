@@ -6,6 +6,7 @@ import {rollerDefaults,calculateRollerPressure} from './roller.js';
 import {pendingCatalogFamilies} from './catalog-pending.js';
 import {layoutDefaults,calculateLayout,calculateLoadLayout} from './vehicle-layout.js';
 import {recommendMotors} from './drive-recommender.js';
+import {manufacturerNumberInfo} from './order-catalog.js';
 const $=id=>document.getElementById(id),clone=x=>JSON.parse(JSON.stringify(x));
 const projectDefaults={...defaults,...auxiliaryDefaults,...stabilityDefaults,...rollerDefaults,...layoutDefaults};
 let config=clone(projectDefaults);
@@ -125,9 +126,20 @@ function renderOrderReferences(){
   const line=document.createElement('div');line.className='order-proof-line';
   const name=document.createElement('strong');name.textContent=title+': '+part.name;
   const number=document.createElement('span');number.textContent=$(fieldId).value.trim()
-   ?'Artikelnummer selbst eingetragen – nicht vom Hersteller verifiziert'
+   ?'Eigene Bestellnummer: '+$(fieldId).value.trim()+' (nicht verifiziert)'
    :'Keine eindeutige Hersteller-Bestellnummer belegt';
-  line.append(name,number);proof.append(line);
+  line.append(name,number);
+  const info=title==='Motor'?manufacturerNumberInfo('motor',motor):
+   title==='Getriebe'?manufacturerNumberInfo('gear',gear):null;
+  if(info){
+   const prefix=document.createElement('div');prefix.className='order-catalog-number';
+   prefix.textContent='Hersteller-Nummernkreis: '+info.pattern+' (X = unbekannt, nicht bestellfähig)';
+   const source=document.createElement('a');source.href=info.source;source.target='_blank';
+   source.rel='noopener noreferrer';source.textContent='Original-Herstellerdokument';
+   const note=document.createElement('small');note.textContent=info.description;
+   line.append(prefix,note,source);
+  }
+  proof.append(line);
  }
  const status=$('orderReferenceStatus');
  status.textContent=given
@@ -147,10 +159,16 @@ function saveOrderReference(kind){
 function copyOrderInformation(){
  const {motor,gear}=selectedOrderItems();if(!motor)return;
  const refs=orderData();
+ const motorRange=manufacturerNumberInfo('motor',motor);
  const lines=['Motor: '+motor.name,
-  'Motor-Artikelnummer (eigene Angabe): '+(refs.motors[motor.id]||'nicht hinterlegt')];
+  'Motor-Artikelnummer (eigene Angabe): '+(refs.motors[motor.id]||'nicht hinterlegt'),
+  'Hersteller-Nummernkreis Motor (nicht bestellfähig): '+(motorRange?.pattern||'nicht belegt')];
+ if(motorRange)lines.push('Herstellerquelle Motor: '+motorRange.source);
  if(config.mode!=='motor'&&gear){
+  const gearRange=manufacturerNumberInfo('gear',gear);
   lines.push('Getriebe: '+gear.name);
+  lines.push('Hersteller-Nummernkreis Getriebe (nicht bestellfähig): '+(gearRange?.pattern||'nicht belegt'));
+  if(gearRange)lines.push('Herstellerquelle Getriebe: '+gearRange.source);
   lines.push('Getriebe-Artikelnummer (eigene Angabe): '+(refs.gears[gear.id]||'nicht hinterlegt'));
   lines.push('Kombinations-Bestellnummer (eigene Angabe): '+(refs.combinations[motor.id+'::'+gear.id]||'nicht hinterlegt'));
   lines.push('Kombinationsstatus: '+combinationStatus(motor,gear).label);
@@ -530,10 +548,10 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.13 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.14 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 // Stabiler App-Link: Versionsprüfung unabhängig vom URL-Queryparameter.
-const APP_VERSION='3.13';
+const APP_VERSION='3.14';
 function initAppUpdates(){
  const notice=$('updateNotice'),apply=$('updateApply');
  let registration=null,available=false;
