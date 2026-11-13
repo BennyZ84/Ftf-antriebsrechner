@@ -115,37 +115,41 @@ function renderOrderReferences(){
  }
  $('orderGearWrap').hidden=config.mode==='motor';
  $('orderComboWrap').hidden=config.mode==='motor';
- const selection=$('orderSelection');
- selection.textContent=motor?(motor.name+(config.mode==='motor'?'':' + '+(gear?.name||'kein Getriebe'))):'Kein Motor ausgewählt';
+ $('orderSelection').textContent=motor?(motor.name+(config.mode==='motor'?'':' + '+(gear?.name||'kein Getriebe'))):'Kein Motor ausgewählt';
  const active=pairs.filter((_,i)=>config.mode!=='motor'||i===0);
- const given=active.filter(([id])=>$(id).value.trim()).length;
- const proof=$('orderProof');
- proof.replaceChildren();
+ const proof=$('orderProof'),catalog=$('orderCatalogProof');
+ proof.replaceChildren();catalog.replaceChildren();
+ let given=0;
  for(const [title,part,fieldId] of [['Motor',motor,'orderMotor'],['Getriebe',gear,'orderGear'],['Komplettantrieb',motor&&gear?{name:motor.name+' + '+gear.name}:null,'orderCombo']]){
   if(!part||(config.mode==='motor'&&title!=='Motor'))continue;
-  const line=document.createElement('div');line.className='order-proof-line';
-  const name=document.createElement('strong');name.textContent=title+': '+part.name;
-  const number=document.createElement('span');number.textContent=$(fieldId).value.trim()
-   ?'Eigene Bestellnummer: '+$(fieldId).value.trim()+' (nicht verifiziert)'
-   :'Keine eindeutige Hersteller-Bestellnummer belegt';
-  line.append(name,number);
+  const value=$(fieldId).value.trim();
+  if(value){
+   given++;
+   const line=document.createElement('div');line.className='order-proof-line';
+   const name=document.createElement('strong');name.textContent=title+': '+part.name;
+   const number=document.createElement('span');number.textContent='Eigene Bestellnummer: '+value+' (nicht verifiziert)';
+   line.append(name,number);proof.append(line);
+  }
   const info=title==='Motor'?manufacturerNumberInfo('motor',motor):
    title==='Getriebe'?manufacturerNumberInfo('gear',gear):null;
   if(info){
+   const line=document.createElement('div');line.className='order-proof-line';
+   const name=document.createElement('strong');name.textContent=title+': '+part.name;
    const prefix=document.createElement('div');prefix.className='order-catalog-number';
    prefix.textContent='Hersteller-Nummernkreis: '+info.pattern+' (X = unbekannt, nicht bestellfähig)';
    const source=document.createElement('a');source.href=info.source;source.target='_blank';
    source.rel='noopener noreferrer';source.textContent='Original-Herstellerdokument';
    const note=document.createElement('small');note.textContent=info.description;
-   line.append(prefix,note,source);
+   line.append(name,prefix,note,source);catalog.append(line);
   }
-  proof.append(line);
  }
- const status=$('orderReferenceStatus');
- status.textContent=given
- ?'Selbst eingetragene Nummern: '+given+'/'+active.length+'. Bitte vor der Bestellung mit Herstellerangebot oder Datenblatt abgleichen.'
- :'Für diese Auswahl sind keine verifizierten Bestellartikelnummern hinterlegt. Motorbezeichnung und Herstellerquelle können für eine Anfrage verwendet werden.';
- $('orderCopy').disabled=!motor;
+ proof.hidden=given===0;
+ catalog.hidden=catalog.childElementCount===0;
+ $('orderCopy').hidden=given===0;
+ $('orderCopy').disabled=!motor||given===0;
+ $('orderReferenceStatus').textContent=given
+  ?'Eigene Artikelnummern: '+given+'/'+active.length+'. Vor der Bestellung mit Herstellerangaben abgleichen.'
+  :'Für diese Auswahl sind keine vollständigen Artikelnummern hinterlegt.';
 }
 function saveOrderReference(kind){
  const refs=orderData(),{motor,gear}=selectedOrderItems();
@@ -548,10 +552,10 @@ function renderPendingCatalog(){
 }
 function updateCatalogSummary(){
  const out=$('catalogSummary');
- if(out)out.textContent='v3.14 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
+ if(out)out.textContent='v3.15 · '+motors.length+' Motorvarianten · '+gears.length+' Getriebeübersetzungen · Katalog nicht vollständig';
 }
 // Stabiler App-Link: Versionsprüfung unabhängig vom URL-Queryparameter.
-const APP_VERSION='3.14';
+const APP_VERSION='3.15';
 function initAppUpdates(){
  const notice=$('updateNotice'),apply=$('updateApply');
  let registration=null,available=false;
