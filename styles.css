@@ -180,3 +180,8 @@ body.motor-only #view-eingaben #motorSpecGrid{grid-template-columns:repeat(3,min
 .order-details .order-fields{margin-top:12px}
 .order-details .order-proof{margin-bottom:12px}
 #orderCopy{margin-top:12px}
+
+/* v3.16: Bestellinformationen ohne leere Eingabefelder */
+.order-references{padding:12px 14px}
+.order-references #orderReferenceStatus{margin:0 0 9px}
+.order-details .order-proof{margin:10px 0}
